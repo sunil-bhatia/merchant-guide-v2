@@ -1,4 +1,0 @@
-^([a-z]+) is ([I|V|X|L|C|D|M])$
-^((?:[a-z]+ )+)([A-Z]\w+) is (\d+) Credits$
-^how much is ((?:\w+[^0-9] )+)\?$
-^how many Credits is ((?:\w+ )+)([A-Z]\w+) \?$

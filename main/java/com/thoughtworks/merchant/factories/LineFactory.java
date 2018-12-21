@@ -14,15 +14,16 @@ public class LineFactory {
 
 	public static Line getLineObject(String line) {
 		
-		HashMap<String, String> lineTypesMap = LineTypeConfigManager.getLineTypesMap();
+		HashMap<String, String> lineTypesMap = ConfigPropertiesManager.getLineTypesMap();
 		
 		Line lineObject = new InvalidLine();
 		
 		Class<?> classObject;
 
 		for (Entry<String, String> entry : lineTypesMap.entrySet()) {
-			String regex = entry.getKey();
-			String className = entry.getValue();
+			String className = entry.getKey();
+			String regex = entry.getValue();
+
 
 			Pattern ptn = Pattern.compile(regex);
 			Matcher mcher = ptn.matcher(line);

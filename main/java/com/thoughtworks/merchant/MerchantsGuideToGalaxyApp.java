@@ -1,7 +1,7 @@
 package com.thoughtworks.merchant;
 import java.util.List;
 
-import com.thoughtworks.merchant.factories.LineTypeConfigManager;
+import com.thoughtworks.merchant.factories.ConfigPropertiesManager;
 import com.thoughtworks.merchant.iomanagers.FileInputLinesManager;
 import com.thoughtworks.merchant.iomanagers.InputLinesManager;
 import com.thoughtworks.merchant.iomanagers.LogManager;
@@ -14,8 +14,8 @@ public class MerchantsGuideToGalaxyApp {
 
 	public static void main(String[] args) {
 		
-		//Delegate to Line Type Config Manager to configure the line types
-		LineTypeConfigManager.configureLineTypesMap(args);
+		//Delegate to Config Properties Manager to configure the Dependency Injection classes
+		ConfigPropertiesManager.configureProperties(args);
 
 		//Delegate to Input Lines Manager to get Input Lines Array
 		final List<String> inputLines = inputLinesManager.getInputLines(args);

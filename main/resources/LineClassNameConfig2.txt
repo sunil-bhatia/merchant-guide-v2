@@ -1,5 +1,0 @@
-com.thoughtworks.merchant.lines.AliasAssignmentLine
-com.thoughtworks.merchant.lines.ValueAssignmentLine
-com.thoughtworks.merchant.lines.QuantityQuestionLine
-com.thoughtworks.merchant.lines.ValueQuestionLine
-com.thoughtworks.merchant.newline.PerUnitQuestionLine
