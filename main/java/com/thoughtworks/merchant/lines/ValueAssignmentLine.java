@@ -4,7 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.CommodityCalculator;
-import com.thoughtworks.merchant.computations.CommodityMapManager;
+import com.thoughtworks.merchant.computations.CommodityMap;
+import com.thoughtworks.merchant.factory.Factory;
 
 //Example Value Assignment Line: "glob glob Silver is 34 Credits"
 public class ValueAssignmentLine implements Line {
@@ -28,10 +29,12 @@ public class ValueAssignmentLine implements Line {
         parse();
         
         // Delegate to Commodity Calculator for calculating the value per unit quantity for the commodity
-		double valuePerUnit = CommodityCalculator.calculateValuePerUnit(value, qtyGalactic);
+        CommodityCalculator commodityCalculator = Factory.getCommodityCalculatorObject();
+		double valuePerUnit = commodityCalculator.calculateValuePerUnit(value, qtyGalactic);
         
     	// Add commodity and valuePerUnit to the Commodity Value Map 
-        CommodityMapManager.addValuePerUnit(commodity, valuePerUnit);
+		CommodityMap commodityMap = Factory.getCommodityMapObject();
+		commodityMap.addValuePerUnit(commodity, valuePerUnit);
 	}
 	
 	// Parse this line and extract the three pieces of information

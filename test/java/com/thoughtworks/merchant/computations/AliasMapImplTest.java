@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 
 public class AliasMapImplTest {
 	
@@ -16,6 +17,12 @@ public class AliasMapImplTest {
 		aliasMap.addMapping("prok", 'V');
 		aliasMap.addMapping("pish", 'X');
 		aliasMap.addMapping("tegj", 'L');
+    }
+    
+    @Before
+    public void setupConfigProperties() {
+    	String[] args = {"config"};
+		ConfigPropertiesManager.configureProperties(args);
     }
 
 	@Test

@@ -5,10 +5,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.computations.CommodityCalculator;
 import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 
-public class CommodityCalculatorTest {
+public class CommodityCalculatorImplTest {
 	
     @Before
     public void setupAliasMap() {
@@ -18,6 +18,12 @@ public class CommodityCalculatorTest {
 		aliasMap.addMapping("pish", 'X');
 		aliasMap.addMapping("tegj", 'L');
     }
+    
+    @Before
+    public void setupConfigProperties() {
+    	String[] args = {"config"};
+		ConfigPropertiesManager.configureProperties(args);
+    }
 
 	@Test
 	public void testCalculatedValuePerUnit() {
@@ -26,7 +32,8 @@ public class CommodityCalculatorTest {
 
 		double expectedValuePerUnit = 195.5;
 
-		double calculatedValuePerUnit = CommodityCalculator.calculateValuePerUnit(value, qtyGalactic);
+        CommodityCalculator commodityCalculator = Factory.getCommodityCalculatorObject();
+		double calculatedValuePerUnit = commodityCalculator.calculateValuePerUnit(value, qtyGalactic);
 		assertEquals(expectedValuePerUnit, calculatedValuePerUnit, 0.001);
 	}
 	

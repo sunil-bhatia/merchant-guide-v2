@@ -5,10 +5,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.computations.GalacticNumerals;
 import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 
-public class GalacticNumeralsTest {
+public class GalacticNumeralsImplTest {
 	
     @Before
     public void setupAliasMap() {
@@ -19,60 +19,73 @@ public class GalacticNumeralsTest {
 		aliasMap.addMapping("tegj", 'L');
     }
     
+    @Before
+    public void setupConfigProperties() {
+    	String[] args = {"config"};
+		ConfigPropertiesManager.configureProperties(args);
+    }
+    
 	@Test
 	public void testGalacticNumGlobIsValid() {
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		String galacticNum = "glob";
 		boolean expectedResult = true;
-		boolean calculatedResult = GalacticNumerals.isValidGalacticNum(galacticNum);
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticNumGlobGlobIsValid() {
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		String galacticNum = "glob glob";
 		boolean expectedResult = true;
-		boolean calculatedResult = GalacticNumerals.isValidGalacticNum(galacticNum);
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticNumPishPishIsValid() {
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		String galacticNum = "pish pish";
 		boolean expectedResult = true;
-		boolean calculatedResult = GalacticNumerals.isValidGalacticNum(galacticNum);
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticNumEfghIsInvalid() {
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		String galacticNum = "efgh";
 		boolean expectedResult = false;
-		boolean calculatedResult = GalacticNumerals.isValidGalacticNum(galacticNum);
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticNumProkEfghIsInvalid() {
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		String galacticNum = "prok efgh";
 		boolean expectedResult = false;
-		boolean calculatedResult = GalacticNumerals.isValidGalacticNum(galacticNum);
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticNumGlobGlobIsArabic2() {
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		String galacticNum = "glob glob";
 		int expectedArabicNum = 2;
-		int convertedArabicNum = GalacticNumerals.galacticToArabic(galacticNum);
+		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
 	
 	@Test
 	public void testGalacticNumGlobProkIsArabic4() {
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		String galacticNum = "glob prok";
 		int expectedArabicNum = 4;
-		int convertedArabicNum = GalacticNumerals.galacticToArabic(galacticNum);
+		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	

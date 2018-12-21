@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.CommodityCalculator;
+import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 //Example Value Question Line: "how many Credits is glob prok Silver ?"
@@ -27,7 +28,8 @@ public class ValueQuestionLine implements Line {
         parse();
         
         // Delegate to Commodity Calculator for calculating the total value for this commodity for the given quantity
-        double totalValue = CommodityCalculator.calculateTotalValue(commodity, qtyGalactic);
+        CommodityCalculator commodityCalculator = Factory.getCommodityCalculatorObject();
+        double totalValue = commodityCalculator.calculateTotalValue(commodity, qtyGalactic);
         	
 		//Delegate to formatter for formatting the output line
 		String outputLine = formatAnswer(totalValue);

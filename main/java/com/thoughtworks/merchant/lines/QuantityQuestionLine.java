@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.GalacticNumerals;
+import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 //Example Quantity Question Line: "how much is pish tegj glob glob ?"
@@ -27,7 +28,8 @@ public class QuantityQuestionLine implements Line {
         parse();
 
     	// Delegate to Galactic Numerals for calculating the answer
-        int qtyArabic = GalacticNumerals.galacticToArabic(qtyGalactic);
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
+        int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
         
 		//Delegate to formatter for formatting the output line
 		String outputLine = formatAnswer(qtyArabic);

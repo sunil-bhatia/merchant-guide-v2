@@ -18,6 +18,12 @@ public class ConfigPropertiesManager {
 	
 	private static String logWriterClassName = "";
 	private static String logFilePathAndName = "";
+	
+	private static String aliasMapClassName = "";
+	private static String commodityMapClassName = "";
+	private static String commodityCalculatorClassName = "";
+	private static String romanNumeralsClassName = "";
+	private static String galacticNumeralsClassName = "";
 
 	public static void configureProperties(String[] args) {
 
@@ -48,6 +54,12 @@ public class ConfigPropertiesManager {
 		
 		logWriterClassName = rb.getString("logWriterClassName");
 		logFilePathAndName = rb.getString("logFilePathAndName");
+		
+		aliasMapClassName = rb.getString("aliasMapClassName");
+		commodityMapClassName = rb.getString("commodityMapClassName");
+		commodityCalculatorClassName = rb.getString("commodityCalculatorClassName");
+		romanNumeralsClassName = rb.getString("romanNumeralsClassName");
+		galacticNumeralsClassName = rb.getString("galacticNumeralsClassName");
 	}
 
 	private static void configureLineTypes(ResourceBundle rb) {
@@ -94,5 +106,25 @@ public class ConfigPropertiesManager {
 	
 	public static String getInvalidLineTypeClassName() {
 		return invalidLineTypeClassName;
+	}
+	
+	public static String getAliasMapClassName() {
+		return aliasMapClassName;
+	}
+
+	public static String getCommodityMapClassName() {
+		return commodityMapClassName;
+	}
+
+	public static String getCommodityCalculatorClassName() {
+		return commodityCalculatorClassName;
+	}
+
+	public static String getRomanNumeralsClassName() {
+		return romanNumeralsClassName;
+	}
+
+	public static String getGalacticNumeralsClassName() {
+		return galacticNumeralsClassName;
 	}
 }

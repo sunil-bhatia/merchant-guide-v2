@@ -9,7 +9,10 @@ import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
 import com.thoughtworks.merchant.computations.AliasMap;
-import com.thoughtworks.merchant.computations.AliasMapImpl;
+import com.thoughtworks.merchant.computations.CommodityCalculator;
+import com.thoughtworks.merchant.computations.CommodityMap;
+import com.thoughtworks.merchant.computations.GalacticNumerals;
+import com.thoughtworks.merchant.computations.RomanNumerals;
 import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 import com.thoughtworks.merchant.iomanagers.InputLinesReader;
 import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
@@ -161,8 +164,103 @@ public class Factory {
 	}
 
 	public static AliasMap getAliasMapObject() {
-		// TODO Auto-generated method stub
-		return new AliasMapImpl();
+		
+		AliasMap aliasMapObject = null;
+
+		String aliasMapClassName = ConfigPropertiesManager.getAliasMapClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(aliasMapClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			aliasMapObject = (AliasMap) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return aliasMapObject;
+	}
+
+	public static CommodityMap getCommodityMapObject() {
+		
+		CommodityMap commodityMapObject = null;
+
+		String commodityMapClassName = ConfigPropertiesManager.getCommodityMapClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(commodityMapClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			commodityMapObject = (CommodityMap) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return commodityMapObject;
+	}
+
+	public static CommodityCalculator getCommodityCalculatorObject() {
+		
+		CommodityCalculator commodityCalculatorObject = null;
+
+		String commodityCalculatorClassName = ConfigPropertiesManager.getCommodityCalculatorClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(commodityCalculatorClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			commodityCalculatorObject = (CommodityCalculator) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return commodityCalculatorObject;
+	}
+
+	public static RomanNumerals getRomanNumeralsObject() {
+		
+		RomanNumerals romanNumeralsObject = null;
+
+		String romanNumeralsClassName = ConfigPropertiesManager.getRomanNumeralsClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(romanNumeralsClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			romanNumeralsObject = (RomanNumerals) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return romanNumeralsObject;
+	}
+
+	public static GalacticNumerals getGalacticNumeralsObject() {
+		
+		GalacticNumerals galacticNumeralsObject = null;
+
+		String galacticNumeralsClassName = ConfigPropertiesManager.getGalacticNumeralsClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(galacticNumeralsClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			galacticNumeralsObject = (GalacticNumerals) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return galacticNumeralsObject;
 	}
 
 }

@@ -3,7 +3,8 @@ package com.thoughtworks.merchant.lines.newlinetype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.computations.CommodityMapManager;
+import com.thoughtworks.merchant.computations.CommodityMap;
+import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.lines.Line;
 import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
@@ -27,7 +28,8 @@ public class PerUnitQuestionLine implements Line {
         parse();
         
         // Delegate to Commodity Map Manager for getting the per unit value for this commodity
-        double perUnitValue = CommodityMapManager.getValuePerUnit(commodity);
+		CommodityMap commodityMap = Factory.getCommodityMapObject();
+        double perUnitValue = commodityMap.getValuePerUnit(commodity);
         	
 		//Delegate to formatter for formatting the output line
 		String outputLine = formatAnswer(perUnitValue);

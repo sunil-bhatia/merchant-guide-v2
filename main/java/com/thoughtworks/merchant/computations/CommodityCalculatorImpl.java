@@ -1,0 +1,40 @@
+package com.thoughtworks.merchant.computations;
+
+import com.thoughtworks.merchant.factory.Factory;
+
+//This class calculates the answer for questions like:
+//"how many Credits is glob prok Silver ?"
+//It calculates the value (in credits) for a commodity given some quantity of the commodity
+public class CommodityCalculatorImpl implements CommodityCalculator {
+	
+	// Example:
+	// value = 34
+	// qtyGalactic = "glob glob"
+	public double calculateValuePerUnit(int value, String qtyGalactic) {
+		double valuePerUnit = 0;
+		
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
+		int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
+		
+		if (qtyArabic != 0){
+			valuePerUnit = (double) value / qtyArabic;
+		}
+
+		return valuePerUnit;
+	}
+	
+	// Example:
+    // commodity = "Silver"
+	// qtyGalactic = "glob prok"
+	public double calculateTotalValue(String commodity,  String qtyGalactic){
+		
+		CommodityMap commodityMap = Factory.getCommodityMapObject();
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
+		int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
+		double valuePerUnit = commodityMap.getValuePerUnit(commodity);
+
+		double totalValue = qtyArabic * valuePerUnit;
+		
+        return totalValue;
+	}
+}
