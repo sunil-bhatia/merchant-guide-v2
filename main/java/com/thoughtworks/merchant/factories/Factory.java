@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 import com.thoughtworks.merchant.iomanagers.InputLinesReader;
 import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
 import com.thoughtworks.merchant.lines.InvalidLine;

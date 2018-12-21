@@ -13,12 +13,12 @@ import com.thoughtworks.merchant.lines.InputLinesListManager;
 // path is provided as the first command line argument.
 public class FileInputLinesReader implements InputLinesReader {
 	
-	private static List<String> inputLines = new ArrayList<>();
-	
-	public FileInputLinesReader() {
-	}
-	
 	public void readInputLines(String[] args){
+		
+		List<String> inputLines = new ArrayList<>();
+		
+		
+		String inputLinesFileName = ConfigPropertiesManager.getInputLinesFileName();
 		
         if (args == null || args.length == 0) {
             System.err.println("Please enter the path to the input file as a program argument, e.g.");

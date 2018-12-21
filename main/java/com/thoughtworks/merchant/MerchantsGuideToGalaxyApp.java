@@ -1,9 +1,9 @@
 package com.thoughtworks.merchant;
 import java.util.List;
 
-import com.thoughtworks.merchant.factories.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factories.Factory;
 import com.thoughtworks.merchant.iomanagers.OutputLinesManager;
+import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 import com.thoughtworks.merchant.iomanagers.InputLinesReader;
 import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
 import com.thoughtworks.merchant.iomanagers.LogManager;
@@ -14,7 +14,7 @@ public class MerchantsGuideToGalaxyApp {
 	
 	public static void main(String[] args) {
 		
-		//Delegate to Config Properties Manager to configure the Dependency Injection classes
+		//Delegate to Config Properties Manager to configure the properties like Dependency Injection classes
 		ConfigPropertiesManager.configureProperties(args);
 
 		InputLinesReader inputLinesReader = Factory.getInputLinesReaderObject();
@@ -33,7 +33,7 @@ public class MerchantsGuideToGalaxyApp {
 
 	private static void printInputOutputLogs() {
 		InputLinesWriter inputLinesWriter = Factory.getInputLinesWriterObject();
-		inputLinesWriter.printInput();
+		inputLinesWriter.writeInput();
 		OutputLinesManager.printOutput();
 		LogManager.printLogs();
 	}

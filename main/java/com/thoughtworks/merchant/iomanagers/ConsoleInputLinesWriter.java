@@ -6,10 +6,7 @@ import com.thoughtworks.merchant.lines.InputLinesListManager;
 
 public class ConsoleInputLinesWriter implements InputLinesWriter {
 	
-	public ConsoleInputLinesWriter() {
-	}
-	
-    public void printInput() {
+    public void writeInput() {
     	
     	//Get input lines list from manager
     	List<String> lines = InputLinesListManager.getInputLines();
