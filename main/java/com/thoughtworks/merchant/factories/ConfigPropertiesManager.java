@@ -6,7 +6,8 @@ import java.util.ResourceBundle;
 public class ConfigPropertiesManager {
 	
 	private static HashMap<String, String> lineTypesMap = new HashMap<String, String>();
-	private static String inputLinesManagerClassName = "";
+	private static String inputLinesReaderClassName = "";
+	private static String inputLinesWriterClassName = "";
 
 	public static void configureProperties(String[] args){
 		
@@ -14,7 +15,8 @@ public class ConfigPropertiesManager {
 		
 		configureLineTypes(rb);
 		
-		inputLinesManagerClassName = rb.getString("inputLinesManagerClassName");
+		inputLinesReaderClassName = rb.getString("inputLinesReaderClassName");
+		inputLinesWriterClassName = rb.getString("inputLinesWriterClassName");
 	}
 	
 	private static void configureLineTypes(ResourceBundle rb){
@@ -35,7 +37,11 @@ public class ConfigPropertiesManager {
 		return lineTypesMap;
 	}
 	
-	public static String getInputLinesManagerClassName() {
-		return inputLinesManagerClassName;
+	public static String getInputLinesReaderClassName() {
+		return inputLinesReaderClassName;
+	}
+	
+	public static String getInputLinesWriterClassName() {
+		return inputLinesWriterClassName;
 	}
 }

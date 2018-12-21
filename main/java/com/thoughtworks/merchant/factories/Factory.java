@@ -7,7 +7,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.iomanagers.InputLinesManager;
+import com.thoughtworks.merchant.iomanagers.InputLinesReader;
+import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
 import com.thoughtworks.merchant.lines.InvalidLine;
 import com.thoughtworks.merchant.lines.Line;
 
@@ -42,24 +43,44 @@ public class Factory {
 		return lineObject;
 	}
 
-	public static InputLinesManager getInputLinesManagerObject() {
+	public static InputLinesReader getInputLinesReaderObject() {
 
-		InputLinesManager inputLinesManagerObject = null;
+		InputLinesReader inputLinesReaderObject = null;
 		
-		String inputLinesManagerClassName = ConfigPropertiesManager.getInputLinesManagerClassName();
+		String inputLinesReaderClassName = ConfigPropertiesManager.getInputLinesReaderClassName();
 
 		Class<?> classObject;
 
 		try {
-			classObject = Class.forName(inputLinesManagerClassName);
+			classObject = Class.forName(inputLinesReaderClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			inputLinesManagerObject = (InputLinesManager) constructor.newInstance();
+			inputLinesReaderObject = (InputLinesReader) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 
-		return inputLinesManagerObject;
+		return inputLinesReaderObject;
+	}
+	
+	public static InputLinesWriter getInputLinesWriterObject() {
+
+		InputLinesWriter inputLinesWriterObject = null;
+		
+		String inputLinesWriterClassName = ConfigPropertiesManager.getInputLinesWriterClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(inputLinesWriterClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			inputLinesWriterObject = (InputLinesWriter) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return inputLinesWriterObject;
 	}
 
 }

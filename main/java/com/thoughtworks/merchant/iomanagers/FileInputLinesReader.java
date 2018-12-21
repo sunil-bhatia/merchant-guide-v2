@@ -7,16 +7,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.thoughtworks.merchant.lines.InputLinesListManager;
+
 // This application accepts an input file. The input file
 // path is provided as the first command line argument.
-public class FileInputLinesManager implements InputLinesManager {
+public class FileInputLinesReader implements InputLinesReader {
 	
-	private static List<String> lines = new ArrayList<>();
+	private static List<String> inputLines = new ArrayList<>();
 	
-	public FileInputLinesManager() {
+	public FileInputLinesReader() {
 	}
 	
-	public List<String> getInputLines(String[] args){
+	public void readInputLines(String[] args){
 		
         if (args == null || args.length == 0) {
             System.err.println("Please enter the path to the input file as a program argument, e.g.");
@@ -26,23 +28,14 @@ public class FileInputLinesManager implements InputLinesManager {
         
         try {
             Path path = Paths.get(args[0]);
-            lines = Files.readAllLines(path, Charset.forName("utf-8"));
+            inputLines = Files.readAllLines(path, Charset.forName("utf-8"));
 
         } catch (IOException e) {
             System.err.println("Unable to read input file: " + e.getMessage());
             System.err.println("Please try again. ");
             System.exit(1);
         }
-		
-		return lines;
+        
+        InputLinesListManager.setInputLines(inputLines);
 	}
-	
-    public void printInput() {
-        System.out.println();
-        System.out.println("Input text:");
-        System.out.println();
-        for (String line : lines) {
-            System.out.println(line);
-        }
-    }
 }
