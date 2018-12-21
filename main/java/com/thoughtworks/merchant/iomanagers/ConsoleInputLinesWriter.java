@@ -2,10 +2,11 @@ package com.thoughtworks.merchant.iomanagers;
 
 import java.util.List;
 
-import com.thoughtworks.merchant.lines.InputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.InputLinesListManager;
 
 public class ConsoleInputLinesWriter implements InputLinesWriter {
 	
+	@Override
     public void writeInput() {
     	
     	//Get input lines list from manager

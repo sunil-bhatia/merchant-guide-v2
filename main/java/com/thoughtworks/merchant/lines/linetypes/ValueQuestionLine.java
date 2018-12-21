@@ -1,10 +1,10 @@
-package com.thoughtworks.merchant.lines;
+package com.thoughtworks.merchant.lines.linetypes;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.CommodityCalculator;
-import com.thoughtworks.merchant.iomanagers.OutputLinesManager;
+import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 //Example Value Question Line: "how many Credits is glob prok Silver ?"
 public class ValueQuestionLine implements Line {
@@ -33,7 +33,7 @@ public class ValueQuestionLine implements Line {
 		String outputLine = formatAnswer(totalValue);
 		
     	//Add the answer to the output lines
-		OutputLinesManager.addLine(outputLine);
+		OutputLinesListManager.addLine(outputLine);
 	}
 	
 	// Parse this line and extract the two pieces of information

@@ -2,8 +2,9 @@ package com.thoughtworks.merchant.lines;
 
 import java.util.List;
 
-import com.thoughtworks.merchant.factories.Factory;
-import com.thoughtworks.merchant.iomanagers.OutputLinesManager;
+import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.lines.linetypes.Line;
+import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 public class InputLinesProcessor {
 
@@ -15,6 +16,6 @@ public class InputLinesProcessor {
 			lineObject.process();
 		}
 
-		return OutputLinesManager.getOutputLines();
+		return OutputLinesListManager.getOutputLines();
 	}
 }

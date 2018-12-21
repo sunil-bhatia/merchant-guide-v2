@@ -1,53 +1,98 @@
 package com.thoughtworks.merchant.iomanagers;
 
 import java.util.HashMap;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class ConfigPropertiesManager {
-	
-	private static HashMap<String, String> lineTypesMap = new HashMap<String, String>();
-	private static String inputLinesReaderClassName = "";
-	private static String inputLinesWriterClassName = "";
-	private static String inputLinesFileName = "";
 
-	public static void configureProperties(String[] args){
-		
-		ResourceBundle rb = ResourceBundle.getBundle(args[1]);
-		
+	private static HashMap<String, String> lineTypesMap = new HashMap<String, String>();
+	
+	private static String invalidLineTypeClassName = "";
+	
+	private static String inputLinesReaderClassName = "";
+	private static String inputLinesFileName = "";
+	
+	private static String inputLinesWriterClassName = "";
+	private static String outputLinesWriterClassName = "";
+	
+	private static String logWriterClassName = "";
+	private static String logFilePathAndName = "";
+
+	public static void configureProperties(String[] args) {
+
+		if (args == null || args.length == 0) {
+			System.err.println("Please enter the name of the properties file as a program argument, e.g.");
+			System.err.println("java -jar MerchantGuide.jar config");
+			System.exit(1);
+		}
+
+		ResourceBundle rb = null;
+		try {
+			rb = ResourceBundle.getBundle(args[0]);
+		} catch (MissingResourceException e) {
+			System.err.println(e.getMessage());
+			System.err.println("Please try again. ");
+			System.exit(1);
+		}
+
 		configureLineTypes(rb);
 		
+		invalidLineTypeClassName = rb.getString("invalidLineTypeClassName");
+
 		inputLinesReaderClassName = rb.getString("inputLinesReaderClassName");
-		inputLinesWriterClassName = rb.getString("inputLinesWriterClassName");
 		inputLinesFileName = rb.getString("inputLinesFileName");
+		
+		inputLinesWriterClassName = rb.getString("inputLinesWriterClassName");
+		outputLinesWriterClassName = rb.getString("outputLinesWriterClassName");
+		
+		logWriterClassName = rb.getString("logWriterClassName");
+		logFilePathAndName = rb.getString("logFilePathAndName");
 	}
 
-	private static void configureLineTypes(ResourceBundle rb){
-		
+	private static void configureLineTypes(ResourceBundle rb) {
+
 		int numberOfLineTypes = Integer.parseInt(rb.getString("numberOfLineTypes"));
-		
-        String className = "";
-        String regex = "";
+
+		String className = "";
+		String regex = "";
 
 		for (int i = 0; i < numberOfLineTypes; i++) {
-			className = rb.getString("lineTypeClassName" + (i+1));
-			regex = rb.getString("lineTypeRegex" + (i+1));
+			className = rb.getString("lineTypeClassName" + (i + 1));
+			regex = rb.getString("lineTypeRegex" + (i + 1));
 			lineTypesMap.put(className, regex);
 		}
 	}
-	
+
 	public static HashMap<String, String> getLineTypesMap() {
 		return lineTypesMap;
 	}
-	
+
 	public static String getInputLinesReaderClassName() {
 		return inputLinesReaderClassName;
 	}
 	
+	public static String getInputLinesFileName() {
+		return inputLinesFileName;
+	}
+
 	public static String getInputLinesWriterClassName() {
 		return inputLinesWriterClassName;
 	}
 	
-	public static String getInputLinesFileName() {
-		return inputLinesFileName;
+	public static String getOutputLinesWriterClassName() {
+		return outputLinesWriterClassName;
+	}
+	
+	public static String getLogWriterClassName() {
+		return logWriterClassName;
+	}
+	
+	public static String getLogFilePathAndName() {
+		return logFilePathAndName;
+	}
+	
+	public static String getInvalidLineTypeClassName() {
+		return invalidLineTypeClassName;
 	}
 }

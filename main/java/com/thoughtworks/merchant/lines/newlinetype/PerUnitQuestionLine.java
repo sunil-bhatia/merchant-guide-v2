@@ -1,11 +1,11 @@
-package com.thoughtworks.merchant.newline;
+package com.thoughtworks.merchant.lines.newlinetype;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.CommodityMapManager;
-import com.thoughtworks.merchant.iomanagers.OutputLinesManager;
-import com.thoughtworks.merchant.lines.Line;
+import com.thoughtworks.merchant.lines.linetypes.Line;
+import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 //Example Per Unit Question Line: "how many Credits is Silver per unit quantity ?"
 public class PerUnitQuestionLine implements Line {
@@ -33,7 +33,7 @@ public class PerUnitQuestionLine implements Line {
 		String outputLine = formatAnswer(perUnitValue);
 		
     	//Add the answer to the output lines
-		OutputLinesManager.addLine(outputLine);
+		OutputLinesListManager.addLine(outputLine);
 	}
 	
 	// Parse this line and extract one piece of information

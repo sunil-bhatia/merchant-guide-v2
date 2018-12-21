@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.lines;
+package com.thoughtworks.merchant.lines.linetypes;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,10 +1,10 @@
-package com.thoughtworks.merchant.lines;
+package com.thoughtworks.merchant.lines.linetypes;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.GalacticNumerals;
-import com.thoughtworks.merchant.iomanagers.OutputLinesManager;
+import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 //Example Quantity Question Line: "how much is pish tegj glob glob ?"
 public class QuantityQuestionLine implements Line {
@@ -33,7 +33,7 @@ public class QuantityQuestionLine implements Line {
 		String outputLine = formatAnswer(qtyArabic);
 		
     	//Add the answer to the output lines
-		OutputLinesManager.addLine(outputLine);
+		OutputLinesListManager.addLine(outputLine);
 	}
 	
 	// Parse this line and extract this piece of information
