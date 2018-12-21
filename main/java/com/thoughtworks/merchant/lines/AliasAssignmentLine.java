@@ -1,9 +1,10 @@
-package com.thoughtworks.merchant.lines.linetypes;
+package com.thoughtworks.merchant.lines;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.computations.AliasMapManager;
+import com.thoughtworks.merchant.computations.AliasMap;
+import com.thoughtworks.merchant.factory.Factory;
 
 // Example Alias Assignment Line: "glob is I"
 public class AliasAssignmentLine implements Line {
@@ -26,7 +27,8 @@ public class AliasAssignmentLine implements Line {
 		parse();
 
 		// Add Galactic Roman Mapping to the Alias Map
-		AliasMapManager.addMapping(galacticSymbol, romanSymbol);
+		AliasMap aliasMap = Factory.getAliasMapObject();
+		aliasMap.addMapping(galacticSymbol, romanSymbol);
 	}
 	
 	// Parse this line and extract the two pieces of information

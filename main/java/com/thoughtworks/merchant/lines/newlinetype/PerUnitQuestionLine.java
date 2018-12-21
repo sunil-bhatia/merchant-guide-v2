@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.CommodityMapManager;
-import com.thoughtworks.merchant.lines.linetypes.Line;
+import com.thoughtworks.merchant.lines.Line;
 import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 //Example Per Unit Question Line: "how many Credits is Silver per unit quantity ?"

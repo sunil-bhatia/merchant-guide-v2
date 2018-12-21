@@ -1,5 +1,7 @@
 package com.thoughtworks.merchant.computations;
 
+import com.thoughtworks.merchant.factory.Factory;
+
 public class GalacticNumerals {
 
 	// Example: parameter galacticNum = "glob glob"
@@ -17,10 +19,12 @@ public class GalacticNumerals {
 	// return romanNum = "II"
 	private static String galacticToRoman(String galacticNum) {
 		String romanNum = "";
+		AliasMap aliasMap = Factory.getAliasMapObject();
+
 		String[] galacticSymbolArray = galacticNum.split(" ");
 
 		for (int i = 0; i < galacticSymbolArray.length; i++) {
-			romanNum += AliasMapManager.getRomanSymbol(galacticSymbolArray[i]);
+			romanNum += aliasMap.getRomanSymbol(galacticSymbolArray[i]);
 		}
 		return romanNum;
 	}
@@ -51,15 +55,17 @@ public class GalacticNumerals {
 	}
 	
 
-	private static boolean areGalacticSymbolsValid(String galacticNum) {
+	private static boolean areGalacticSymbolsValid(String galacticNum) {		
 		boolean areGalacticSymbolsValid = false;
 		boolean invalidGalacticSymbolFound = false;
+		
+		AliasMap aliasMap = Factory.getAliasMapObject();
 		
 		String[] galacticSymbolArray = galacticNum.split(" ");
 
 		for (int i = 0; i < galacticSymbolArray.length; i++) {
 			// Check if galactic symbol is valid
-			if (!AliasMapManager.isValidGalacticSymbol(galacticSymbolArray[i])) {
+			if (!aliasMap.isValidGalacticSymbol(galacticSymbolArray[i])) {
 				invalidGalacticSymbolFound = true;
 			}
 		}

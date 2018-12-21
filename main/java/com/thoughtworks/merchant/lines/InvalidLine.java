@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.lines.linetypes;
+package com.thoughtworks.merchant.lines;
 
 import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 

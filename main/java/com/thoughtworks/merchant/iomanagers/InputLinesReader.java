@@ -1,7 +1,9 @@
 package com.thoughtworks.merchant.iomanagers;
 
+import java.util.List;
+
 public interface InputLinesReader {
 	
-	public void readInputLines();
+	public List<String> readInputLines();
     
 }

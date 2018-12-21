@@ -12,7 +12,7 @@ import com.thoughtworks.merchant.lines.listmanagers.InputLinesListManager;
 public class FileInputLinesReader implements InputLinesReader {
 	
 	@Override
-	public void readInputLines(){
+	public List<String> readInputLines(){
 		
 		List<String> inputLines = new ArrayList<>();
 		
@@ -29,5 +29,7 @@ public class FileInputLinesReader implements InputLinesReader {
         }
         
         InputLinesListManager.setInputLines(inputLines);
+        
+        return inputLines;
 	}
 }

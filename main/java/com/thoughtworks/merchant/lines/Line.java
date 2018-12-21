@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.lines.linetypes;
+package com.thoughtworks.merchant.lines;
 
 public interface Line {
 

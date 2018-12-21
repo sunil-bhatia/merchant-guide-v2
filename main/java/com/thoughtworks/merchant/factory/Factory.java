@@ -7,14 +7,29 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.thoughtworks.merchant.MerchantsNotesProcessor;
+import com.thoughtworks.merchant.computations.AliasMap;
+import com.thoughtworks.merchant.computations.AliasMapImpl;
 import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 import com.thoughtworks.merchant.iomanagers.InputLinesReader;
 import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
 import com.thoughtworks.merchant.iomanagers.LogWriter;
 import com.thoughtworks.merchant.iomanagers.OutputLinesWriter;
-import com.thoughtworks.merchant.lines.linetypes.Line;
+import com.thoughtworks.merchant.lines.Line;
 
 public class Factory {
+
+	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
+
+		InputLinesReader inputLinesReader = Factory.getInputLinesReaderObject();
+		InputLinesWriter inputLinesWriter = Factory.getInputLinesWriterObject();
+		OutputLinesWriter outputLinesWriter = Factory.getOutputLinesWriterObject();
+		LogWriter logWriter = Factory.getLogWriterObject();
+
+		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader,
+				inputLinesWriter, outputLinesWriter, logWriter);
+		return merchantsNotesProcessor;
+	}
 
 	public static Line getLineObject(String line) {
 
@@ -44,11 +59,11 @@ public class Factory {
 
 		return lineObject;
 	}
-	
+
 	public static Line getInvalidLineTypeObject() {
 
 		Line invalidLineTypeObject = null;
-		
+
 		String invalidLineTypeClassName = ConfigPropertiesManager.getInvalidLineTypeClassName();
 
 		Class<?> classObject;
@@ -68,7 +83,7 @@ public class Factory {
 	public static InputLinesReader getInputLinesReaderObject() {
 
 		InputLinesReader inputLinesReaderObject = null;
-		
+
 		String inputLinesReaderClassName = ConfigPropertiesManager.getInputLinesReaderClassName();
 
 		Class<?> classObject;
@@ -84,11 +99,11 @@ public class Factory {
 
 		return inputLinesReaderObject;
 	}
-	
+
 	public static InputLinesWriter getInputLinesWriterObject() {
 
 		InputLinesWriter inputLinesWriterObject = null;
-		
+
 		String inputLinesWriterClassName = ConfigPropertiesManager.getInputLinesWriterClassName();
 
 		Class<?> classObject;
@@ -104,11 +119,11 @@ public class Factory {
 
 		return inputLinesWriterObject;
 	}
-	
+
 	public static OutputLinesWriter getOutputLinesWriterObject() {
 
 		OutputLinesWriter outputLinesWriterObject = null;
-		
+
 		String outputLinesWriterClassName = ConfigPropertiesManager.getOutputLinesWriterClassName();
 
 		Class<?> classObject;
@@ -124,11 +139,11 @@ public class Factory {
 
 		return outputLinesWriterObject;
 	}
-	
+
 	public static LogWriter getLogWriterObject() {
 
 		LogWriter logWriterObject = null;
-		
+
 		String logWriterClassName = ConfigPropertiesManager.getLogWriterClassName();
 
 		Class<?> classObject;
@@ -143,6 +158,11 @@ public class Factory {
 		}
 
 		return logWriterObject;
+	}
+
+	public static AliasMap getAliasMapObject() {
+		// TODO Auto-generated method stub
+		return new AliasMapImpl();
 	}
 
 }

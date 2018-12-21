@@ -5,17 +5,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.computations.AliasMapManager;
 import com.thoughtworks.merchant.computations.GalacticNumerals;
+import com.thoughtworks.merchant.factory.Factory;
 
 public class GalacticNumeralsTest {
 	
     @Before
     public void setupAliasMap() {
-    	AliasMapManager.addMapping("glob", 'I');
-    	AliasMapManager.addMapping("prok", 'V');
-    	AliasMapManager.addMapping("pish", 'X');
-    	AliasMapManager.addMapping("tegj", 'L');
+		AliasMap aliasMap = Factory.getAliasMapObject();
+		aliasMap.addMapping("glob", 'I');
+		aliasMap.addMapping("prok", 'V');
+		aliasMap.addMapping("pish", 'X');
+		aliasMap.addMapping("tegj", 'L');
     }
     
 	@Test
@@ -77,6 +78,7 @@ public class GalacticNumeralsTest {
 	
     @After
     public void teardownAliasMap() {
-    	AliasMapManager.getAliasMap().clear();
+		AliasMap aliasMap = Factory.getAliasMapObject();
+		aliasMap.getAliasMap().clear();
     }
 }
