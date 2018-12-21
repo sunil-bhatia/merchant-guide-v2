@@ -13,6 +13,9 @@ public class FileInputLinesManager implements InputLinesManager {
 	
 	private static List<String> lines = new ArrayList<>();
 	
+	public FileInputLinesManager() {
+	}
+	
 	public List<String> getInputLines(String[] args){
 		
         if (args == null || args.length == 0) {
