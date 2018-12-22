@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.GalacticNumerals;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.ListManager;
 
 //Example Quantity Question Line: "how much is pish tegj glob glob ?"
 public class QuantityQuestionLine implements Line {
@@ -35,7 +35,7 @@ public class QuantityQuestionLine implements Line {
 		String outputLine = formatAnswer(qtyArabic);
 		
     	//Add the answer to the output lines
-		OutputLinesListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 		outputLinesListManager.addObject(outputLine);
 	}
 	

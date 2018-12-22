@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.lines.newlinetype;
+package com.thoughtworks.merchant.newscope;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.thoughtworks.merchant.computations.CommodityMap;
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.lines.Line;
-import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.ListManager;
 
 //Example Per Unit Question Line: "how many Credits is Silver per unit quantity ?"
 public class PerUnitQuestionLine implements Line {
@@ -35,7 +35,7 @@ public class PerUnitQuestionLine implements Line {
 		String outputLine = formatAnswer(perUnitValue);
 		
     	//Add the answer to the output lines
-		OutputLinesListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 		outputLinesListManager.addObject(outputLine);
 	}
 	

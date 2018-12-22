@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.lines.listmanagers.LogsListManager;
+import com.thoughtworks.merchant.lines.listmanagers.ListManager;
 
 public class FileLogWriter implements ListWriter {
 
@@ -15,7 +15,7 @@ public class FileLogWriter implements ListWriter {
 	public void write() {
 		
 		// Get log list from manager
-		LogsListManager logsListManager = Factory.getLogsListManagerObject();
+		ListManager logsListManager = Factory.getLogsListManagerObject();
 		List<String> logs = logsListManager.getList();
 		
 		String logFilePathAndName = ConfigPropertiesManager.getLogFilePathAndName();

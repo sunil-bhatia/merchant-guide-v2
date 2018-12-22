@@ -14,18 +14,20 @@ import com.thoughtworks.merchant.computations.CommodityMap;
 import com.thoughtworks.merchant.computations.GalacticNumerals;
 import com.thoughtworks.merchant.computations.RomanNumerals;
 import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
-import com.thoughtworks.merchant.iomanagers.InputLinesReader;
+import com.thoughtworks.merchant.iomanagers.ListReader;
 import com.thoughtworks.merchant.iomanagers.ListWriter;
 import com.thoughtworks.merchant.lines.Line;
-import com.thoughtworks.merchant.lines.listmanagers.InputLinesListManager;
-import com.thoughtworks.merchant.lines.listmanagers.LogsListManager;
-import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.ListManager;
 
 public class Factory {
+	
+	private static ListManager inputLinesListManagerObject;
+	private static ListManager outputLinesListManagerObject;
+	private static ListManager logsListManagerObject;
 
 	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
-		InputLinesReader inputLinesReader = Factory.getInputLinesReaderObject();
+		ListReader inputLinesReader = Factory.getInputLinesReaderObject();
 		ListWriter inputLinesWriter = Factory.getInputLinesWriterObject();
 		ListWriter outputLinesWriter = Factory.getOutputLinesWriterObject();
 		ListWriter logWriter = Factory.getLogWriterObject();
@@ -84,9 +86,9 @@ public class Factory {
 		return invalidLineTypeObject;
 	}
 
-	public static InputLinesReader getInputLinesReaderObject() {
+	public static ListReader getInputLinesReaderObject() {
 
-		InputLinesReader inputLinesReaderObject = null;
+		ListReader inputLinesReaderObject = null;
 
 		String inputLinesReaderClassName = ConfigPropertiesManager.getInputLinesReaderClassName();
 
@@ -95,7 +97,7 @@ public class Factory {
 		try {
 			classObject = Class.forName(inputLinesReaderClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			inputLinesReaderObject = (InputLinesReader) constructor.newInstance();
+			inputLinesReaderObject = (ListReader) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -264,18 +266,20 @@ public class Factory {
 		return galacticNumeralsObject;
 	}
 
-	public static InputLinesListManager getInputLinesListManagerObject() {
+	public static ListManager getInputLinesListManagerObject() {
 		
-		InputLinesListManager inputLinesListManagerObject = null;
+		if (inputLinesListManagerObject != null){
+			return inputLinesListManagerObject;
+		}
 
-		String inputLinesListManagerClassName = ConfigPropertiesManager.getInputLinesListManagerClassName();
+		String listManagerClassName = ConfigPropertiesManager.getListManagerClassName();
 
 		Class<?> classObject;
 
 		try {
-			classObject = Class.forName(inputLinesListManagerClassName);
+			classObject = Class.forName(listManagerClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			inputLinesListManagerObject = (InputLinesListManager) constructor.newInstance();
+			inputLinesListManagerObject = (ListManager) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -284,18 +288,20 @@ public class Factory {
 		return inputLinesListManagerObject;
 	}
 
-	public static OutputLinesListManager getOutputLinesListManagerObject() {
+	public static ListManager getOutputLinesListManagerObject() {
 		
-		OutputLinesListManager outputLinesListManagerObject = null;
+		if (outputLinesListManagerObject != null){
+			return outputLinesListManagerObject;
+		}
 
-		String outputLinesListManagerClassName = ConfigPropertiesManager.getOutputLinesListManagerClassName();
+		String listManagerClassName = ConfigPropertiesManager.getListManagerClassName();
 
 		Class<?> classObject;
 
 		try {
-			classObject = Class.forName(outputLinesListManagerClassName);
+			classObject = Class.forName(listManagerClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			outputLinesListManagerObject = (OutputLinesListManager) constructor.newInstance();
+			outputLinesListManagerObject = (ListManager) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -304,18 +310,20 @@ public class Factory {
 		return outputLinesListManagerObject;
 	}
 
-	public static LogsListManager getLogsListManagerObject() {
+	public static ListManager getLogsListManagerObject() {
 		
-		LogsListManager logsListManagerObject = null;
+		if (logsListManagerObject != null){
+			return logsListManagerObject;
+		}
 
-		String logsListManagerClassName = ConfigPropertiesManager.getLogsListManagerClassName();
+		String listManagerClassName = ConfigPropertiesManager.getListManagerClassName();
 
 		Class<?> classObject;
 
 		try {
-			classObject = Class.forName(logsListManagerClassName);
+			classObject = Class.forName(listManagerClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			logsListManagerObject = (LogsListManager) constructor.newInstance();
+			logsListManagerObject = (ListManager) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();

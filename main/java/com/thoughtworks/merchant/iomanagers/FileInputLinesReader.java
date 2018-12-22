@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.lines.listmanagers.InputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.ListManager;
 
-public class FileInputLinesReader implements InputLinesReader {
+public class FileInputLinesReader implements ListReader {
 	
 	@Override
-	public List<String> readInputLines(){
+	public List<String> read(){
 		
 		List<String> inputLines = new ArrayList<>();
 		
@@ -29,7 +29,7 @@ public class FileInputLinesReader implements InputLinesReader {
             System.exit(1);
         }
         
-        InputLinesListManager inputLinesListManager = Factory.getInputLinesListManagerObject();
+        ListManager inputLinesListManager = Factory.getInputLinesListManagerObject();
         inputLinesListManager.setList(inputLines);
         
         return inputLines;

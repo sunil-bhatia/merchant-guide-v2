@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.computations.CommodityCalculator;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.ListManager;
 
 //Example Value Question Line: "how many Credits is glob prok Silver ?"
 public class ValueQuestionLine implements Line {
@@ -35,7 +35,7 @@ public class ValueQuestionLine implements Line {
 		String outputLine = formatAnswer(totalValue);
 		
     	//Add the answer to the output lines
-		OutputLinesListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 		outputLinesListManager.addObject(outputLine);
 	}
 	

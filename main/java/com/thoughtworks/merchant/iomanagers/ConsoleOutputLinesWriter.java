@@ -3,7 +3,7 @@ package com.thoughtworks.merchant.iomanagers;
 import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.ListManager;
 
 public class ConsoleOutputLinesWriter implements ListWriter {
 
@@ -11,7 +11,7 @@ public class ConsoleOutputLinesWriter implements ListWriter {
 	public void write() {
 
 		// Get output lines list from manager
-		OutputLinesListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 		List<String> outputLines = outputLinesListManager.getList();
 
 		System.out.println();
