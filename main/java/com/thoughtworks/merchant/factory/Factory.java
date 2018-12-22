@@ -15,9 +15,7 @@ import com.thoughtworks.merchant.computations.GalacticNumerals;
 import com.thoughtworks.merchant.computations.RomanNumerals;
 import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 import com.thoughtworks.merchant.iomanagers.InputLinesReader;
-import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
-import com.thoughtworks.merchant.iomanagers.LogWriter;
-import com.thoughtworks.merchant.iomanagers.OutputLinesWriter;
+import com.thoughtworks.merchant.iomanagers.ListWriter;
 import com.thoughtworks.merchant.lines.Line;
 import com.thoughtworks.merchant.lines.listmanagers.InputLinesListManager;
 import com.thoughtworks.merchant.lines.listmanagers.LogsListManager;
@@ -28,9 +26,9 @@ public class Factory {
 	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
 		InputLinesReader inputLinesReader = Factory.getInputLinesReaderObject();
-		InputLinesWriter inputLinesWriter = Factory.getInputLinesWriterObject();
-		OutputLinesWriter outputLinesWriter = Factory.getOutputLinesWriterObject();
-		LogWriter logWriter = Factory.getLogWriterObject();
+		ListWriter inputLinesWriter = Factory.getInputLinesWriterObject();
+		ListWriter outputLinesWriter = Factory.getOutputLinesWriterObject();
+		ListWriter logWriter = Factory.getLogWriterObject();
 
 		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader,
 				inputLinesWriter, outputLinesWriter, logWriter);
@@ -106,9 +104,9 @@ public class Factory {
 		return inputLinesReaderObject;
 	}
 
-	public static InputLinesWriter getInputLinesWriterObject() {
+	public static ListWriter getInputLinesWriterObject() {
 
-		InputLinesWriter inputLinesWriterObject = null;
+		ListWriter inputLinesWriterObject = null;
 
 		String inputLinesWriterClassName = ConfigPropertiesManager.getInputLinesWriterClassName();
 
@@ -117,7 +115,7 @@ public class Factory {
 		try {
 			classObject = Class.forName(inputLinesWriterClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			inputLinesWriterObject = (InputLinesWriter) constructor.newInstance();
+			inputLinesWriterObject = (ListWriter) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -126,9 +124,9 @@ public class Factory {
 		return inputLinesWriterObject;
 	}
 
-	public static OutputLinesWriter getOutputLinesWriterObject() {
+	public static ListWriter getOutputLinesWriterObject() {
 
-		OutputLinesWriter outputLinesWriterObject = null;
+		ListWriter outputLinesWriterObject = null;
 
 		String outputLinesWriterClassName = ConfigPropertiesManager.getOutputLinesWriterClassName();
 
@@ -137,7 +135,7 @@ public class Factory {
 		try {
 			classObject = Class.forName(outputLinesWriterClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			outputLinesWriterObject = (OutputLinesWriter) constructor.newInstance();
+			outputLinesWriterObject = (ListWriter) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -146,9 +144,9 @@ public class Factory {
 		return outputLinesWriterObject;
 	}
 
-	public static LogWriter getLogWriterObject() {
+	public static ListWriter getLogWriterObject() {
 
-		LogWriter logWriterObject = null;
+		ListWriter logWriterObject = null;
 
 		String logWriterClassName = ConfigPropertiesManager.getLogWriterClassName();
 
@@ -157,7 +155,7 @@ public class Factory {
 		try {
 			classObject = Class.forName(logWriterClassName);
 			Constructor<?> constructor = classObject.getConstructor();
-			logWriterObject = (LogWriter) constructor.newInstance();
+			logWriterObject = (ListWriter) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();

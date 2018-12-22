@@ -9,10 +9,10 @@ import java.util.List;
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.lines.listmanagers.LogsListManager;
 
-public class FileLogWriter implements LogWriter {
+public class FileLogWriter implements ListWriter {
 
 	@Override
-	public void writeLogs() {
+	public void write() {
 		
 		// Get log list from manager
 		LogsListManager logsListManager = Factory.getLogsListManagerObject();

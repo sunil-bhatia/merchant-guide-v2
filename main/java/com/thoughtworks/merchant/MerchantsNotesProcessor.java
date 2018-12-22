@@ -3,20 +3,18 @@ import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.iomanagers.InputLinesReader;
-import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
-import com.thoughtworks.merchant.iomanagers.LogWriter;
-import com.thoughtworks.merchant.iomanagers.OutputLinesWriter;
+import com.thoughtworks.merchant.iomanagers.ListWriter;
 import com.thoughtworks.merchant.lines.Line;
 
 public class MerchantsNotesProcessor {
 	
 	private InputLinesReader inputLinesReader;
-	private InputLinesWriter inputLinesWriter;
-	private OutputLinesWriter outputLinesWriter;
-	private LogWriter logWriter; 
+	private ListWriter inputLinesWriter;
+	private ListWriter outputLinesWriter;
+	private ListWriter logWriter; 
 	
-	public MerchantsNotesProcessor(InputLinesReader inputLinesReader, InputLinesWriter inputLinesWriter,
-			OutputLinesWriter outputLinesWriter, LogWriter logWriter) {
+	public MerchantsNotesProcessor(InputLinesReader inputLinesReader, ListWriter inputLinesWriter,
+			ListWriter outputLinesWriter, ListWriter logWriter) {
 		super();
 		this.inputLinesReader = inputLinesReader;
 		this.inputLinesWriter = inputLinesWriter;
@@ -41,8 +39,8 @@ public class MerchantsNotesProcessor {
 
 	private void printInputOutputLogs() {
 		
-		inputLinesWriter.writeInput();
-		outputLinesWriter.writeOutput();
-		logWriter.writeLogs();
+		inputLinesWriter.write();
+		outputLinesWriter.write();
+		logWriter.write();
 	}
 }

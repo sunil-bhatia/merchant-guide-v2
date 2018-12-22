@@ -5,10 +5,10 @@ import java.util.List;
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
-public class ConsoleOutputLinesWriter implements OutputLinesWriter {
+public class ConsoleOutputLinesWriter implements ListWriter {
 
 	@Override
-	public void writeOutput() {
+	public void write() {
 
 		// Get output lines list from manager
 		OutputLinesListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
