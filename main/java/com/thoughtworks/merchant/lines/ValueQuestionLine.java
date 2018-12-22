@@ -35,7 +35,8 @@ public class ValueQuestionLine implements Line {
 		String outputLine = formatAnswer(totalValue);
 		
     	//Add the answer to the output lines
-		OutputLinesListManager.addLine(outputLine);
+		OutputLinesListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+		outputLinesListManager.addObject(outputLine);
 	}
 	
 	// Parse this line and extract the two pieces of information

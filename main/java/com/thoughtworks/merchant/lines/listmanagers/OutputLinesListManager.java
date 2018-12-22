@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 //This class maintains Output Lines List
-public class OutputLinesListManager {
+public class OutputLinesListManager implements ListManager{
 
 	private static List<String> outputLines = new ArrayList<>();
 	
-	public static void addLine(String line){
-		outputLines.add(line);
+	@Override
+	public void addObject(String object) {
+		outputLines.add(object);
 	}
 
-	public static List<String> getOutputLines() {
+	@Override
+	public List<String> getList() {
 		return outputLines;
+	}
+
+	@Override
+	public void setList(List<String> list) {
+		outputLines = list;
 	}
 }

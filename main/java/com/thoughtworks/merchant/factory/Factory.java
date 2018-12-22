@@ -19,6 +19,9 @@ import com.thoughtworks.merchant.iomanagers.InputLinesWriter;
 import com.thoughtworks.merchant.iomanagers.LogWriter;
 import com.thoughtworks.merchant.iomanagers.OutputLinesWriter;
 import com.thoughtworks.merchant.lines.Line;
+import com.thoughtworks.merchant.lines.listmanagers.InputLinesListManager;
+import com.thoughtworks.merchant.lines.listmanagers.LogsListManager;
+import com.thoughtworks.merchant.lines.listmanagers.OutputLinesListManager;
 
 public class Factory {
 
@@ -261,6 +264,66 @@ public class Factory {
 		}
 
 		return galacticNumeralsObject;
+	}
+
+	public static InputLinesListManager getInputLinesListManagerObject() {
+		
+		InputLinesListManager inputLinesListManagerObject = null;
+
+		String inputLinesListManagerClassName = ConfigPropertiesManager.getInputLinesListManagerClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(inputLinesListManagerClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			inputLinesListManagerObject = (InputLinesListManager) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return inputLinesListManagerObject;
+	}
+
+	public static OutputLinesListManager getOutputLinesListManagerObject() {
+		
+		OutputLinesListManager outputLinesListManagerObject = null;
+
+		String outputLinesListManagerClassName = ConfigPropertiesManager.getOutputLinesListManagerClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(outputLinesListManagerClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			outputLinesListManagerObject = (OutputLinesListManager) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return outputLinesListManagerObject;
+	}
+
+	public static LogsListManager getLogsListManagerObject() {
+		
+		LogsListManager logsListManagerObject = null;
+
+		String logsListManagerClassName = ConfigPropertiesManager.getLogsListManagerClassName();
+
+		Class<?> classObject;
+
+		try {
+			classObject = Class.forName(logsListManagerClassName);
+			Constructor<?> constructor = classObject.getConstructor();
+			logsListManagerObject = (LogsListManager) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return logsListManagerObject;
 	}
 
 }

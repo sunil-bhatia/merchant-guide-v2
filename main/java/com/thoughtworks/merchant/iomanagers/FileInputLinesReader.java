@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.lines.listmanagers.InputLinesListManager;
 
 public class FileInputLinesReader implements InputLinesReader {
@@ -28,7 +29,8 @@ public class FileInputLinesReader implements InputLinesReader {
             System.exit(1);
         }
         
-        InputLinesListManager.setInputLines(inputLines);
+        InputLinesListManager inputLinesListManager = Factory.getInputLinesListManagerObject();
+        inputLinesListManager.setList(inputLines);
         
         return inputLines;
 	}

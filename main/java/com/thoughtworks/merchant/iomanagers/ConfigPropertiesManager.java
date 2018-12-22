@@ -24,6 +24,10 @@ public class ConfigPropertiesManager {
 	private static String commodityCalculatorClassName = "";
 	private static String romanNumeralsClassName = "";
 	private static String galacticNumeralsClassName = "";
+	
+	private static String inputLinesListManagerClassName = "";
+	private static String outputLinesListManagerClassName = "";
+	private static String logsListManagerClassName = "";
 
 	public static void configureProperties(String[] args) {
 
@@ -60,6 +64,10 @@ public class ConfigPropertiesManager {
 		commodityCalculatorClassName = rb.getString("commodityCalculatorClassName");
 		romanNumeralsClassName = rb.getString("romanNumeralsClassName");
 		galacticNumeralsClassName = rb.getString("galacticNumeralsClassName");
+		
+		inputLinesListManagerClassName = rb.getString("inputLinesListManagerClassName");
+		outputLinesListManagerClassName = rb.getString("outputLinesListManagerClassName");
+		logsListManagerClassName = rb.getString("logsListManagerClassName");
 	}
 
 	private static void configureLineTypes(ResourceBundle rb) {
@@ -126,5 +134,17 @@ public class ConfigPropertiesManager {
 
 	public static String getGalacticNumeralsClassName() {
 		return galacticNumeralsClassName;
+	}
+	
+	public static String getInputLinesListManagerClassName() {
+		return inputLinesListManagerClassName;
+	}
+
+	public static String getOutputLinesListManagerClassName() {
+		return outputLinesListManagerClassName;
+	}
+
+	public static String getLogsListManagerClassName() {
+		return logsListManagerClassName;
 	}
 }

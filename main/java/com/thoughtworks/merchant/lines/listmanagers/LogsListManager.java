@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 //This class maintains Log List
-public class LogsListManager {
+public class LogsListManager implements ListManager {
 
 	private static List<String> logs = new ArrayList<>();
 	
-	public static void add(String message){
-		logs.add(message);
+	@Override
+	public void addObject(String object) {
+		logs.add(object);
 	}
 
-	public static List<String> getLogs() {
+	@Override
+	public List<String> getList() {
 		return logs;
+	}
+
+	@Override
+	public void setList(List<String> list) {
+		logs = list;
 	}
 }

@@ -35,7 +35,8 @@ public class QuantityQuestionLine implements Line {
 		String outputLine = formatAnswer(qtyArabic);
 		
     	//Add the answer to the output lines
-		OutputLinesListManager.addLine(outputLine);
+		OutputLinesListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+		outputLinesListManager.addObject(outputLine);
 	}
 	
 	// Parse this line and extract this piece of information
