@@ -1,6 +1,9 @@
 package com.thoughtworks.merchant.computations;
 
 import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.interfaces.AliasMap;
+import com.thoughtworks.merchant.interfaces.GalacticNumerals;
+import com.thoughtworks.merchant.interfaces.RomanNumerals;
 
 public class GalacticNumeralsImpl implements GalacticNumerals {
 

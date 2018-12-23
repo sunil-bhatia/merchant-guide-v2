@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.iomanagers;
+package com.thoughtworks.merchant.factory;
 
 import java.util.HashMap;
 import java.util.MissingResourceException;

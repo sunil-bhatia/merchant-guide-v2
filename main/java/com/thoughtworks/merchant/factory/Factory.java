@@ -8,16 +8,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
-import com.thoughtworks.merchant.computations.AliasMap;
-import com.thoughtworks.merchant.computations.CommodityCalculator;
-import com.thoughtworks.merchant.computations.CommodityMap;
-import com.thoughtworks.merchant.computations.GalacticNumerals;
-import com.thoughtworks.merchant.computations.RomanNumerals;
-import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
-import com.thoughtworks.merchant.iomanagers.ListReader;
-import com.thoughtworks.merchant.iomanagers.ListWriter;
-import com.thoughtworks.merchant.lines.Line;
-import com.thoughtworks.merchant.lines.listmanagers.ListManager;
+import com.thoughtworks.merchant.interfaces.AliasMap;
+import com.thoughtworks.merchant.interfaces.CommodityCalculator;
+import com.thoughtworks.merchant.interfaces.CommodityMap;
+import com.thoughtworks.merchant.interfaces.GalacticNumerals;
+import com.thoughtworks.merchant.interfaces.Line;
+import com.thoughtworks.merchant.interfaces.ListManager;
+import com.thoughtworks.merchant.interfaces.ListReader;
+import com.thoughtworks.merchant.interfaces.ListWriter;
+import com.thoughtworks.merchant.interfaces.RomanNumerals;
 
 public class Factory {
 	

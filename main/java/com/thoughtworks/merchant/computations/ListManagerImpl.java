@@ -1,7 +1,9 @@
-package com.thoughtworks.merchant.lines.listmanagers;
+package com.thoughtworks.merchant.computations;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.thoughtworks.merchant.interfaces.ListManager;
 
 //This class maintains a list of objects
 public class ListManagerImpl implements ListManager {

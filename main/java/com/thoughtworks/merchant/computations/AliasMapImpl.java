@@ -2,6 +2,8 @@ package com.thoughtworks.merchant.computations;
 
 import java.util.HashMap;
 
+import com.thoughtworks.merchant.interfaces.AliasMap;
+
 //This class maintains the mapping between galactic symbols and roman symbols
 //This mapping was obtained from the Alias Assignment Input Lines like: "glob is I"
 //Example Alias Map : {tegj=L, glob=I, prok=V, pish=X}

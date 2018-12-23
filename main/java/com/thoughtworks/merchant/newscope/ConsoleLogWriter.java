@@ -3,8 +3,8 @@ package com.thoughtworks.merchant.newscope;
 import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.iomanagers.ListWriter;
-import com.thoughtworks.merchant.lines.listmanagers.ListManager;
+import com.thoughtworks.merchant.interfaces.ListManager;
+import com.thoughtworks.merchant.interfaces.ListWriter;
 
 public class ConsoleLogWriter implements ListWriter {
 

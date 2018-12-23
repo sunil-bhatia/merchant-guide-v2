@@ -1,7 +1,7 @@
 package com.thoughtworks.merchant;
 
+import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
 
 public class MerchantsGuideToGalaxyApp {
 	

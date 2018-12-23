@@ -2,10 +2,9 @@ package com.thoughtworks.merchant;
 import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.iomanagers.ListReader;
-import com.thoughtworks.merchant.iomanagers.ListWriter;
-import com.thoughtworks.merchant.lines.Line;
-import com.thoughtworks.merchant.lines.listmanagers.ListManager;
+import com.thoughtworks.merchant.interfaces.Line;
+import com.thoughtworks.merchant.interfaces.ListReader;
+import com.thoughtworks.merchant.interfaces.ListWriter;
 
 public class MerchantsNotesProcessor {
 	
@@ -42,8 +41,6 @@ public class MerchantsNotesProcessor {
 		
 		inputLinesWriter.write();
 		outputLinesWriter.write();
-		ListManager logsListManager = Factory.getLogsListManagerObject();
-		logsListManager.addObject("test where this is printed");
 		logWriter.write();
 	}
 }

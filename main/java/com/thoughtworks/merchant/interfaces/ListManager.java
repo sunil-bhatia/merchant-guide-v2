@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.lines.listmanagers;
+package com.thoughtworks.merchant.interfaces;
 
 import java.util.List;
 

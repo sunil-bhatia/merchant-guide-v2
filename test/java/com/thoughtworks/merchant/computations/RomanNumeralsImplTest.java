@@ -4,8 +4,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.iomanagers.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.RomanNumerals;
 
 public class RomanNumeralsImplTest {
 	

@@ -3,8 +3,9 @@ package com.thoughtworks.merchant.lines;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.computations.AliasMap;
 import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.interfaces.AliasMap;
+import com.thoughtworks.merchant.interfaces.Line;
 
 // Example Alias Assignment Line: "glob is I"
 public class AliasAssignmentLine implements Line {
@@ -23,7 +24,7 @@ public class AliasAssignmentLine implements Line {
 	@Override
 	public void process() {
 
-		// Delegate to parse method for parsing the line
+		// Parse line and extract key fields
 		parse();
 
 		// Add Galactic Roman Mapping to the Alias Map

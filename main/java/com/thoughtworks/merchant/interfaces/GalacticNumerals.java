@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.computations;
+package com.thoughtworks.merchant.interfaces;
 
 public interface GalacticNumerals {
 

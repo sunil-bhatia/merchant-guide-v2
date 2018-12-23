@@ -3,9 +3,10 @@ package com.thoughtworks.merchant.lines;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.computations.GalacticNumerals;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.lines.listmanagers.ListManager;
+import com.thoughtworks.merchant.interfaces.GalacticNumerals;
+import com.thoughtworks.merchant.interfaces.Line;
+import com.thoughtworks.merchant.interfaces.ListManager;
 
 //Example Quantity Question Line: "how much is pish tegj glob glob ?"
 public class QuantityQuestionLine implements Line {
@@ -23,20 +24,31 @@ public class QuantityQuestionLine implements Line {
 	@Override
 	public void process() {
 
-		// Delegate to parse method for parsing the line
-		// Example: qtyGalactic = "pish tegj glob glob"
+		// Parse line and extract key field
         parse();
-
-    	// Delegate to Galactic Numerals for calculating the answer
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
-        int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
         
-		//Delegate to formatter for formatting the output line
-		String outputLine = formatAnswer(qtyArabic);
+		// Validate line
+		if (isLineValid()){
+
+			// Calculate quantity arabic
+			GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
+			int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
+        
+			//Format valid answer
+			String outputLine = formatValidAnswer(qtyArabic);
 		
-    	//Add the answer to the output lines
-		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
-		outputLinesListManager.addObject(outputLine);
+			//Add the answer to the output lines
+			ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+			outputLinesListManager.addObject(outputLine);
+		
+		} else {
+			
+			String outputLine = formatInvalidAnswer();
+
+			// Add the answer to the output lines
+			ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+			outputLinesListManager.addObject(outputLine);
+		}
 	}
 	
 	// Parse this line and extract this piece of information
@@ -51,11 +63,34 @@ public class QuantityQuestionLine implements Line {
 		qtyGalactic = mcher.group(1);
 	}
 	
-	private String formatAnswer(int qtyArabic) {
+	private String formatValidAnswer(int qtyArabic) {
 		String outputLine = "";
 		if (qtyArabic != 0) {
 			outputLine = qtyGalactic + "is " + qtyArabic;
 		}
+		return outputLine;
+	}
+	
+	// Check if quantity galactic is a valid galactic number
+	private boolean isLineValid(){
+
+		boolean isValid;
+		
+		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
+		ListManager logsListManager = Factory.getLogsListManagerObject();
+
+		if (galacticNumerals.isValidGalacticNum(qtyGalactic)) {
+			isValid = true;
+		} else {
+			isValid = false;
+			logsListManager.addObject("Invalid Galactic Number in Input Line : " + line);
+		}
+		
+		return isValid;
+	}
+	
+	 private String formatInvalidAnswer() {
+		String outputLine = "I have no idea what you are talking about";
 		return outputLine;
 	}
 }

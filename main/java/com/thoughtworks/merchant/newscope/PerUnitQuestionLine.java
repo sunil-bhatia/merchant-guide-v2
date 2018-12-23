@@ -3,10 +3,10 @@ package com.thoughtworks.merchant.newscope;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.computations.CommodityMap;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.lines.Line;
-import com.thoughtworks.merchant.lines.listmanagers.ListManager;
+import com.thoughtworks.merchant.interfaces.CommodityMap;
+import com.thoughtworks.merchant.interfaces.Line;
+import com.thoughtworks.merchant.interfaces.ListManager;
 
 //Example Per Unit Question Line: "how many Credits is Silver per unit quantity ?"
 public class PerUnitQuestionLine implements Line {

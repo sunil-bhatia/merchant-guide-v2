@@ -1,6 +1,9 @@
 package com.thoughtworks.merchant.computations;
 
 import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.interfaces.CommodityCalculator;
+import com.thoughtworks.merchant.interfaces.CommodityMap;
+import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 
 //This class calculates the answer for questions like:
 //"how many Credits is glob prok Silver ?"
