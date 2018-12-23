@@ -17,6 +17,7 @@ public class ConfigPropertiesManager {
 	private static String outputLinesWriterClassName = "";
 	
 	private static String logWriterClassName = "";
+	private static String isLogFileNeeded = "";
 	private static String logFilePathAndName = "";
 	
 	private static String aliasMapClassName = "";
@@ -56,7 +57,10 @@ public class ConfigPropertiesManager {
 		outputLinesWriterClassName = rb.getString("outputLinesWriterClassName");
 		
 		logWriterClassName = rb.getString("logWriterClassName");
-		logFilePathAndName = rb.getString("logFilePathAndName");
+		isLogFileNeeded = rb.getString("isLogFileNeeded");
+		if (isLogFileNeeded.equals("true")){
+			logFilePathAndName = rb.getString("logFilePathAndName");
+		}
 		
 		aliasMapClassName = rb.getString("aliasMapClassName");
 		commodityMapClassName = rb.getString("commodityMapClassName");
