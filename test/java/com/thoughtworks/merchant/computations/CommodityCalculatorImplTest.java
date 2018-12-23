@@ -14,6 +14,12 @@ public class CommodityCalculatorImplTest {
 	
     @Before
     public void setupAliasMap() {
+    	
+    	// Configure properties
+    	String[] args = {"config"};
+		ConfigPropertiesManager.configureProperties(args);
+		
+		// Set up alias map
 		AliasMap aliasMap = Factory.getAliasMapObject();
 		aliasMap.addMapping("glob", 'I');
 		aliasMap.addMapping("prok", 'V');
@@ -21,21 +27,18 @@ public class CommodityCalculatorImplTest {
 		aliasMap.addMapping("tegj", 'L');
     }
     
-    @Before
-    public void setupConfigProperties() {
-    	String[] args = {"config"};
-		ConfigPropertiesManager.configureProperties(args);
-    }
-
 	@Test
 	public void testCalculatedValuePerUnit() {
+		
 		String qtyGalactic = "pish pish";
+		
 		int value = 3910;
 
 		double expectedValuePerUnit = 195.5;
 
         CommodityCalculator commodityCalculator = Factory.getCommodityCalculatorObject();
 		double calculatedValuePerUnit = commodityCalculator.calculateValuePerUnit(value, qtyGalactic);
+		
 		assertEquals(expectedValuePerUnit, calculatedValuePerUnit, 0.001);
 	}
 	

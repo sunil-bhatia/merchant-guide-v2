@@ -13,6 +13,12 @@ public class AliasMapImplTest {
 	
     @Before
     public void setupAliasMap() {
+    	
+    	// Configure properties
+    	String[] args = {"config"};
+		ConfigPropertiesManager.configureProperties(args);
+		
+		// Set up alias map
 		AliasMap aliasMap = Factory.getAliasMapObject();
 		aliasMap.addMapping("glob", 'I');
 		aliasMap.addMapping("prok", 'V');
@@ -20,55 +26,69 @@ public class AliasMapImplTest {
 		aliasMap.addMapping("tegj", 'L');
     }
     
-    @Before
-    public void setupConfigProperties() {
-    	String[] args = {"config"};
-		ConfigPropertiesManager.configureProperties(args);
-    }
-
 	@Test
 	public void testGalacticSymbolGlobIsValid() {
-		AliasMap aliasMap = Factory.getAliasMapObject();
+		
 		String galacticSymbol = "glob";
+		
 		boolean expectedResult = true;
+		
+		AliasMap aliasMap = Factory.getAliasMapObject();
 		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 
 	@Test
 	public void testGalacticSymbolProkIsValid() {
-		AliasMap aliasMap = Factory.getAliasMapObject();
+
 		String galacticSymbol = "prok";
+		
 		boolean expectedResult = true;
+		
+		AliasMap aliasMap = Factory.getAliasMapObject();
 		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticSymbolPishIsValid() {
-		AliasMap aliasMap = Factory.getAliasMapObject();
+
 		String galacticSymbol = "pish";
+		
 		boolean expectedResult = true;
+		
+		AliasMap aliasMap = Factory.getAliasMapObject();
 		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticSymbolAbcdIsInvalid() {
-		AliasMap aliasMap = Factory.getAliasMapObject();
+
 		String galacticSymbol = "abcd";
+		
 		boolean expectedResult = false;
+		
+		AliasMap aliasMap = Factory.getAliasMapObject();
 		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
 	@Test
 	public void testGalacticSymbolGlotIsInvalid() {
-		AliasMap aliasMap = Factory.getAliasMapObject();
+
 		String galacticSymbol = "glot";
+		
 		boolean expectedResult = false;
+		
+		AliasMap aliasMap = Factory.getAliasMapObject();
 		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
