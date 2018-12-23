@@ -8,13 +8,22 @@ import com.thoughtworks.merchant.interfaces.ListManager;
 
 public abstract class GenericLine implements Line {
 
-	private String line;
-	private String regex;
+	protected String line;
+	protected String regex;
 
-	String commodity;
-	String qtyGalactic;
+	protected String commodity;
+	protected String qtyGalactic;
 
-	String outputLine;
+	protected boolean isGalacticNumValid;
+	protected boolean isCommodityValid;
+
+	protected String validOutputLine;
+	protected String invalidOutputLine;
+	protected ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
+
+	protected ListManager logsListManager = Factory.getLogsListManagerObject();
+	
+	protected boolean isAssignmentLine;
 
 	public GenericLine(String line, String regex) {
 		this.line = line;
@@ -27,70 +36,80 @@ public abstract class GenericLine implements Line {
 		parse();
 
 		if (isLineValid()) {
-			calculateAnswer();
-			outputLine = formatValidAnswer();
+			if(isAssignmentLine){
+				calculateAssignedData();
+				addAssignedData();
+			} else {
+				calculateAnswer();
+				formatValidAnswer();
+				addValidOutputLine();
+			}
 		} else {
-			outputLine = formatInvalidAnswer();
+			formatInvalidAnswer();
+			addInvalidOutputLine();
 		}
-
-		addOutputLine();
 	}
 
-	public abstract void parse();
+	protected abstract void parse();
 
-	// Validate line
-	public boolean isLineValid() {
+	// By default, it is assumed that line is valid
+	protected boolean isLineValid() {
+		return true;
+	}
 
-		boolean isValid;
+	protected void validateGalacticNum() {
 
-		// Two conditions have to be met, for this to be true
-		// 1. Galactic number should be valid
-		// 2. Commodity should be valid
-
-		boolean isValidGalacticNum;
-		boolean isValidCommodity;
-
-		// Check if galactic number is valid
 		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
-		ListManager logsListManager = Factory.getLogsListManagerObject();
 
-		if (qtyGalactic == null || galacticNumerals.isValidGalacticNum(qtyGalactic)) {
-			isValidGalacticNum = true;
+		if (galacticNumerals.isValidGalacticNum(qtyGalactic)) {
+			isGalacticNumValid = true;
 		} else {
-			isValidGalacticNum = false;
+			isGalacticNumValid = false;
 			logsListManager.addObject("Invalid Galactic Number in Input Line : " + line);
 		}
+	}
 
-		// Check if Commodity is valid
+	protected void validateCommodity() {
+
 		CommodityMap commodityMap = Factory.getCommodityMapObject();
-		if (commodity == null || commodityMap.isValidCommodity(commodity)) {
-			isValidCommodity = true;
+
+		if (commodityMap.isValidCommodity(commodity)) {
+			isCommodityValid = true;
 		} else {
-			isValidCommodity = false;
+			isCommodityValid = false;
 			logsListManager.addObject("Invalid Commodity in Input Line : " + line);
 		}
-
-		if (isValidGalacticNum && isValidCommodity) {
-			isValid = true;
-		} else {
-			isValid = false;
-		}
-
-		return isValid;
 	}
-	
-	public abstract void calculateAnswer();
 
-	public abstract String formatValidAnswer();
-
-	public String formatInvalidAnswer() {
-		String outputLine = "I have no idea what you are talking about";
-		return outputLine;
+	protected void formatInvalidAnswer() {
+		invalidOutputLine = "I have no idea what you are talking about";
 	}
-	
-	// Add the answer to the output lines
-	public void addOutputLine() {
-		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
-		outputLinesListManager.addObject(outputLine);
+
+	protected void addValidOutputLine() {
+		outputLinesListManager.addObject(validOutputLine);
+	}
+
+	protected void addInvalidOutputLine() {
+		outputLinesListManager.addObject(invalidOutputLine);
+	}
+
+	protected void calculateAssignedData() {
+		// Empty method
+		// Will be implemented by derived classes, only if required
+	}
+
+	protected void addAssignedData() {
+		// Empty method
+		// Will be implemented by derived classes, only if required
+	}
+
+	protected void calculateAnswer() {
+		// Empty method
+		// Will be implemented by derived classes, only if required
+	}
+
+	protected void formatValidAnswer() {
+		// Empty method
+		// Will be implemented by derived classes, only if required
 	}
 }

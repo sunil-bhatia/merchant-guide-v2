@@ -8,7 +8,7 @@ import com.thoughtworks.merchant.interfaces.CommodityCalculator;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
 
 //Example Value Assignment Line: "glob glob Silver is 34 Credits"
-public class ValueAssignmentLine extends GenericAssignmentLine {
+public class ValueAssignmentLine extends GenericLine {
 
 	private int value;
 	private double valuePerUnit;
@@ -22,6 +22,8 @@ public class ValueAssignmentLine extends GenericAssignmentLine {
 	// commodity = "Silver"
 	// value = 34
 	protected void parse() {
+		
+		isAssignmentLine = true;
 
 		Pattern ptn = Pattern.compile(regex);
 

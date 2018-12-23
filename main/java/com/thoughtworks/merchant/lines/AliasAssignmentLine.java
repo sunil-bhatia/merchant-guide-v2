@@ -7,7 +7,7 @@ import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.AliasMap;
 
 // Example Alias Assignment Line: "glob is I"
-public class AliasAssignmentLine extends GenericAssignmentLine {
+public class AliasAssignmentLine extends GenericLine {
 
 	private String galacticSymbol;
 	private Character romanSymbol;
@@ -20,6 +20,8 @@ public class AliasAssignmentLine extends GenericAssignmentLine {
 	// galacticSymbol = "glob"
 	// romanSymbol = 'I'
 	protected void parse() {
+		
+		isAssignmentLine = true;
 		
 		Pattern ptn = Pattern.compile(regex);
 
