@@ -7,7 +7,7 @@ public class MerchantsGuideToGalaxyApp {
 	
 	public static void main(String[] args) {
 		
-		//Delegate to Config Properties Manager to configure the properties like Dependency Injection classes etc
+		// Configure the properties like Dependency Injection classes etc
 		ConfigPropertiesManager.configureProperties(args);
 
 		MerchantsNotesProcessor merchantsNotesProcessor = Factory.createMerchantsNotesProcessor();

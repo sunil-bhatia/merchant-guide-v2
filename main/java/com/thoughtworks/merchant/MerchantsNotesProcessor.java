@@ -24,17 +24,23 @@ public class MerchantsNotesProcessor {
 
 	public void processMerchantNotes() {
 		
-		//Delegate to Input Lines Reader to read input lines
+		//Read input lines
 		final List<String> inputLines = inputLinesReader.read();
+		
+		//Process input lines
+		processLines(inputLines);
+
+		//Print the Input, Output and Logs
+		printInputOutputLogs();
+	}
+	
+	public void processLines(List<String> inputLines){
 		
 		// Process each line
 		for (String line : inputLines) {
 			Line lineObject = Factory.getLineObject(line);
 			lineObject.process();
 		}
-
-		//Print the Input, Output and Logs
-		printInputOutputLogs();
 	}
 
 	private void printInputOutputLogs() {
