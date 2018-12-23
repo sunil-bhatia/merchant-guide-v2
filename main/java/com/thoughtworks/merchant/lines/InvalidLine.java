@@ -14,14 +14,6 @@ public class InvalidLine extends GenericLine {
 
 	@Override
 	protected void extractData() {
-		// TODO Auto-generated method stub
-
+		// No data to be extracted 
 	}
-
-	@Override
-	protected void determineLineType() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

@@ -14,15 +14,6 @@ public class PerUnitQuestionLine extends GenericLine {
 		commodity = mcher.group(1).trim();
 	}
 	
-	protected void determineLineType() {
-		isAssignmentLine = false;
-	}
-	
-	protected boolean isLineValid() {
-		validateCommodity();
-		return isCommodityValid;
-	}
-	
 	protected void calculateAnswer() {
 		valuePerUnit = commodityMap.getValuePerUnit(commodity);
 	}

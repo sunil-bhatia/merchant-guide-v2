@@ -17,10 +17,6 @@ public class AliasAssignmentLine extends GenericLine {
 		romanSymbol = mcher.group(2).trim().charAt(0);
 	}
 	
-	protected void determineLineType() {
-		isAssignmentLine = true;
-	}
-	
 	protected void addAssignedData(){
 		aliasMap.addMapping(galacticSymbol, romanSymbol);
 	}

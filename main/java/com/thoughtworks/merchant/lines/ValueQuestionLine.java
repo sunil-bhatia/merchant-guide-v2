@@ -16,25 +16,6 @@ public class ValueQuestionLine extends GenericLine {
 		commodity = mcher.group(2).trim();
 	}
 	
-	protected void determineLineType() {
-		isAssignmentLine = false;
-	}
-	
-	protected boolean isLineValid() {
-		boolean isValid;
-		
-		validateGalacticNum();
-		validateCommodity();
-		
-		if (isGalacticNumValid && isCommodityValid){
-			isValid = true;
-		} else {
-			isValid = false;
-		}
-		
-		return isValid;
-	}
-	
 	protected void calculateAnswer() {
 		totalValue = commodityCalculator.calculateTotalValue(commodity, qtyGalactic);
 	}

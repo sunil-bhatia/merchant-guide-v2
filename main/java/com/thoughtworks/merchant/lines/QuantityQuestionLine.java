@@ -12,23 +12,11 @@ public class QuantityQuestionLine extends GenericLine {
 		qtyGalactic = mcher.group(1);
 	}
 	
-	protected void determineLineType() {
-		isAssignmentLine = false;
-	}
-	
-	@Override
-	protected boolean isLineValid() {
-		validateGalacticNum();
-		return isGalacticNumValid;
-	}
-	
 	protected void calculateAnswer() {
 		qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
 	}
 	
 	protected void formatValidAnswer() {
-		if (qtyArabic != 0) {
-			validOutputLine = qtyGalactic + "is " + qtyArabic;
-		}
+		validOutputLine = qtyGalactic + "is " + qtyArabic;
 	}
 }

@@ -21,28 +21,42 @@ public class RomanNumeralsImpl implements RomanNumerals{
 	}
 
 	public int romanToArabic(String romanNumInput) {
-		int arabicNum = 0;
 
 		String romanNum = romanNumInput.toUpperCase();
+		
+		int totalArabicNumVal = 0;
 
 		if (isValidRomanNum(romanNum)){
-			// Traverse in reverse
-			int prevSymbol = 0;
+			
+			char currentSymbol;
+			int currentSymbolVal;
+			int prevSymbolVal = 0;
+			
+			// Traverse in reverse, from right to left
 			for (int i = romanNum.length() - 1; i >= 0; i--) {
-				int currentSymbol = symbolVal.get(romanNum.charAt(i));
-				// When smaller values precede larger values, smaller values are
-				// subtracted
-				if (currentSymbol < prevSymbol)
-					arabicNum -= currentSymbol;
-				else
-					arabicNum += currentSymbol;
-				prevSymbol = currentSymbol;
+				
+				currentSymbol = romanNum.charAt(i);
+				currentSymbolVal = symbolVal.get(currentSymbol);
+
+				// if symbol value increasing from right to left, then add, otherwise subtract
+				if (symbolValueIncreasing(currentSymbolVal, prevSymbolVal)){
+					totalArabicNumVal += currentSymbolVal;
+				} else{
+					totalArabicNumVal -= currentSymbolVal;
+				}
+				
+				prevSymbolVal = currentSymbolVal;
 			}
+			
 		} else {
-			arabicNum = -1;
+			totalArabicNumVal = -1;
 		}
 
-		return arabicNum;
+		return totalArabicNumVal;
+	}
+	
+	private boolean symbolValueIncreasing(int currentSymbolVal, int prevSymbolVal){
+		return (currentSymbolVal >= prevSymbolVal);
 	}
 	
 	public boolean isValidRomanNum(String romanNumInput){

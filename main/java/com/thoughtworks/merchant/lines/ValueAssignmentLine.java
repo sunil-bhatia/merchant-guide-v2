@@ -16,15 +16,6 @@ public class ValueAssignmentLine extends GenericLine {
 		value = Integer.parseInt(mcher.group(3).trim());
 	}
 	
-	protected void determineLineType() {
-		isAssignmentLine = true;
-	}
-	
-	protected boolean isLineValid() {
-		validateGalacticNum();
-		return isGalacticNumValid;
-	}
-	
 	protected void calculateAssignedData(){
 		valuePerUnit = commodityCalculator.calculateValuePerUnit(value, qtyGalactic);
 	}

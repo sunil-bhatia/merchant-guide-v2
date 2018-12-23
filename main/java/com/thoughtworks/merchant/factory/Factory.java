@@ -23,6 +23,12 @@ public class Factory {
 	private static ListManager inputLinesListManagerObject;
 	private static ListManager outputLinesListManagerObject;
 	private static ListManager logsListManagerObject;
+	private static Line invalidLineTypeObject;
+	private static AliasMap aliasMapObject;
+	private static CommodityMap commodityMapObject;
+	private static CommodityCalculator commodityCalculatorObject;
+	private static RomanNumerals romanNumeralsObject;
+	private static GalacticNumerals galacticNumeralsObject;
 
 	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
@@ -36,14 +42,19 @@ public class Factory {
 		return merchantsNotesProcessor;
 	}
 
+	// Based on the format of the line, return an appropriate object of type Line
 	public static Line getLineObject(String line) {
 
+		// Get the mapping of class names and regex, for each of the line types
 		HashMap<String, String> lineTypesMap = ConfigPropertiesManager.getLineTypesMap();
 
+		// If line does not match with any of the regex, then by default it will be considered of invalid type
 		Line lineObject = getInvalidLineTypeObject();
 
 		Class<?> classObject;
 
+		// For each of the line type, try to match this line with its corresponding regex
+		// and if it matches, instantiate an object of the corresponding class
 		for (Entry<String, String> entry : lineTypesMap.entrySet()) {
 			String className = entry.getKey();
 			String regex = entry.getValue();
@@ -65,9 +76,12 @@ public class Factory {
 		return lineObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static Line getInvalidLineTypeObject() {
-
-		Line invalidLineTypeObject = null;
+		
+		if (invalidLineTypeObject != null){
+			return invalidLineTypeObject;
+		}
 
 		String invalidLineTypeClassName = ConfigPropertiesManager.getInvalidLineTypeClassName();
 
@@ -75,8 +89,8 @@ public class Factory {
 
 		try {
 			classObject = Class.forName(invalidLineTypeClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			invalidLineTypeObject = (Line) constructor.newInstance();
+			Constructor<?> constructor = classObject.getConstructor(String.class, String.class);
+			invalidLineTypeObject = (Line) constructor.newInstance("", "");
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -165,9 +179,12 @@ public class Factory {
 		return logWriterObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static AliasMap getAliasMapObject() {
 		
-		AliasMap aliasMapObject = null;
+		if (aliasMapObject != null){
+			return aliasMapObject;
+		}
 
 		String aliasMapClassName = ConfigPropertiesManager.getAliasMapClassName();
 
@@ -185,10 +202,13 @@ public class Factory {
 		return aliasMapObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static CommodityMap getCommodityMapObject() {
 		
-		CommodityMap commodityMapObject = null;
-
+		if (commodityMapObject != null){
+			return commodityMapObject;
+		}
+		
 		String commodityMapClassName = ConfigPropertiesManager.getCommodityMapClassName();
 
 		Class<?> classObject;
@@ -205,9 +225,12 @@ public class Factory {
 		return commodityMapObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static CommodityCalculator getCommodityCalculatorObject() {
 		
-		CommodityCalculator commodityCalculatorObject = null;
+		if (commodityCalculatorObject != null){
+			return commodityCalculatorObject;
+		}
 
 		String commodityCalculatorClassName = ConfigPropertiesManager.getCommodityCalculatorClassName();
 
@@ -225,10 +248,13 @@ public class Factory {
 		return commodityCalculatorObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static RomanNumerals getRomanNumeralsObject() {
 		
-		RomanNumerals romanNumeralsObject = null;
-
+		if (romanNumeralsObject != null){
+			return romanNumeralsObject;
+		}
+		
 		String romanNumeralsClassName = ConfigPropertiesManager.getRomanNumeralsClassName();
 
 		Class<?> classObject;
@@ -245,9 +271,12 @@ public class Factory {
 		return romanNumeralsObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static GalacticNumerals getGalacticNumeralsObject() {
 		
-		GalacticNumerals galacticNumeralsObject = null;
+		if (galacticNumeralsObject != null){
+			return galacticNumeralsObject;
+		}
 
 		String galacticNumeralsClassName = ConfigPropertiesManager.getGalacticNumeralsClassName();
 
@@ -265,6 +294,7 @@ public class Factory {
 		return galacticNumeralsObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static ListManager getInputLinesListManagerObject() {
 		
 		if (inputLinesListManagerObject != null){
@@ -287,6 +317,7 @@ public class Factory {
 		return inputLinesListManagerObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static ListManager getOutputLinesListManagerObject() {
 		
 		if (outputLinesListManagerObject != null){
@@ -309,6 +340,7 @@ public class Factory {
 		return outputLinesListManagerObject;
 	}
 
+	// We need to instantiate ony one instance of this object
 	public static ListManager getLogsListManagerObject() {
 		
 		if (logsListManagerObject != null){

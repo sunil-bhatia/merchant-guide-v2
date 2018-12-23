@@ -47,8 +47,9 @@ public abstract class GenericLine implements Line {
 	public void process() {
 		
 		parse();
+		determineIsAssignmentLine();
 		extractData();
-		determineLineType();
+		validateData();
 
 		if (isLineValid()) {
 			if(isAssignmentLine){
@@ -70,16 +71,48 @@ public abstract class GenericLine implements Line {
 		mcher = ptn.matcher(line);
 		mcher.matches();
 	}
+	
+	protected void determineIsAssignmentLine(){
+		int indexLastChar = line.length()-1;
+		char lastChar = line.charAt(indexLastChar);
+		
+		if (lastChar != '?'){
+			isAssignmentLine = true;
+		} else {
+			isAssignmentLine = false;
+		}
+	}
 
 	protected abstract void extractData();
 	
-	protected abstract void determineLineType();
-
-	// By default, it is assumed that line is valid
-	protected boolean isLineValid() {
-		return true;
+	protected void validateData() {
+		
+		if (qtyGalactic != null){
+			validateGalacticNum();
+		} else {
+			isGalacticNumValid = true;
+		}
+		
+		// Don't check commodity validity in value assignment line 
+		if (isAssignmentLine == false && commodity != null){
+			validateCommodity();
+		} else {
+			isCommodityValid = true;
+		}
 	}
-
+	
+	protected boolean isLineValid() {
+		boolean isValid;
+		
+		if (isGalacticNumValid && isCommodityValid){
+			isValid = true;
+		} else {
+			isValid = false;
+		}
+		
+		return isValid;
+	}
+	
 	protected void validateGalacticNum() {
 		if (galacticNumerals.isValidGalacticNum(qtyGalactic)) {
 			isGalacticNumValid = true;
