@@ -5,21 +5,37 @@ import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.AliasMap;
+import com.thoughtworks.merchant.interfaces.Line;
 
 // Example Alias Assignment Line: "glob is I"
-public class AliasAssignmentLine extends GenericAssignmentLine {
+public class AliasAssignmentLine2 implements Line {
 
-	private String galacticSymbol;
-	private Character romanSymbol;
+	private String line;	
+	private String regex;
 	
-	public AliasAssignmentLine(String line, String regex) {
-		super(line, regex);
+	String galacticSymbol;
+	Character romanSymbol;
+	
+	public AliasAssignmentLine2(String line, String regex) {
+		this.line = line;
+		this.regex = regex;
+	}
+
+	@Override
+	public void process() {
+
+		// Parse line and extract key fields
+		parse();
+
+		// Add Galactic Roman Mapping to the Alias Map
+		AliasMap aliasMap = Factory.getAliasMapObject();
+		aliasMap.addMapping(galacticSymbol, romanSymbol);
 	}
 	
 	// Parse this line and extract the two pieces of information
 	// galacticSymbol = "glob"
 	// romanSymbol = 'I'
-	protected void parse() {
+	private void parse() {
 		
 		Pattern ptn = Pattern.compile(regex);
 
@@ -28,11 +44,5 @@ public class AliasAssignmentLine extends GenericAssignmentLine {
 
 		galacticSymbol = mcher.group(1).trim();
 		romanSymbol = mcher.group(2).trim().charAt(0);
-	}
-	
-	protected void addAssignedData(){
-		// Add Galactic Roman Mapping to the Alias Map
-		AliasMap aliasMap = Factory.getAliasMapObject();
-		aliasMap.addMapping(galacticSymbol, romanSymbol);
 	}
 }

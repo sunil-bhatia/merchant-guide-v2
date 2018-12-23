@@ -1,20 +1,22 @@
 package com.thoughtworks.merchant.lines;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.CommodityMap;
 import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 import com.thoughtworks.merchant.interfaces.Line;
 import com.thoughtworks.merchant.interfaces.ListManager;
 
 public abstract class GenericAssignmentLine implements Line {
 
-	private String line;
-	private String regex;
+	protected String line;
+	protected String regex;
 
-	String commodity;
-	String qtyGalactic;
+	protected String commodity;
+	protected String qtyGalactic;
+	
+	protected boolean isGalacticNumValid;
+	protected boolean isCommodityValid;
 
-	String outputLine;
+	protected String outputLine;
 
 	public GenericAssignmentLine(String line, String regex) {
 		this.line = line;
@@ -30,66 +32,43 @@ public abstract class GenericAssignmentLine implements Line {
 			calculateAssignedData();
 			addAssignedData();
 		} else {
-			outputLine = formatInvalidAnswer();
+			formatInvalidAnswer();
 			addOutputLine();
 		}
 	}
 
+	protected abstract void parse();
+	
+	protected void calculateAssignedData(){
+		// Empty method
+		// Will be implemented by derived classes, only if required
+	}
+	
+	protected abstract void addAssignedData();
+	
+	// By default, it is assumed that line is valid
+	protected boolean isLineValid() {
+		return true;
+	}
+	
+	protected void validateGalacticNum(){
 
-	public abstract void parse();
-
-	// Validate line
-	public boolean isLineValid() {
-
-		boolean isValid;
-
-		// Two conditions have to be met, for this to be true
-		// 1. Galactic number should be valid
-		// 2. Commodity should be valid
-
-		boolean isValidGalacticNum;
-		boolean isValidCommodity;
-
-		// Check if galactic number is valid
 		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		ListManager logsListManager = Factory.getLogsListManagerObject();
 
-		if (qtyGalactic == null || galacticNumerals.isValidGalacticNum(qtyGalactic)) {
-			isValidGalacticNum = true;
+		if (galacticNumerals.isValidGalacticNum(qtyGalactic)) {
+			isGalacticNumValid = true;
 		} else {
-			isValidGalacticNum = false;
+			isGalacticNumValid = false;
 			logsListManager.addObject("Invalid Galactic Number in Input Line : " + line);
 		}
-
-		// Check if Commodity is valid
-		CommodityMap commodityMap = Factory.getCommodityMapObject();
-		if (commodity == null || commodityMap.isValidCommodity(commodity)) {
-			isValidCommodity = true;
-		} else {
-			isValidCommodity = false;
-			logsListManager.addObject("Invalid Commodity in Input Line : " + line);
-		}
-
-		if (isValidGalacticNum && isValidCommodity) {
-			isValid = true;
-		} else {
-			isValid = false;
-		}
-
-		return isValid;
 	}
 	
-	public abstract void calculateAssignedData();
-	
-	public abstract void addAssignedData();
-
-	public String formatInvalidAnswer() {
-		String outputLine = "I have no idea what you are talking about";
-		return outputLine;
+	protected void formatInvalidAnswer() {
+		outputLine = "I have no idea what you are talking about";
 	}
 	
-	// Add the answer to the output lines
-	public void addOutputLine() {
+	protected void addOutputLine() {
 		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 		outputLinesListManager.addObject(outputLine);
 	}

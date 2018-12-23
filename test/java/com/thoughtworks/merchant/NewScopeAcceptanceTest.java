@@ -23,7 +23,7 @@ public class NewScopeAcceptanceTest {
     public void setupConfig() {
     	
     	// Configure properties
-    	String[] args = {"config2"};
+    	String[] args = {"confignewscope"};
 		ConfigPropertiesManager.configureProperties(args);
 		
     }
