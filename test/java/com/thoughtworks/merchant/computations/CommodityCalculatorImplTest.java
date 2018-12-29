@@ -20,7 +20,7 @@ public class CommodityCalculatorImplTest {
 		ConfigPropertiesManager.configureProperties(args);
 		
 		// Set up alias map
-		AliasMap aliasMap = Factory.getAliasMapObject();
+		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 		aliasMap.addMapping("glob", 'I');
 		aliasMap.addMapping("prok", 'V');
 		aliasMap.addMapping("pish", 'X');
@@ -36,7 +36,8 @@ public class CommodityCalculatorImplTest {
 
 		double expectedValuePerUnit = 195.5;
 
-        CommodityCalculator commodityCalculator = Factory.getCommodityCalculatorObject();
+        //CommodityCalculator commodityCalculator = Factory.getCommodityCalculatorObject();
+        CommodityCalculator commodityCalculator = (CommodityCalculator) Factory.getObject("commodityCalculator");
 		double calculatedValuePerUnit = commodityCalculator.calculateValuePerUnit(value, qtyGalactic);
 		
 		assertEquals(expectedValuePerUnit, calculatedValuePerUnit, 0.001);
@@ -44,7 +45,7 @@ public class CommodityCalculatorImplTest {
 	
     @After
     public void teardownAliasMap() {
-		AliasMap aliasMap = Factory.getAliasMapObject();
+		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 		aliasMap.getAliasMap().clear();
     }
 }

@@ -31,7 +31,7 @@ public class CommodityCalculatorImpl implements CommodityCalculator {
 	// qtyGalactic = "glob prok"
 	public double calculateTotalValue(String commodity,  String qtyGalactic){
 		
-		CommodityMap commodityMap = Factory.getCommodityMapObject();
+		CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
 		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
 		double valuePerUnit = commodityMap.getValuePerUnit(commodity);

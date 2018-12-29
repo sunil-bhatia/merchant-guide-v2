@@ -6,6 +6,8 @@ import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 import com.thoughtworks.merchant.interfaces.RomanNumerals;
 
 public class GalacticNumeralsImpl implements GalacticNumerals {
+	
+	AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 
 	// Example: parameter galacticNum = "glob glob"
 	// return arabicNum = 2
@@ -25,7 +27,7 @@ public class GalacticNumeralsImpl implements GalacticNumerals {
 	// return romanNum = "II"
 	private  String galacticToRoman(String galacticNum) {
 		String romanNum = "";
-		AliasMap aliasMap = Factory.getAliasMapObject();
+		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 
 		String[] galacticSymbolArray = galacticNum.split(" ");
 
@@ -67,7 +69,7 @@ public class GalacticNumeralsImpl implements GalacticNumerals {
 		boolean areGalacticSymbolsValid = false;
 		boolean invalidGalacticSymbolFound = false;
 		
-		AliasMap aliasMap = Factory.getAliasMapObject();
+		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 		
 		String[] galacticSymbolArray = galacticNum.split(" ");
 

@@ -132,10 +132,10 @@ public class AliasAssignmentLineValidationTest {
 	
     @After
     public void teardownAllMaps() {
-		AliasMap aliasMap = Factory.getAliasMapObject();
+		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 		aliasMap.getAliasMap().clear();
 		
-		CommodityMap commodityMap = Factory.getCommodityMapObject();
+		CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
 		commodityMap.getCommodityMap().clear();
 		
 		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();

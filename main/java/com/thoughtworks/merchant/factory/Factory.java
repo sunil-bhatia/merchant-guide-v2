@@ -8,9 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
-import com.thoughtworks.merchant.interfaces.AliasMap;
 import com.thoughtworks.merchant.interfaces.CommodityCalculator;
-import com.thoughtworks.merchant.interfaces.CommodityMap;
 import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 import com.thoughtworks.merchant.interfaces.Line;
 import com.thoughtworks.merchant.interfaces.ListManager;
@@ -23,19 +21,16 @@ public class Factory {
 	private static ListManager inputLinesListManagerObject;
 	private static ListManager outputLinesListManagerObject;
 	private static ListManager logsListManagerObject;
-	private static Line invalidLineTypeObject;
-	private static AliasMap aliasMapObject;
-	private static CommodityMap commodityMapObject;
 	private static CommodityCalculator commodityCalculatorObject;
 	private static RomanNumerals romanNumeralsObject;
 	private static GalacticNumerals galacticNumeralsObject;
 
 	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
-		ListReader inputLinesReader = Factory.getInputLinesReaderObject();
-		ListWriter inputLinesWriter = Factory.getInputLinesWriterObject();
-		ListWriter outputLinesWriter = Factory.getOutputLinesWriterObject();
-		ListWriter logWriter = Factory.getLogWriterObject();
+		ListReader inputLinesReader = (ListReader) Factory.getObject("inputLinesReader");
+		ListWriter inputLinesWriter = (ListWriter) Factory.getObject("inputLinesWriter");
+		ListWriter outputLinesWriter = (ListWriter) Factory.getObject("outputLinesWriter");
+		ListWriter logWriter = (ListWriter) Factory.getObject("logWriter");
 
 		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader,
 				inputLinesWriter, outputLinesWriter, logWriter);
@@ -49,182 +44,64 @@ public class Factory {
 		HashMap<String, String> lineTypesMap = ConfigPropertiesManager.getLineTypesMap();
 
 		// If line does not match with any of the regex, then by default it will be considered of invalid type
-		Line lineObject = getInvalidLineTypeObject();
-
-		Class<?> classObject;
+		Line lineObject = (Line) constructLineObject("invalidLineType", line, "");
 
 		// For each of the line type, try to match this line with its corresponding regex
 		// and if it matches, instantiate an object of the corresponding class
 		for (Entry<String, String> entry : lineTypesMap.entrySet()) {
-			String className = entry.getKey();
+			String objectName = entry.getKey();
 			String regex = entry.getValue();
 
 			Pattern ptn = Pattern.compile(regex);
 			Matcher mcher = ptn.matcher(line);
 			if (mcher.matches()) {
-				try {
-					classObject = Class.forName(className);
-					Constructor<?> constructor = classObject.getConstructor(String.class, String.class);
-					lineObject = (Line) constructor.newInstance(line, regex);
-				} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-						| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-					e.printStackTrace();
-				}
+				lineObject = (Line) constructLineObject(objectName, line, regex);
 			}
 		}
 
 		return lineObject;
 	}
+	
+	public static Object constructLineObject(String objectName, String line, String regex) {
 
-	// We need to instantiate ony one instance of this object
-	public static Line getInvalidLineTypeObject() {
-		
-		if (invalidLineTypeObject != null){
-			return invalidLineTypeObject;
-		}
+		Object object = null;
 
-		String invalidLineTypeClassName = ConfigPropertiesManager.getInvalidLineTypeClassName();
+		String className = ConfigPropertiesManager.getClassName(objectName);
 
 		Class<?> classObject;
 
 		try {
-			classObject = Class.forName(invalidLineTypeClassName);
+			classObject = Class.forName(className);
 			Constructor<?> constructor = classObject.getConstructor(String.class, String.class);
-			invalidLineTypeObject = (Line) constructor.newInstance("", "");
+			object = constructor.newInstance(line, regex);
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 
-		return invalidLineTypeObject;
+		return object;
 	}
 
-	public static ListReader getInputLinesReaderObject() {
+	public static Object getObject(String objectName) {
 
-		ListReader inputLinesReaderObject = null;
+		Object object = null;
 
-		String inputLinesReaderClassName = ConfigPropertiesManager.getInputLinesReaderClassName();
+		String className = ConfigPropertiesManager.getClassName(objectName);
 
 		Class<?> classObject;
 
 		try {
-			classObject = Class.forName(inputLinesReaderClassName);
+			classObject = Class.forName(className);
 			Constructor<?> constructor = classObject.getConstructor();
-			inputLinesReaderObject = (ListReader) constructor.newInstance();
+			object = constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 
-		return inputLinesReaderObject;
+		return object;
 	}
-
-	public static ListWriter getInputLinesWriterObject() {
-
-		ListWriter inputLinesWriterObject = null;
-
-		String inputLinesWriterClassName = ConfigPropertiesManager.getInputLinesWriterClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(inputLinesWriterClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			inputLinesWriterObject = (ListWriter) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return inputLinesWriterObject;
-	}
-
-	public static ListWriter getOutputLinesWriterObject() {
-
-		ListWriter outputLinesWriterObject = null;
-
-		String outputLinesWriterClassName = ConfigPropertiesManager.getOutputLinesWriterClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(outputLinesWriterClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			outputLinesWriterObject = (ListWriter) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return outputLinesWriterObject;
-	}
-
-	public static ListWriter getLogWriterObject() {
-
-		ListWriter logWriterObject = null;
-
-		String logWriterClassName = ConfigPropertiesManager.getLogWriterClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(logWriterClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			logWriterObject = (ListWriter) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return logWriterObject;
-	}
-
-	// We need to instantiate ony one instance of this object
-	public static AliasMap getAliasMapObject() {
-		
-		if (aliasMapObject != null){
-			return aliasMapObject;
-		}
-
-		String aliasMapClassName = ConfigPropertiesManager.getAliasMapClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(aliasMapClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			aliasMapObject = (AliasMap) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return aliasMapObject;
-	}
-
-	// We need to instantiate ony one instance of this object
-	public static CommodityMap getCommodityMapObject() {
-		
-		if (commodityMapObject != null){
-			return commodityMapObject;
-		}
-		
-		String commodityMapClassName = ConfigPropertiesManager.getCommodityMapClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(commodityMapClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			commodityMapObject = (CommodityMap) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return commodityMapObject;
-	}
-
+	
 	// We need to instantiate ony one instance of this object
 	public static CommodityCalculator getCommodityCalculatorObject() {
 		

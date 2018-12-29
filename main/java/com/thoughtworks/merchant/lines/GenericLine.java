@@ -35,9 +35,9 @@ public abstract class GenericLine implements Line {
 	protected ListManager logsListManager = Factory.getLogsListManagerObject();
 	protected ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 	protected GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
-	protected CommodityMap commodityMap = Factory.getCommodityMapObject();
+	protected CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
 	protected CommodityCalculator commodityCalculator = Factory.getCommodityCalculatorObject();
-	protected AliasMap aliasMap = Factory.getAliasMapObject();
+	protected AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 
 	public GenericLine(String line, String regex) {
 		this.line = line;
