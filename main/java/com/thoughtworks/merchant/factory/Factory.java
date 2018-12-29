@@ -2,8 +2,6 @@ package com.thoughtworks.merchant.factory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,18 +32,20 @@ public class Factory {
 	// Based on the format of the line, return an appropriate object of type Line
 	public static Line getLineObject(String line) {
 
-		// Get the mapping of class names and regex, for each of the line types
-		HashMap<String, String> lineTypesMap = ConfigPropertiesManager.getLineTypesMap();
-
 		// If line does not match with any of the regex, then by default it will be considered of invalid type
 		Line lineObject = (Line) constructLineObject("invalidLineType", line, "");
 
+		int numberOfLineTypes = Integer.parseInt(ConfigPropertiesManager.getPropertyValue("numberOfLineTypes"));
+
+		String objectName = "";
+		String regex = "";
+		
 		// For each of the line type, try to match this line with its corresponding regex
 		// and if it matches, instantiate an object of the corresponding class
-		for (Entry<String, String> entry : lineTypesMap.entrySet()) {
-			String objectName = entry.getKey();
-			String regex = entry.getValue();
-
+		for (int i = 0; i < numberOfLineTypes; i++) {
+			objectName = "lineType" + (i + 1);
+			regex = ConfigPropertiesManager.getPropertyValue("lineTypeRegex" + (i + 1));
+			
 			Pattern ptn = Pattern.compile(regex);
 			Matcher mcher = ptn.matcher(line);
 			if (mcher.matches()) {
@@ -60,7 +60,7 @@ public class Factory {
 
 		Object object = null;
 
-		String className = ConfigPropertiesManager.getClassName(objectName);
+		String className = ConfigPropertiesManager.getPropertyValue(objectName);
 
 		Class<?> classObject;
 
@@ -80,7 +80,7 @@ public class Factory {
 
 		Object object = null;
 
-		String className = ConfigPropertiesManager.getClassName(objectName);
+		String className = ConfigPropertiesManager.getPropertyValue(objectName);
 
 		Class<?> classObject;
 
@@ -96,7 +96,7 @@ public class Factory {
 		return object;
 	}
 	
-	// We need to instantiate ony one instance of this object
+	// We need to instantiate only one instance of this object
 	public static ListManager getInputLinesListManagerObject() {
 		
 		if (inputLinesListManagerObject == null){
@@ -106,7 +106,7 @@ public class Factory {
 		return inputLinesListManagerObject;
 	}
 	
-	// We need to instantiate ony one instance of this object
+	// We need to instantiate only one instance of this object
 	public static ListManager getOutputLinesListManagerObject() {
 		
 		if (outputLinesListManagerObject == null){
@@ -116,7 +116,7 @@ public class Factory {
 		return outputLinesListManagerObject;
 	}
 	
-	// We need to instantiate ony one instance of this object
+	// We need to instantiate only one instance of this object
 	public static ListManager getLogsListManagerObject() {
 		
 		if (logsListManagerObject == null){

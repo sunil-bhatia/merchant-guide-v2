@@ -20,7 +20,7 @@ public class FileLogWriter implements ListWriter {
 		ListManager logsListManager = Factory.getLogsListManagerObject();
 		List<String> logs = logsListManager.getList();
 		
-		String logFilePathAndName = ConfigPropertiesManager.getLogFilePathAndName();
+		String logFilePathAndName = ConfigPropertiesManager.getPropertyValue("logFilePathAndName");
 		
         Path path = Paths.get(logFilePathAndName);
         try {
