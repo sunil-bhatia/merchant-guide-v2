@@ -8,23 +8,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
-import com.thoughtworks.merchant.interfaces.CommodityCalculator;
-import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 import com.thoughtworks.merchant.interfaces.Line;
 import com.thoughtworks.merchant.interfaces.ListManager;
 import com.thoughtworks.merchant.interfaces.ListReader;
 import com.thoughtworks.merchant.interfaces.ListWriter;
-import com.thoughtworks.merchant.interfaces.RomanNumerals;
 
 public class Factory {
 	
 	private static ListManager inputLinesListManagerObject;
 	private static ListManager outputLinesListManagerObject;
 	private static ListManager logsListManagerObject;
-	private static CommodityCalculator commodityCalculatorObject;
-	private static RomanNumerals romanNumeralsObject;
-	private static GalacticNumerals galacticNumeralsObject;
-
+	
 	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
 		ListReader inputLinesReader = (ListReader) Factory.getObject("inputLinesReader");
@@ -103,141 +97,32 @@ public class Factory {
 	}
 	
 	// We need to instantiate ony one instance of this object
-	public static CommodityCalculator getCommodityCalculatorObject() {
-		
-		if (commodityCalculatorObject != null){
-			return commodityCalculatorObject;
-		}
-
-		String commodityCalculatorClassName = ConfigPropertiesManager.getCommodityCalculatorClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(commodityCalculatorClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			commodityCalculatorObject = (CommodityCalculator) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return commodityCalculatorObject;
-	}
-
-	// We need to instantiate ony one instance of this object
-	public static RomanNumerals getRomanNumeralsObject() {
-		
-		if (romanNumeralsObject != null){
-			return romanNumeralsObject;
-		}
-		
-		String romanNumeralsClassName = ConfigPropertiesManager.getRomanNumeralsClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(romanNumeralsClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			romanNumeralsObject = (RomanNumerals) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return romanNumeralsObject;
-	}
-
-	// We need to instantiate ony one instance of this object
-	public static GalacticNumerals getGalacticNumeralsObject() {
-		
-		if (galacticNumeralsObject != null){
-			return galacticNumeralsObject;
-		}
-
-		String galacticNumeralsClassName = ConfigPropertiesManager.getGalacticNumeralsClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(galacticNumeralsClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			galacticNumeralsObject = (GalacticNumerals) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return galacticNumeralsObject;
-	}
-
-	// We need to instantiate ony one instance of this object
 	public static ListManager getInputLinesListManagerObject() {
 		
-		if (inputLinesListManagerObject != null){
-			return inputLinesListManagerObject;
+		if (inputLinesListManagerObject == null){
+			inputLinesListManagerObject = (ListManager) Factory.getObject("listManager");
 		}
-
-		String listManagerClassName = ConfigPropertiesManager.getListManagerClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(listManagerClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			inputLinesListManagerObject = (ListManager) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
+		
 		return inputLinesListManagerObject;
 	}
-
+	
 	// We need to instantiate ony one instance of this object
 	public static ListManager getOutputLinesListManagerObject() {
 		
-		if (outputLinesListManagerObject != null){
-			return outputLinesListManagerObject;
+		if (outputLinesListManagerObject == null){
+			outputLinesListManagerObject = (ListManager) Factory.getObject("listManager");
 		}
-
-		String listManagerClassName = ConfigPropertiesManager.getListManagerClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(listManagerClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			outputLinesListManagerObject = (ListManager) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
+		
 		return outputLinesListManagerObject;
 	}
-
+	
 	// We need to instantiate ony one instance of this object
 	public static ListManager getLogsListManagerObject() {
 		
-		if (logsListManagerObject != null){
-			return logsListManagerObject;
-		}
-
-		String listManagerClassName = ConfigPropertiesManager.getListManagerClassName();
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(listManagerClassName);
-			Constructor<?> constructor = classObject.getConstructor();
-			logsListManagerObject = (ListManager) constructor.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
+		if (logsListManagerObject == null){
+			logsListManagerObject = (ListManager) Factory.getObject("listManager");
 		}
 
 		return logsListManagerObject;
 	}
-
 }

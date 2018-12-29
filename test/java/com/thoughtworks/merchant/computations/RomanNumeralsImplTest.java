@@ -10,10 +10,13 @@ import com.thoughtworks.merchant.interfaces.RomanNumerals;
 
 public class RomanNumeralsImplTest {
 	
+	RomanNumerals romanNumerals;
+	
     @Before
     public void setupConfigProperties() {
     	String[] args = {"config"};
 		ConfigPropertiesManager.configureProperties(args);
+		romanNumerals = (RomanNumerals) Factory.getObject("romanNumerals");
     }
 
 	@Test
@@ -23,7 +26,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 1;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -36,7 +38,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 2;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -49,7 +50,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 3;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -62,7 +62,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 4;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -75,7 +74,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 5;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -88,7 +86,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 6;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -101,7 +98,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 7;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -114,7 +110,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 8;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -127,7 +122,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 9;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -140,7 +134,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 10;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -153,7 +146,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 39;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -166,7 +158,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = 1776;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -179,7 +170,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = -1;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -192,7 +182,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = -1;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -205,7 +194,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = -1;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -218,7 +206,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = -1;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -231,7 +218,6 @@ public class RomanNumeralsImplTest {
 		
 		int expectedArabicNum = -1;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
 		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);

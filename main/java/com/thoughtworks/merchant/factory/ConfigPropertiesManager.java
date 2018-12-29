@@ -13,12 +13,6 @@ public class ConfigPropertiesManager {
 	private static String isLogFileNeeded = "";
 	private static String logFilePathAndName = "";
 	
-	private static String commodityCalculatorClassName = "";
-	private static String romanNumeralsClassName = "";
-	private static String galacticNumeralsClassName = "";
-	
-	private static String listManagerClassName = "";
-	
 	private static ResourceBundle rb = null;
 	
 
@@ -47,11 +41,6 @@ public class ConfigPropertiesManager {
 			logFilePathAndName = rb.getString("logFilePathAndName");
 		}
 		
-		commodityCalculatorClassName = rb.getString("commodityCalculatorClassName");
-		romanNumeralsClassName = rb.getString("romanNumeralsClassName");
-		galacticNumeralsClassName = rb.getString("galacticNumeralsClassName");
-		
-		listManagerClassName = rb.getString("listManagerClassName");
 	}
 
 	private static void configureLineTypes() {
@@ -80,22 +69,6 @@ public class ConfigPropertiesManager {
 		return logFilePathAndName;
 	}
 	
-	public static String getCommodityCalculatorClassName() {
-		return commodityCalculatorClassName;
-	}
-
-	public static String getRomanNumeralsClassName() {
-		return romanNumeralsClassName;
-	}
-
-	public static String getGalacticNumeralsClassName() {
-		return galacticNumeralsClassName;
-	}
-	
-	public static String getListManagerClassName() {
-		return listManagerClassName;
-	}
-
 	public static String getClassName(String objectName) {
 		String className = rb.getString(objectName);
 		return className;

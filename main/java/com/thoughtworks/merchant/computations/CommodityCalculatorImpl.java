@@ -16,7 +16,7 @@ public class CommodityCalculatorImpl implements CommodityCalculator {
 	public double calculateValuePerUnit(int value, String qtyGalactic) {
 		double valuePerUnit = 0;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
+		GalacticNumerals galacticNumerals = (GalacticNumerals) Factory.getObject("galacticNumerals");
 		int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
 		
 		if (qtyArabic != 0){
@@ -32,7 +32,7 @@ public class CommodityCalculatorImpl implements CommodityCalculator {
 	public double calculateTotalValue(String commodity,  String qtyGalactic){
 		
 		CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
+		GalacticNumerals galacticNumerals = (GalacticNumerals) Factory.getObject("galacticNumerals");
 		int qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
 		double valuePerUnit = commodityMap.getValuePerUnit(commodity);
 

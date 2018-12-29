@@ -14,7 +14,7 @@ public class GalacticNumeralsImpl implements GalacticNumerals {
 	public int galacticToArabic(String galacticNum) {
 		int arabicNum = 0;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
+		RomanNumerals romanNumerals = (RomanNumerals) Factory.getObject("romanNumerals");
 		
 		if (isValidGalacticNum(galacticNum)) {
 			String romanNum = galacticToRoman(galacticNum);
@@ -47,7 +47,7 @@ public class GalacticNumeralsImpl implements GalacticNumerals {
 		boolean areGalacticSymbolsValid = areGalacticSymbolsValid(galacticNum);
 		boolean isRomanNumValid = false;
 		
-		RomanNumerals romanNumerals = Factory.getRomanNumeralsObject();
+		RomanNumerals romanNumerals = (RomanNumerals) Factory.getObject("romanNumerals");
 		
 		String romanNum = "";
 		if (areGalacticSymbolsValid){

@@ -12,8 +12,10 @@ import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 
 public class GalacticNumeralsImplTest {
 	
+	GalacticNumerals galacticNumerals;
+	
     @Before
-    public void setupAliasMap() {
+    public void setup() {
     	
     	// Configure properties
     	String[] args = {"config"};
@@ -25,6 +27,8 @@ public class GalacticNumeralsImplTest {
 		aliasMap.addMapping("prok", 'V');
 		aliasMap.addMapping("pish", 'X');
 		aliasMap.addMapping("tegj", 'L');
+		
+		galacticNumerals = (GalacticNumerals) Factory.getObject("galacticNumerals");
     }
      
 	@Test
@@ -34,7 +38,6 @@ public class GalacticNumeralsImplTest {
 		
 		boolean expectedResult = true;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		
 		assertEquals(expectedResult, calculatedResult);
@@ -47,7 +50,6 @@ public class GalacticNumeralsImplTest {
 		
 		boolean expectedResult = true;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		
 		assertEquals(expectedResult, calculatedResult);
@@ -60,7 +62,6 @@ public class GalacticNumeralsImplTest {
 		
 		boolean expectedResult = true;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		
 		assertEquals(expectedResult, calculatedResult);
@@ -73,7 +74,6 @@ public class GalacticNumeralsImplTest {
 		
 		boolean expectedResult = false;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		
 		assertEquals(expectedResult, calculatedResult);
@@ -86,7 +86,6 @@ public class GalacticNumeralsImplTest {
 		
 		boolean expectedResult = false;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
 		
 		assertEquals(expectedResult, calculatedResult);
@@ -99,7 +98,6 @@ public class GalacticNumeralsImplTest {
 		
 		int expectedArabicNum = 2;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
@@ -113,7 +111,6 @@ public class GalacticNumeralsImplTest {
 		
 		int expectedArabicNum = 4;
 		
-		GalacticNumerals galacticNumerals = Factory.getGalacticNumeralsObject();
 		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);
 		
 		assertEquals(expectedArabicNum, convertedArabicNum);
