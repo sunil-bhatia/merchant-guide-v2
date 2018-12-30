@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.Line;
-import com.thoughtworks.merchant.interfaces.ListManager;
+import com.thoughtworks.merchant.interfaces.LogManager;
 import com.thoughtworks.merchant.interfaces.ListReader;
 import com.thoughtworks.merchant.interfaces.ListWriter;
 
@@ -12,14 +12,14 @@ public class MerchantsNotesProcessor {
 	
 	private ListReader inputLinesReader;
 	private ListWriter listWriter;
-	private ListWriter logWriter; 
+	private LogManager logManager; 
 	
 	public MerchantsNotesProcessor(ListReader inputLinesReader, ListWriter listWriter,
-			ListWriter logWriter) {
+			LogManager logManager) {
 		super();
 		this.inputLinesReader = inputLinesReader;
 		this.listWriter = listWriter;
-		this.logWriter = logWriter;
+		this.logManager = logManager;
 	}
 
 	public void processMerchantNotes() {
@@ -65,12 +65,10 @@ public class MerchantsNotesProcessor {
 	
 	private void printLogs() {
 		
-		// Get log list from manager
-		ListManager logsListManager = Factory.getLogsListManagerObject();
+
 		// For testing
-		logsListManager.addObject("test where this is printed 4");
-		List<String> logs = logsListManager.getList();
+		logManager.addLog("test where this is printed 4");
 		
-		logWriter.write(logs, "Logs:");
+		logManager.printLog();
 	}
 }

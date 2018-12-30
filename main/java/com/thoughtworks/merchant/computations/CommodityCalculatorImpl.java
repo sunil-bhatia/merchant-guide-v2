@@ -10,13 +10,15 @@ import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 //It calculates the value (in credits) for a commodity given some quantity of the commodity
 public class CommodityCalculatorImpl implements CommodityCalculator {
 	
+	private CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
+	private GalacticCalculator galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
+
 	// Example:
 	// value = 34
 	// qtyGalactic = "glob glob"
 	public double calculateValuePerUnit(int value, String qtyGalactic) {
 		double valuePerUnit = 0;
 		
-		GalacticCalculator galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
 		int qtyArabic = galacticCalculator.galacticToArabic(qtyGalactic);
 		
 		if (qtyArabic != 0){
@@ -31,8 +33,6 @@ public class CommodityCalculatorImpl implements CommodityCalculator {
 	// qtyGalactic = "glob prok"
 	public double calculateTotalValue(String commodity,  String qtyGalactic){
 		
-		CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
-		GalacticCalculator galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
 		int qtyArabic = galacticCalculator.galacticToArabic(qtyGalactic);
 		double valuePerUnit = commodityMap.getValuePerUnit(commodity);
 

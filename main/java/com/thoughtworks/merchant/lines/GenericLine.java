@@ -7,7 +7,7 @@ import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
 import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 import com.thoughtworks.merchant.interfaces.Line;
-import com.thoughtworks.merchant.interfaces.ListManager;
+import com.thoughtworks.merchant.interfaces.LogManager;
 
 public abstract class GenericLine implements Line {
 
@@ -17,7 +17,7 @@ public abstract class GenericLine implements Line {
 	protected String commodity;
 	protected String qtyGalactic;
 
-	protected ListManager logsListManager = Factory.getLogsListManagerObject();
+	protected LogManager logManager = Factory.getLogManager();
 	protected GalacticCalculator galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
 	protected CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
 
@@ -95,7 +95,7 @@ public abstract class GenericLine implements Line {
 			isGalacticNumValid = true;
 		} else {
 			isGalacticNumValid = false;
-			logsListManager.addObject("Invalid Galactic Number in Input Line : " + line);
+			logManager.addLog("Invalid Galactic Number in Input Line : " + line);
 		}
 		
 		return isGalacticNumValid;
@@ -108,7 +108,7 @@ public abstract class GenericLine implements Line {
 			isCommodityValid = true;
 		} else {
 			isCommodityValid = false;
-			logsListManager.addObject("Invalid Commodity in Input Line : " + line);
+			logManager.addLog("Invalid Commodity in Input Line : " + line);
 		}
 		
 		return isCommodityValid;

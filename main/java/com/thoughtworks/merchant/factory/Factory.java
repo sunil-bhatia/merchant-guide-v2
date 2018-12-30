@@ -7,22 +7,22 @@ import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
 import com.thoughtworks.merchant.interfaces.Line;
-import com.thoughtworks.merchant.interfaces.ListManager;
+import com.thoughtworks.merchant.interfaces.LogManager;
 import com.thoughtworks.merchant.interfaces.ListReader;
 import com.thoughtworks.merchant.interfaces.ListWriter;
 
 public class Factory {
 	
-	private static ListManager logsListManagerObject;
+	private static LogManager logManager;
 	
 	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
 		ListReader inputLinesReader = (ListReader) Factory.getObject("inputLinesReader");
 		ListWriter listWriter = (ListWriter) Factory.getObject("listWriter");
-		ListWriter logWriter = (ListWriter) Factory.getObject("logWriter");
+		LogManager logManager = getLogManager();
 
 		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader,
-				listWriter, logWriter);
+				listWriter, logManager);
 		return merchantsNotesProcessor;
 	}
 
@@ -76,12 +76,12 @@ public class Factory {
 	}
 	
 	// We need to instantiate only one instance of this object
-	public static ListManager getLogsListManagerObject() {
+	public static LogManager getLogManager() {
 		
-		if (logsListManagerObject == null){
-			logsListManagerObject = (ListManager) Factory.getObject("listManager");
+		if (logManager == null){
+			logManager = (LogManager) Factory.getObject("logManager");
 		}
 
-		return logsListManagerObject;
+		return logManager;
 	}
 }
