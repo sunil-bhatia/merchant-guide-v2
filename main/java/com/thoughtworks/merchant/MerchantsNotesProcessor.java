@@ -68,7 +68,7 @@ public class MerchantsNotesProcessor {
 		// Get log list from manager
 		ListManager logsListManager = Factory.getLogsListManagerObject();
 		// For testing
-		logsListManager.addObject("test where this is printed 3");
+		logsListManager.addObject("test where this is printed 4");
 		List<String> logs = logsListManager.getList();
 		
 		logWriter.write(logs, "Logs:");

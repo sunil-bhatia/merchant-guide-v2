@@ -31,8 +31,6 @@ public class Factory {
 
 		// If line does not match with any of the regex, then by default it will be considered of invalid type
 		Line lineObject = (Line) getObject("invalidLineType");
-		lineObject.setLine(line);
-		lineObject.setRegex("");
 
 		int numberOfLineTypes = Integer.parseInt(ConfigPropertiesManager.getPropertyValue("numberOfLineTypes"));
 

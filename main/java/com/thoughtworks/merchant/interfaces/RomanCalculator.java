@@ -1,6 +1,6 @@
 package com.thoughtworks.merchant.interfaces;
 
-public interface RomanNumerals {
+public interface RomanCalculator {
 
 	public int romanToArabic(String romanNumInput);
 

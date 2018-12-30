@@ -1,6 +1,6 @@
 package com.thoughtworks.merchant.interfaces;
 
-public interface GalacticNumerals {
+public interface GalacticCalculator {
 
 	public int galacticToArabic(String galacticNum);
 

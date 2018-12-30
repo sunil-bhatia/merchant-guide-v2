@@ -22,7 +22,7 @@ public class PerUnitQuestionLine extends GenericLine {
 		valuePerUnit = commodityMap.getValuePerUnit(commodity);
 	}
 
-	protected void formatValidAnswer() {
-		validOutputLine = "Per unit quantity " + commodity + " is " + (long) valuePerUnit + " Credits";
+	protected String formatValidAnswer() {
+		return ("Per unit quantity " + commodity + " is " + (long) valuePerUnit + " Credits");
 	}
 }

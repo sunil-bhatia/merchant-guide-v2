@@ -5,18 +5,15 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
 import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.AliasMap;
-import com.thoughtworks.merchant.interfaces.CommodityMap;
 
 
-public class AliasAssignmentLineValidationTest {
+public class GalacticAssignmentLineValidationTest {
 	
     @Before
     public void setupConfig() {
@@ -28,7 +25,7 @@ public class AliasAssignmentLineValidationTest {
     }
 	
 	@Test
-	public void testDuplicateGalacticSymbolInAliasAssignmentOverwrites() {
+	public void testDuplicateGalacticSymbolInGalacticAssignmentOverwrites() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob is C");
 		inputLines.add("glob is I");
@@ -46,7 +43,7 @@ public class AliasAssignmentLineValidationTest {
 	}
 	
 	@Test
-	public void testIncorrectRomanSymbolInAliasAssignmentReturnsNoIdeaLine() {
+	public void testIncorrectRomanSymbolInGalacticAssignmentReturnsNoIdeaLine() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob is T");
 
@@ -62,7 +59,7 @@ public class AliasAssignmentLineValidationTest {
 	}
 	
 	@Test
-	public void testTwoCharRomanSymbolInAliasAssignmentReturnsNoIdeaLine() {
+	public void testTwoCharRomanSymbolInGalacticAssignmentReturnsNoIdeaLine() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob is II");
 
@@ -78,7 +75,7 @@ public class AliasAssignmentLineValidationTest {
 	}
 	
 	@Test
-	public void testIsMissingInAliasAssignmentReturnsNoIdeaLine() {
+	public void testIsMissingInGalacticAssignmentReturnsNoIdeaLine() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob in I");
 
@@ -94,7 +91,7 @@ public class AliasAssignmentLineValidationTest {
 	}
 	
 	@Test
-	public void testFourWordsInAliasAssignmentReturnsNoIdeaLine() {
+	public void testFourWordsInGalacticAssignmentReturnsNoIdeaLine() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob is I A");
 
@@ -108,15 +105,4 @@ public class AliasAssignmentLineValidationTest {
 
 		assertEquals(expectedOutputLines, generatedOutputLines);
 	}
-	
-    @After
-    public void teardownAllMaps() {
-		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
-		aliasMap.getAliasMap().clear();
-		
-		CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
-		commodityMap.getCommodityMap().clear();
-		
-		// clear other maps as well
-    }
 }

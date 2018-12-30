@@ -10,8 +10,7 @@ public class InvalidLine extends GenericLine {
 	}
 
 	public String process() {
-		formatInvalidAnswer();
-		return invalidOutputLine;
+		return formatInvalidAnswer();
 	}
 
 	@Override

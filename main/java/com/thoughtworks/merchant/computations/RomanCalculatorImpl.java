@@ -2,15 +2,15 @@ package com.thoughtworks.merchant.computations;
 
 import java.util.HashMap;
 
-import com.thoughtworks.merchant.interfaces.RomanNumerals;
+import com.thoughtworks.merchant.interfaces.RomanCalculator;
 
-//This class is used to convert from roman numerals to arabic numbers
-public class RomanNumeralsImpl implements RomanNumerals{
+//This class is used to convert from roman numbers to arabic numbers
+public class RomanCalculatorImpl implements RomanCalculator{
 
 	private static HashMap<Character, Integer> symbolVal = new HashMap<Character, Integer>();
 
 	static {
-		// Roman numerals are based on seven symbols with these values
+		// Roman numbers are based on seven symbols with these values
 		symbolVal.put('I', 1);
 		symbolVal.put('V', 5);
 		symbolVal.put('X', 10);

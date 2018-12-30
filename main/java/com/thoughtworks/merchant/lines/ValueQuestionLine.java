@@ -27,7 +27,7 @@ public class ValueQuestionLine extends GenericLine {
 		totalValue = commodityCalculator.calculateTotalValue(commodity, qtyGalactic);
 	}
 
-	protected void formatValidAnswer() {
-		validOutputLine = qtyGalactic + commodity + " is " + (long) totalValue + " Credits";
+	protected String formatValidAnswer() {
+		return (qtyGalactic + commodity + " is " + (long) totalValue + " Credits");
 	}	 
 }

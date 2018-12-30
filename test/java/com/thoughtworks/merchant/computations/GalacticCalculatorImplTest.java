@@ -1,19 +1,18 @@
 package com.thoughtworks.merchant.computations;
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.AliasMap;
-import com.thoughtworks.merchant.interfaces.GalacticNumerals;
+import com.thoughtworks.merchant.interfaces.GalacticMap;
+import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 
-public class GalacticNumeralsImplTest {
+public class GalacticCalculatorImplTest {
 	
-	AliasMap aliasMap;
-	GalacticNumerals galacticNumerals;
+	GalacticMap galacticMap;
+	GalacticCalculator galacticCalculator;
 	
     @Before
     public void setup() {
@@ -22,14 +21,14 @@ public class GalacticNumeralsImplTest {
     	String[] args = {"config"};
 		ConfigPropertiesManager.configureProperties(args);
 		
-		// Set up alias map
-		aliasMap = (AliasMap) Factory.getObject("aliasMap");
-		aliasMap.addMapping("glob", 'I');
-		aliasMap.addMapping("prok", 'V');
-		aliasMap.addMapping("pish", 'X');
-		aliasMap.addMapping("tegj", 'L');
+		// Set up galactic map
+		galacticMap = (GalacticMap) Factory.getObject("galacticMap");
+		galacticMap.addMapping("glob", 'I');
+		galacticMap.addMapping("prok", 'V');
+		galacticMap.addMapping("pish", 'X');
+		galacticMap.addMapping("tegj", 'L');
 		
-		galacticNumerals = (GalacticNumerals) Factory.getObject("galacticNumerals");
+		galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
     }
      
 	@Test
@@ -38,7 +37,7 @@ public class GalacticNumeralsImplTest {
 		String galacticNum = "glob";
 		
 		boolean expectedResult = true;		
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);	
+		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -48,7 +47,7 @@ public class GalacticNumeralsImplTest {
 		String galacticNum = "glob glob";
 		
 		boolean expectedResult = true;	
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);		
+		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -58,7 +57,7 @@ public class GalacticNumeralsImplTest {
 		String galacticNum = "pish pish";
 		
 		boolean expectedResult = true;		
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);		
+		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -68,7 +67,7 @@ public class GalacticNumeralsImplTest {
 		String galacticNum = "efgh";
 		
 		boolean expectedResult = false;	
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);	
+		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -78,7 +77,7 @@ public class GalacticNumeralsImplTest {
 		String galacticNum = "prok efgh";
 		
 		boolean expectedResult = false;	
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);	
+		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -88,7 +87,7 @@ public class GalacticNumeralsImplTest {
 		String galacticNum = "glob glob";
 		
 		int expectedArabicNum = 2;	
-		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);	
+		int convertedArabicNum = galacticCalculator.galacticToArabic(galacticNum);	
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -99,12 +98,7 @@ public class GalacticNumeralsImplTest {
 		String galacticNum = "glob prok";
 		
 		int expectedArabicNum = 4;	
-		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);
+		int convertedArabicNum = galacticCalculator.galacticToArabic(galacticNum);
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
-	
-    @After
-    public void teardown() {
-		aliasMap.getAliasMap().clear();
-    }
 }

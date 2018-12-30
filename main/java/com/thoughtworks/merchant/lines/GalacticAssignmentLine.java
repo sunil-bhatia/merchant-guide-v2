@@ -3,17 +3,17 @@ package com.thoughtworks.merchant.lines;
 import java.util.regex.Matcher;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.AliasMap;
+import com.thoughtworks.merchant.interfaces.GalacticMap;
 
-// Example Alias Assignment Line: "glob is I"
-public class AliasAssignmentLine extends GenericLine {
+// Example Galactic Assignment Line: "glob is I"
+public class GalacticAssignmentLine extends GenericLine {
 
 	private String galacticSymbol;
 	private Character romanSymbol;
 	
-	private AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
+	private GalacticMap galacticMap = (GalacticMap) Factory.getObject("galacticMap");
 	
-	public AliasAssignmentLine() {
+	public GalacticAssignmentLine() {
 		super();
 	}
 	
@@ -25,6 +25,6 @@ public class AliasAssignmentLine extends GenericLine {
 	}
 	
 	protected void addAssignedData(){
-		aliasMap.addMapping(galacticSymbol, romanSymbol);
+		galacticMap.addMapping(galacticSymbol, romanSymbol);
 	}
 }

@@ -1,17 +1,16 @@
 package com.thoughtworks.merchant.computations;
 
 import static org.junit.Assert.*;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.AliasMap;
+import com.thoughtworks.merchant.interfaces.GalacticMap;
 
-public class AliasMapImplTest {
+public class GalacticMapImplTest {
 	
-	AliasMap aliasMap;
+	GalacticMap galacticMap;
 	
     @Before
     public void setup() {
@@ -20,12 +19,12 @@ public class AliasMapImplTest {
     	String[] args = {"config"};
 		ConfigPropertiesManager.configureProperties(args);
 		
-		// Set up alias map
-		aliasMap = (AliasMap) Factory.getObject("aliasMap");
-		aliasMap.addMapping("glob", 'I');
-		aliasMap.addMapping("prok", 'V');
-		aliasMap.addMapping("pish", 'X');
-		aliasMap.addMapping("tegj", 'L');
+		// Set up galactic map
+		galacticMap = (GalacticMap) Factory.getObject("galacticMap");
+		galacticMap.addMapping("glob", 'I');
+		galacticMap.addMapping("prok", 'V');
+		galacticMap.addMapping("pish", 'X');
+		galacticMap.addMapping("tegj", 'L');
     }
     
 	@Test
@@ -33,7 +32,7 @@ public class AliasMapImplTest {
 		
 		String galacticSymbol = "glob";
 		boolean expectedResult = true;
-		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		boolean calculatedResult = galacticMap.isValidGalacticSymbol(galacticSymbol);
 		
 		assertEquals(expectedResult, calculatedResult);
 	}
@@ -44,7 +43,7 @@ public class AliasMapImplTest {
 
 		String galacticSymbol = "prok";		
 		boolean expectedResult = true;		
-		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		boolean calculatedResult = galacticMap.isValidGalacticSymbol(galacticSymbol);
 		
 		assertEquals(expectedResult, calculatedResult);
 	}
@@ -54,7 +53,7 @@ public class AliasMapImplTest {
 
 		String galacticSymbol = "pish";		
 		boolean expectedResult = true;		
-		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		boolean calculatedResult = galacticMap.isValidGalacticSymbol(galacticSymbol);
 		
 		assertEquals(expectedResult, calculatedResult);
 	}
@@ -64,7 +63,7 @@ public class AliasMapImplTest {
 
 		String galacticSymbol = "abcd";		
 		boolean expectedResult = false;		
-		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		boolean calculatedResult = galacticMap.isValidGalacticSymbol(galacticSymbol);
 		
 		assertEquals(expectedResult, calculatedResult);
 	}
@@ -74,13 +73,8 @@ public class AliasMapImplTest {
 
 		String galacticSymbol = "glot";		
 		boolean expectedResult = false;		
-		boolean calculatedResult = aliasMap.isValidGalacticSymbol(galacticSymbol);
+		boolean calculatedResult = galacticMap.isValidGalacticSymbol(galacticSymbol);
 		
 		assertEquals(expectedResult, calculatedResult);
 	}
-	
-    @After
-    public void teardown() {
-		aliasMap.getAliasMap().clear();
-    }
 }

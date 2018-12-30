@@ -17,10 +17,10 @@ public class QuantityQuestionLine extends GenericLine {
 	}
 	
 	protected void calculateAnswer() {
-		qtyArabic = galacticNumerals.galacticToArabic(qtyGalactic);
+		qtyArabic = galacticCalculator.galacticToArabic(qtyGalactic);
 	}
 	
-	protected void formatValidAnswer() {
-		validOutputLine = qtyGalactic + "is " + qtyArabic;
+	protected String formatValidAnswer() {
+		return (qtyGalactic + "is " + qtyArabic);
 	}
 }

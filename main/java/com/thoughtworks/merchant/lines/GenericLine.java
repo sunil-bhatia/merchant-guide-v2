@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
-import com.thoughtworks.merchant.interfaces.GalacticNumerals;
+import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 import com.thoughtworks.merchant.interfaces.Line;
 import com.thoughtworks.merchant.interfaces.ListManager;
 
@@ -16,16 +16,9 @@ public abstract class GenericLine implements Line {
 
 	protected String commodity;
 	protected String qtyGalactic;
-	
-	protected boolean isCommodityValid;
-	protected boolean isGalacticNumValid;
-
-	protected String validOutputLine;
-	protected String invalidOutputLine;
-	protected String outputLine;
 
 	protected ListManager logsListManager = Factory.getLogsListManagerObject();
-	protected GalacticNumerals galacticNumerals = (GalacticNumerals) Factory.getObject("galacticNumerals");
+	protected GalacticCalculator galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
 	protected CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
 
 	public GenericLine() {
@@ -33,30 +26,23 @@ public abstract class GenericLine implements Line {
 
 	public String process() {
 		
+		String outputLine = "";
+		
 		Matcher mcher = parse();
 		extractData(mcher);
-		validateData();
 
-		if (isLineValid()) {
+		if (isDataValid()) {
 			if(isLineAssignmentType()){
 				calculateAssignedData();
 				addAssignedData();
 			} else {
 				calculateAnswer();
-				formatValidAnswer();
+				outputLine = formatValidAnswer();
 			}
 		} else {
-			formatInvalidAnswer();
+			outputLine = formatInvalidAnswer();
 		}
-		
-		if (validOutputLine != null){
-			outputLine = validOutputLine;
-		} else if (invalidOutputLine != null){
-			outputLine = invalidOutputLine;
-		} else {
-			outputLine = "";
-		}
-		
+			
 		return outputLine;
 	}
 	
@@ -71,9 +57,68 @@ public abstract class GenericLine implements Line {
 		return mcher;
 	}
 	
+	protected abstract void extractData(Matcher mcher);
+	
+	protected boolean isDataValid() {
+		
+		boolean isGalacticNumValid;
+		boolean isCommodityValid;
+		
+		if (qtyGalactic != null){
+			isGalacticNumValid = validateGalacticNum();
+		} else {
+			isGalacticNumValid = true;
+		}
+		
+		// Don't check commodity validity in value assignment line 
+		if (isLineAssignmentType() == false && commodity != null){
+			isCommodityValid = validateCommodity();
+		} else {
+			isCommodityValid = true;
+		}
+		
+		boolean isValid;
+		
+		if (isGalacticNumValid && isCommodityValid){
+			isValid = true;
+		} else {
+			isValid = false;
+		}
+		
+		return isValid;
+	}
+	
+	protected boolean validateGalacticNum() {
+		boolean isGalacticNumValid;
+		
+		if (galacticCalculator.isValidGalacticNum(qtyGalactic)) {
+			isGalacticNumValid = true;
+		} else {
+			isGalacticNumValid = false;
+			logsListManager.addObject("Invalid Galactic Number in Input Line : " + line);
+		}
+		
+		return isGalacticNumValid;
+	}
+
+	protected boolean validateCommodity() {
+		boolean isCommodityValid;
+		
+		if (commodityMap.isValidCommodity(commodity)) {
+			isCommodityValid = true;
+		} else {
+			isCommodityValid = false;
+			logsListManager.addObject("Invalid Commodity in Input Line : " + line);
+		}
+		
+		return isCommodityValid;
+	}
+	
 	protected boolean isLineAssignmentType(){
 		
 		boolean isAssignmentType;
+		
+		line = line.trim();
 		
 		int indexLastChar = line.length()-1;
 		char lastChar = line.charAt(indexLastChar);
@@ -86,59 +131,7 @@ public abstract class GenericLine implements Line {
 		
 		return isAssignmentType;
 	}
-
-	protected abstract void extractData(Matcher mcher);
 	
-	protected void validateData() {
-		
-		if (qtyGalactic != null){
-			validateGalacticNum();
-		} else {
-			isGalacticNumValid = true;
-		}
-		
-		// Don't check commodity validity in value assignment line 
-		if (isLineAssignmentType() == false && commodity != null){
-			validateCommodity();
-		} else {
-			isCommodityValid = true;
-		}
-	}
-	
-	protected boolean isLineValid() {
-		boolean isValid;
-		
-		if (isGalacticNumValid && isCommodityValid){
-			isValid = true;
-		} else {
-			isValid = false;
-		}
-		
-		return isValid;
-	}
-	
-	protected void validateGalacticNum() {
-		if (galacticNumerals.isValidGalacticNum(qtyGalactic)) {
-			isGalacticNumValid = true;
-		} else {
-			isGalacticNumValid = false;
-			logsListManager.addObject("Invalid Galactic Number in Input Line : " + line);
-		}
-	}
-
-	protected void validateCommodity() {
-		if (commodityMap.isValidCommodity(commodity)) {
-			isCommodityValid = true;
-		} else {
-			isCommodityValid = false;
-			logsListManager.addObject("Invalid Commodity in Input Line : " + line);
-		}
-	}
-	
-	protected void formatInvalidAnswer() {
-		invalidOutputLine = "I have no idea what you are talking about";
-	}
-
 	protected void calculateAssignedData() {
 		// Empty method - Will be implemented by derived classes, only if required
 	}
@@ -150,9 +143,14 @@ public abstract class GenericLine implements Line {
 	protected void calculateAnswer() {
 		// Empty method - Will be implemented by derived classes, only if required
 	}
-
-	protected void formatValidAnswer() {
-		// Empty method - Will be implemented by derived classes, only if required
+	
+	protected String formatInvalidAnswer() {
+		return "I have no idea what you are talking about";
+	}
+	
+	protected String formatValidAnswer() {
+		// Dummy method - Will be implemented by derived classes, only if required
+		return "";
 	}
 	
 	public void setLine(String line) {

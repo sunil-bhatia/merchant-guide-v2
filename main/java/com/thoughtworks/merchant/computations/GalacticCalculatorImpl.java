@@ -1,24 +1,23 @@
 package com.thoughtworks.merchant.computations;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.AliasMap;
-import com.thoughtworks.merchant.interfaces.GalacticNumerals;
-import com.thoughtworks.merchant.interfaces.RomanNumerals;
+import com.thoughtworks.merchant.interfaces.GalacticMap;
+import com.thoughtworks.merchant.interfaces.GalacticCalculator;
+import com.thoughtworks.merchant.interfaces.RomanCalculator;
 
-public class GalacticNumeralsImpl implements GalacticNumerals {
+public class GalacticCalculatorImpl implements GalacticCalculator {
 	
-	AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
+	private GalacticMap galacticMap = (GalacticMap) Factory.getObject("galacticMap");
+	private RomanCalculator romanCalculator = (RomanCalculator) Factory.getObject("romanCalculator");
 
 	// Example: parameter galacticNum = "glob glob"
 	// return arabicNum = 2
 	public int galacticToArabic(String galacticNum) {
 		int arabicNum = 0;
-		
-		RomanNumerals romanNumerals = (RomanNumerals) Factory.getObject("romanNumerals");
-		
+				
 		if (isValidGalacticNum(galacticNum)) {
 			String romanNum = galacticToRoman(galacticNum);
-			arabicNum = romanNumerals.romanToArabic(romanNum);
+			arabicNum = romanCalculator.romanToArabic(romanNum);
 		}
 		return arabicNum;
 	}
@@ -27,12 +26,11 @@ public class GalacticNumeralsImpl implements GalacticNumerals {
 	// return romanNum = "II"
 	private  String galacticToRoman(String galacticNum) {
 		String romanNum = "";
-		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 
 		String[] galacticSymbolArray = galacticNum.split(" ");
 
 		for (int i = 0; i < galacticSymbolArray.length; i++) {
-			romanNum += aliasMap.getRomanSymbol(galacticSymbolArray[i]);
+			romanNum += galacticMap.getRomanSymbol(galacticSymbolArray[i]);
 		}
 		return romanNum;
 	}
@@ -46,13 +44,11 @@ public class GalacticNumeralsImpl implements GalacticNumerals {
 		
 		boolean areGalacticSymbolsValid = areGalacticSymbolsValid(galacticNum);
 		boolean isRomanNumValid = false;
-		
-		RomanNumerals romanNumerals = (RomanNumerals) Factory.getObject("romanNumerals");
-		
+			
 		String romanNum = "";
 		if (areGalacticSymbolsValid){
 			romanNum = galacticToRoman(galacticNum);
-			if (romanNumerals.isValidRomanNum(romanNum)){
+			if (romanCalculator.isValidRomanNum(romanNum)){
 				isRomanNumValid = true;
 			}
 		}
@@ -65,17 +61,15 @@ public class GalacticNumeralsImpl implements GalacticNumerals {
 	}
 	
 
-	private static boolean areGalacticSymbolsValid(String galacticNum) {		
+	private boolean areGalacticSymbolsValid(String galacticNum) {		
 		boolean areGalacticSymbolsValid = false;
 		boolean invalidGalacticSymbolFound = false;
-		
-		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 		
 		String[] galacticSymbolArray = galacticNum.split(" ");
 
 		for (int i = 0; i < galacticSymbolArray.length; i++) {
 			// Check if galactic symbol is valid
-			if (!aliasMap.isValidGalacticSymbol(galacticSymbolArray[i])) {
+			if (!galacticMap.isValidGalacticSymbol(galacticSymbolArray[i])) {
 				invalidGalacticSymbolFound = true;
 			}
 		}

@@ -33,8 +33,4 @@ public class CommodityMapImpl implements CommodityMap {
 		}
 		return isValid;
 	}
-
-	public HashMap<String, Double> getCommodityMap() {
-		return commodityMap;
-	}
 }

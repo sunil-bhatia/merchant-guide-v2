@@ -5,16 +5,12 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
 import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.AliasMap;
-import com.thoughtworks.merchant.interfaces.CommodityMap;
-import com.thoughtworks.merchant.interfaces.ListManager;
 
 
 public class ValueAssignmentLineValidationTest {
@@ -81,15 +77,4 @@ public class ValueAssignmentLineValidationTest {
 
 		assertEquals(expectedOutputLines, generatedOutputLines);
 	}
-	
-    @After
-    public void teardownAllMaps() {
-		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
-		aliasMap.getAliasMap().clear();
-		
-		CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
-		commodityMap.getCommodityMap().clear();
-			
-		// clear other maps as well
-    }
 }
