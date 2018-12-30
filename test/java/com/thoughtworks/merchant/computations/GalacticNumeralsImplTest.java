@@ -12,6 +12,7 @@ import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 
 public class GalacticNumeralsImplTest {
 	
+	AliasMap aliasMap;
 	GalacticNumerals galacticNumerals;
 	
     @Before
@@ -22,7 +23,7 @@ public class GalacticNumeralsImplTest {
 		ConfigPropertiesManager.configureProperties(args);
 		
 		// Set up alias map
-		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
+		aliasMap = (AliasMap) Factory.getObject("aliasMap");
 		aliasMap.addMapping("glob", 'I');
 		aliasMap.addMapping("prok", 'V');
 		aliasMap.addMapping("pish", 'X');
@@ -36,10 +37,8 @@ public class GalacticNumeralsImplTest {
 
 		String galacticNum = "glob";
 		
-		boolean expectedResult = true;
-		
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
-		
+		boolean expectedResult = true;		
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -48,10 +47,8 @@ public class GalacticNumeralsImplTest {
 
 		String galacticNum = "glob glob";
 		
-		boolean expectedResult = true;
-		
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
-		
+		boolean expectedResult = true;	
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -60,10 +57,8 @@ public class GalacticNumeralsImplTest {
 
 		String galacticNum = "pish pish";
 		
-		boolean expectedResult = true;
-		
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
-		
+		boolean expectedResult = true;		
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -72,10 +67,8 @@ public class GalacticNumeralsImplTest {
 
 		String galacticNum = "efgh";
 		
-		boolean expectedResult = false;
-		
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
-		
+		boolean expectedResult = false;	
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -84,10 +77,8 @@ public class GalacticNumeralsImplTest {
 
 		String galacticNum = "prok efgh";
 		
-		boolean expectedResult = false;
-		
-		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);
-		
+		boolean expectedResult = false;	
+		boolean calculatedResult = galacticNumerals.isValidGalacticNum(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -96,10 +87,8 @@ public class GalacticNumeralsImplTest {
 
 		String galacticNum = "glob glob";
 		
-		int expectedArabicNum = 2;
-		
-		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);
-		
+		int expectedArabicNum = 2;	
+		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);	
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -109,16 +98,13 @@ public class GalacticNumeralsImplTest {
 
 		String galacticNum = "glob prok";
 		
-		int expectedArabicNum = 4;
-		
+		int expectedArabicNum = 4;	
 		int convertedArabicNum = galacticNumerals.galacticToArabic(galacticNum);
-		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
     @After
-    public void teardownAliasMap() {
-		AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
+    public void teardown() {
 		aliasMap.getAliasMap().clear();
     }
 }
