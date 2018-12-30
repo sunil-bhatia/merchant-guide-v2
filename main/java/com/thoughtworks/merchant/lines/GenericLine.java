@@ -22,16 +22,16 @@ public abstract class GenericLine implements Line {
 
 	protected String validOutputLine;
 	protected String invalidOutputLine;
+	protected String outputLine;
 
 	protected ListManager logsListManager = Factory.getLogsListManagerObject();
-	protected ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 	protected GalacticNumerals galacticNumerals = (GalacticNumerals) Factory.getObject("galacticNumerals");
 	protected CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
 
 	public GenericLine() {
 	}
 
-	public void process() {
+	public String process() {
 		
 		Matcher mcher = parse();
 		extractData(mcher);
@@ -44,12 +44,20 @@ public abstract class GenericLine implements Line {
 			} else {
 				calculateAnswer();
 				formatValidAnswer();
-				addValidOutputLine();
 			}
 		} else {
 			formatInvalidAnswer();
-			addInvalidOutputLine();
 		}
+		
+		if (validOutputLine != null){
+			outputLine = validOutputLine;
+		} else if (invalidOutputLine != null){
+			outputLine = invalidOutputLine;
+		} else {
+			outputLine = "";
+		}
+		
+		return outputLine;
 	}
 	
 	protected Matcher parse() {
@@ -129,14 +137,6 @@ public abstract class GenericLine implements Line {
 	
 	protected void formatInvalidAnswer() {
 		invalidOutputLine = "I have no idea what you are talking about";
-	}
-
-	protected void addValidOutputLine() {
-		outputLinesListManager.addObject(validOutputLine);
-	}
-
-	protected void addInvalidOutputLine() {
-		outputLinesListManager.addObject(invalidOutputLine);
 	}
 
 	protected void calculateAssignedData() {

@@ -9,9 +9,9 @@ public class InvalidLine extends GenericLine {
 		super();
 	}
 
-	public void process() {
+	public String process() {
 		formatInvalidAnswer();
-		addInvalidOutputLine();
+		return invalidOutputLine;
 	}
 
 	@Override

@@ -14,8 +14,6 @@ import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.AliasMap;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
-import com.thoughtworks.merchant.interfaces.ListManager;
-
 
 public class NewScopeAcceptanceTest {
 	
@@ -56,12 +54,8 @@ public class NewScopeAcceptanceTest {
 		
 		// Process input lines
 		MerchantsNotesProcessor merchantsNotesProcessor = Factory.createMerchantsNotesProcessor();
-		merchantsNotesProcessor.processLines(inputLines);
+		List<String> generatedOutputLines = merchantsNotesProcessor.processLines(inputLines);
 
-		// Get output lines list from manager
-		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
-		List<String> generatedOutputLines = outputLinesListManager.getList();
-		
 		assertEquals(expectedOutputLines, generatedOutputLines);
 	}
 	
@@ -72,9 +66,6 @@ public class NewScopeAcceptanceTest {
 		
 		CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
 		commodityMap.getCommodityMap().clear();
-		
-		ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
-		outputLinesListManager.getList().clear();
 		
 		// clear other maps as well
     }

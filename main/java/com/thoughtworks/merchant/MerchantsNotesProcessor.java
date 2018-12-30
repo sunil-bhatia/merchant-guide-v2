@@ -1,24 +1,24 @@
 package com.thoughtworks.merchant;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.Line;
+import com.thoughtworks.merchant.interfaces.ListManager;
 import com.thoughtworks.merchant.interfaces.ListReader;
 import com.thoughtworks.merchant.interfaces.ListWriter;
 
 public class MerchantsNotesProcessor {
 	
 	private ListReader inputLinesReader;
-	private ListWriter inputLinesWriter;
-	private ListWriter outputLinesWriter;
+	private ListWriter listWriter;
 	private ListWriter logWriter; 
 	
-	public MerchantsNotesProcessor(ListReader inputLinesReader, ListWriter inputLinesWriter,
-			ListWriter outputLinesWriter, ListWriter logWriter) {
+	public MerchantsNotesProcessor(ListReader inputLinesReader, ListWriter listWriter,
+			ListWriter logWriter) {
 		super();
 		this.inputLinesReader = inputLinesReader;
-		this.inputLinesWriter = inputLinesWriter;
-		this.outputLinesWriter = outputLinesWriter;
+		this.listWriter = listWriter;
 		this.logWriter = logWriter;
 	}
 
@@ -28,25 +28,49 @@ public class MerchantsNotesProcessor {
 		final List<String> inputLines = inputLinesReader.read();
 		
 		//Process input lines
-		processLines(inputLines);
+		List<String> outputLines = processLines(inputLines);
 
 		//Print the Input, Output and Logs
-		printInputOutputLogs();
+		printInputLines(inputLines);
+		printOutputLines(outputLines);
+		printLogs();
 	}
 	
-	public void processLines(List<String> inputLines){
+	public List<String> processLines(List<String> inputLines){
+		
+		List<String> outputLines = new ArrayList<String>();
+		String outputLine;
 		
 		// Process each line
 		for (String line : inputLines) {
 			Line lineObject = Factory.getLineObject(line);
-			lineObject.process();
+			outputLine = lineObject.process();
+			
+			if (!outputLine.isEmpty()){
+				outputLines.add(outputLine);
+			}
 		}
-	}
-
-	private void printInputOutputLogs() {
 		
-		inputLinesWriter.write();
-		outputLinesWriter.write();
-		logWriter.write();
+		return outputLines;
+		
+	}
+	
+	private void printInputLines(List<String> inputLines) {   	
+		listWriter.write(inputLines, "Input text:");
+	}
+	
+	private void printOutputLines(List<String> outputLines) {   	
+		listWriter.write(outputLines, "Results:");
+	}
+	
+	private void printLogs() {
+		
+		// Get log list from manager
+		ListManager logsListManager = Factory.getLogsListManagerObject();
+		// For testing
+		logsListManager.addObject("test where this is printed 3");
+		List<String> logs = logsListManager.getList();
+		
+		logWriter.write(logs, "Logs:");
 	}
 }

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.ListManager;
 import com.thoughtworks.merchant.interfaces.ListReader;
 
 public class FileInputLinesReader implements ListReader {
@@ -30,10 +28,7 @@ public class FileInputLinesReader implements ListReader {
             System.err.println("Please try again. ");
             System.exit(1);
         }
-        
-        ListManager inputLinesListManager = Factory.getInputLinesListManagerObject();
-        inputLinesListManager.setList(inputLines);
-        
+              
         return inputLines;
 	}
 }

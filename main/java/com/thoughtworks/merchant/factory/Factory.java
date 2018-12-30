@@ -13,19 +13,16 @@ import com.thoughtworks.merchant.interfaces.ListWriter;
 
 public class Factory {
 	
-	private static ListManager inputLinesListManagerObject;
-	private static ListManager outputLinesListManagerObject;
 	private static ListManager logsListManagerObject;
 	
 	public static MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
 		ListReader inputLinesReader = (ListReader) Factory.getObject("inputLinesReader");
-		ListWriter inputLinesWriter = (ListWriter) Factory.getObject("inputLinesWriter");
-		ListWriter outputLinesWriter = (ListWriter) Factory.getObject("outputLinesWriter");
+		ListWriter listWriter = (ListWriter) Factory.getObject("listWriter");
 		ListWriter logWriter = (ListWriter) Factory.getObject("logWriter");
 
 		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader,
-				inputLinesWriter, outputLinesWriter, logWriter);
+				listWriter, logWriter);
 		return merchantsNotesProcessor;
 	}
 
@@ -34,6 +31,8 @@ public class Factory {
 
 		// If line does not match with any of the regex, then by default it will be considered of invalid type
 		Line lineObject = (Line) getObject("invalidLineType");
+		lineObject.setLine(line);
+		lineObject.setRegex("");
 
 		int numberOfLineTypes = Integer.parseInt(ConfigPropertiesManager.getPropertyValue("numberOfLineTypes"));
 
@@ -76,26 +75,6 @@ public class Factory {
 		}
 
 		return object;
-	}
-	
-	// We need to instantiate only one instance of this object
-	public static ListManager getInputLinesListManagerObject() {
-		
-		if (inputLinesListManagerObject == null){
-			inputLinesListManagerObject = (ListManager) Factory.getObject("listManager");
-		}
-		
-		return inputLinesListManagerObject;
-	}
-	
-	// We need to instantiate only one instance of this object
-	public static ListManager getOutputLinesListManagerObject() {
-		
-		if (outputLinesListManagerObject == null){
-			outputLinesListManagerObject = (ListManager) Factory.getObject("listManager");
-		}
-		
-		return outputLinesListManagerObject;
 	}
 	
 	// We need to instantiate only one instance of this object
