@@ -4,8 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.thoughtworks.merchant.factory.Factory;
-import com.thoughtworks.merchant.interfaces.AliasMap;
-import com.thoughtworks.merchant.interfaces.CommodityCalculator;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
 import com.thoughtworks.merchant.interfaces.GalacticNumerals;
 import com.thoughtworks.merchant.interfaces.Line;
@@ -15,19 +13,12 @@ public abstract class GenericLine implements Line {
 
 	protected String line;
 	protected String regex;
-	protected Pattern ptn;
-	protected Matcher mcher;
 
 	protected String commodity;
 	protected String qtyGalactic;
-	protected int qtyArabic;
-	protected int value;
-	protected double valuePerUnit;
 	
-	protected boolean isAssignmentLine;
-
-	protected boolean isGalacticNumValid;
 	protected boolean isCommodityValid;
+	protected boolean isGalacticNumValid;
 
 	protected String validOutputLine;
 	protected String invalidOutputLine;
@@ -36,23 +27,18 @@ public abstract class GenericLine implements Line {
 	protected ListManager outputLinesListManager = Factory.getOutputLinesListManagerObject();
 	protected GalacticNumerals galacticNumerals = (GalacticNumerals) Factory.getObject("galacticNumerals");
 	protected CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
-	protected CommodityCalculator commodityCalculator = (CommodityCalculator) Factory.getObject("commodityCalculator");
-	protected AliasMap aliasMap = (AliasMap) Factory.getObject("aliasMap");
 
-	public GenericLine(String line, String regex) {
-		this.line = line;
-		this.regex = regex;
+	public GenericLine() {
 	}
 
 	public void process() {
 		
-		parse();
-		determineIsAssignmentLine();
-		extractData();
+		Matcher mcher = parse();
+		extractData(mcher);
 		validateData();
 
 		if (isLineValid()) {
-			if(isAssignmentLine){
+			if(isLineAssignmentType()){
 				calculateAssignedData();
 				addAssignedData();
 			} else {
@@ -66,24 +52,34 @@ public abstract class GenericLine implements Line {
 		}
 	}
 	
-	protected void parse() {
-		ptn = Pattern.compile(regex);
+	protected Matcher parse() {
+		
+		Matcher mcher;
+		
+		Pattern ptn = Pattern.compile(regex);
 		mcher = ptn.matcher(line);
 		mcher.matches();
+		
+		return mcher;
 	}
 	
-	protected void determineIsAssignmentLine(){
+	protected boolean isLineAssignmentType(){
+		
+		boolean isAssignmentType;
+		
 		int indexLastChar = line.length()-1;
 		char lastChar = line.charAt(indexLastChar);
 		
 		if (lastChar != '?'){
-			isAssignmentLine = true;
+			isAssignmentType = true;
 		} else {
-			isAssignmentLine = false;
+			isAssignmentType = false;
 		}
+		
+		return isAssignmentType;
 	}
 
-	protected abstract void extractData();
+	protected abstract void extractData(Matcher mcher);
 	
 	protected void validateData() {
 		
@@ -94,7 +90,7 @@ public abstract class GenericLine implements Line {
 		}
 		
 		// Don't check commodity validity in value assignment line 
-		if (isAssignmentLine == false && commodity != null){
+		if (isLineAssignmentType() == false && commodity != null){
 			validateCommodity();
 		} else {
 			isCommodityValid = true;
@@ -157,5 +153,13 @@ public abstract class GenericLine implements Line {
 
 	protected void formatValidAnswer() {
 		// Empty method - Will be implemented by derived classes, only if required
+	}
+	
+	public void setLine(String line) {
+		this.line = line;
+	}
+	
+	public void setRegex(String regex) {
+		this.regex = regex;
 	}
 }

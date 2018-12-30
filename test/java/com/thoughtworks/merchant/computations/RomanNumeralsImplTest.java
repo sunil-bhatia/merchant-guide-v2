@@ -13,9 +13,10 @@ public class RomanNumeralsImplTest {
 	RomanNumerals romanNumerals;
 	
     @Before
-    public void setupConfigProperties() {
+    public void setup() {
     	String[] args = {"config"};
 		ConfigPropertiesManager.configureProperties(args);
+		
 		romanNumerals = (RomanNumerals) Factory.getObject("romanNumerals");
     }
 
@@ -24,10 +25,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "i";
 		
-		int expectedArabicNum = 1;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 1;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 
@@ -36,10 +35,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "ii";
 		
-		int expectedArabicNum = 2;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 2;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -48,10 +45,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "iii";
 		
-		int expectedArabicNum = 3;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 3;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -60,10 +55,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "iv";
 		
-		int expectedArabicNum = 4;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 4;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -72,10 +65,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "v";
 		
-		int expectedArabicNum = 5;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 5;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -84,10 +75,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "vi";
 		
-		int expectedArabicNum = 6;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 6;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -96,10 +85,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "VII";
 		
-		int expectedArabicNum = 7;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 7;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -108,10 +95,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "VIII";
 		
-		int expectedArabicNum = 8;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 8;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -120,10 +105,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "IX";
 		
-		int expectedArabicNum = 9;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 9;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -132,10 +115,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "X";
 		
-		int expectedArabicNum = 10;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 10;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -144,10 +125,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "XXXIX";
 		
-		int expectedArabicNum = 39;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 39;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -156,10 +135,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "MDCCLXXVI";
 		
-		int expectedArabicNum = 1776;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = 1776;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -168,10 +145,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "IIII";
 		
-		int expectedArabicNum = -1;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = -1;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -180,10 +155,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "IIX";
 		
-		int expectedArabicNum = -1;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = -1;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -192,10 +165,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "DD";
 		
-		int expectedArabicNum = -1;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = -1;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -204,10 +175,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "IL";
 		
-		int expectedArabicNum = -1;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = -1;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 	
@@ -216,10 +185,8 @@ public class RomanNumeralsImplTest {
 
 		String romanNum = "j";
 		
-		int expectedArabicNum = -1;
-		
-		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);
-		
+		int expectedArabicNum = -1;		
+		int convertedArabicNum = romanNumerals.romanToArabic(romanNum);		
 		assertEquals(expectedArabicNum, convertedArabicNum);
 	}
 }

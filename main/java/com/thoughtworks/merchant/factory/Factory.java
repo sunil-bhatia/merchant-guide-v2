@@ -33,7 +33,7 @@ public class Factory {
 	public static Line getLineObject(String line) {
 
 		// If line does not match with any of the regex, then by default it will be considered of invalid type
-		Line lineObject = (Line) constructLineObject("invalidLineType", line, "");
+		Line lineObject = (Line) getObject("invalidLineType");
 
 		int numberOfLineTypes = Integer.parseInt(ConfigPropertiesManager.getPropertyValue("numberOfLineTypes"));
 
@@ -49,33 +49,15 @@ public class Factory {
 			Pattern ptn = Pattern.compile(regex);
 			Matcher mcher = ptn.matcher(line);
 			if (mcher.matches()) {
-				lineObject = (Line) constructLineObject(objectName, line, regex);
+				lineObject = (Line) getObject(objectName);
+				lineObject.setLine(line);
+				lineObject.setRegex(regex);
 			}
 		}
 
 		return lineObject;
 	}
 	
-	public static Object constructLineObject(String objectName, String line, String regex) {
-
-		Object object = null;
-
-		String className = ConfigPropertiesManager.getPropertyValue(objectName);
-
-		Class<?> classObject;
-
-		try {
-			classObject = Class.forName(className);
-			Constructor<?> constructor = classObject.getConstructor(String.class, String.class);
-			object = constructor.newInstance(line, regex);
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-
-		return object;
-	}
-
 	public static Object getObject(String objectName) {
 
 		Object object = null;
