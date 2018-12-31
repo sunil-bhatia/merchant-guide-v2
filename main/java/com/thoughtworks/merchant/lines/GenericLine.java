@@ -25,9 +25,9 @@ public abstract class GenericLine implements Line {
 	}
 
 	public String process() {
-		
+
 		String outputLine = "";
-		
+
 		Matcher mcher = parse();
 		extractData(mcher);
 
@@ -36,52 +36,62 @@ public abstract class GenericLine implements Line {
 		} else {
 			outputLine = processInvalidData();
 		}
-			
+
 		return outputLine;
 	}
-	
+
 	protected Matcher parse() {
-		
+
 		Matcher mcher;
-		
+
 		Pattern ptn = Pattern.compile(regex);
 		mcher = ptn.matcher(line);
 		mcher.matches();
-		
+
 		return mcher;
 	}
-	
+
 	protected abstract void extractData(Matcher mcher);
-	
+
 	protected abstract boolean isDataValid();
-	
+
 	protected boolean isGalacticNumValid() {
 		boolean isGalacticNumValid;
-		
-		if (qtyGalactic != null){
-			if (galacticCalculator.isValidGalacticNum(qtyGalactic)) {
-				isGalacticNumValid = true;
-			} else {
-				isGalacticNumValid = false;
-				logManager.addLog("Invalid Galactic Number in Input Line : " + line);
-			}
-		} else {
+
+		if (galacticCalculator.isValidGalacticNum(qtyGalactic)) {
 			isGalacticNumValid = true;
+		} else {
+			isGalacticNumValid = false;
+			logManager.addLog("Invalid Galactic Number in Input Line : " + line);
 		}
-		
+
 		return isGalacticNumValid;
 	}
 	
+	protected boolean isCommodityValid() {
+
+		boolean isCommodityValid;
+
+		if (commodityMap.isValidCommodity(commodity)) {
+			isCommodityValid = true;
+		} else {
+			isCommodityValid = false;
+			logManager.addLog("Invalid Commodity in Input Line : " + line);
+		}
+
+		return isCommodityValid;
+	}
+
 	protected abstract String processValidData();
-	
+
 	protected String processInvalidData() {
 		return "I have no idea what you are talking about";
 	}
-	
+
 	public void setLine(String line) {
 		this.line = line;
 	}
-	
+
 	public void setRegex(String regex) {
 		this.regex = regex;
 	}

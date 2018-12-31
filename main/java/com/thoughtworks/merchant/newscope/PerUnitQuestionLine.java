@@ -18,6 +18,10 @@ public class PerUnitQuestionLine extends QuestionLine {
 		commodity = mcher.group(1).trim();
 	}
 	
+	protected boolean isDataValid() {
+		return isCommodityValid();
+	}
+	
 	protected void calculateAnswer() {
 		valuePerUnit = commodityMap.getValuePerUnit(commodity);
 	}

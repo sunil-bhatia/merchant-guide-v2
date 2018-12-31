@@ -24,7 +24,16 @@ public class GalacticAssignmentLine extends AssignmentLine {
 		romanSymbol = mcher.group(2).trim().charAt(0);
 	}
 	
+	protected boolean isDataValid() {
+		return true;
+	}
+	
 	protected void addAssignedData(){
 		galacticMap.addMapping(galacticSymbol, romanSymbol);
+	}
+
+	@Override
+	protected void calculateAssignedData() {
+		// Empty method, as nothing to be calculated
 	}
 }

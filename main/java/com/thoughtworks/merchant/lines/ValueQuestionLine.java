@@ -23,6 +23,10 @@ public class ValueQuestionLine extends QuestionLine {
 		commodity = mcher.group(2).trim();
 	}
 	
+	protected boolean isDataValid() {
+		return (isGalacticNumValid() && isCommodityValid());
+	}
+	
 	protected void calculateAnswer() {
 		totalValue = commodityCalculator.calculateTotalValue(commodity, qtyGalactic);
 	}

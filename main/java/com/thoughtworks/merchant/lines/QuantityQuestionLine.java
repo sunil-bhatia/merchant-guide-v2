@@ -16,6 +16,10 @@ public class QuantityQuestionLine extends QuestionLine {
 		qtyGalactic = mcher.group(1);
 	}
 	
+	protected boolean isDataValid() {		
+		return isGalacticNumValid();
+	}
+	
 	protected void calculateAnswer() {
 		qtyArabic = galacticCalculator.galacticToArabic(qtyGalactic);
 	}

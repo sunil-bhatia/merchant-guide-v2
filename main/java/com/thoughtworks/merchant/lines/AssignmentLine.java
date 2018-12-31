@@ -15,13 +15,7 @@ public abstract class AssignmentLine extends GenericLine {
 		return outputLine;
 	}
 	
-	protected boolean isDataValid() {
-		return isGalacticNumValid();
-	}
-	
-	protected void calculateAssignedData() {
-		// Empty method - Will be implemented by derived classes, only if required
-	}
+	protected abstract void calculateAssignedData();
 
 	protected abstract void addAssignedData();
 }
