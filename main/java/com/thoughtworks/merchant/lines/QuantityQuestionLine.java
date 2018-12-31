@@ -3,7 +3,7 @@ package com.thoughtworks.merchant.lines;
 import java.util.regex.Matcher;
 
 //Example Quantity Question Line: "how much is pish tegj glob glob ?"
-public class QuantityQuestionLine extends GenericLine {
+public class QuantityQuestionLine extends QuestionLine {
 	
 	private int qtyArabic;
 	

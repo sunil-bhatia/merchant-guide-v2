@@ -10,11 +10,23 @@ public class InvalidLine extends GenericLine {
 	}
 
 	public String process() {
-		return formatInvalidAnswer();
+		return processInvalidData();
 	}
 
 	@Override
 	protected void extractData(Matcher mcher) {
 		// No data to be extracted 
+	}
+
+	@Override
+	protected String processValidData() {
+		// No data to be processed 
+		return null;
+	}
+
+	@Override
+	protected boolean isDataValid() {
+		// No data to be validated
+		return false;
 	}
 }

@@ -6,7 +6,7 @@ import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.CommodityCalculator;
 
 //Example Value Question Line: "how many Credits is glob prok Silver ?"
-public class ValueQuestionLine extends GenericLine {
+public class ValueQuestionLine extends QuestionLine {
 	
 	private double totalValue;
 	

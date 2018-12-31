@@ -2,10 +2,10 @@ package com.thoughtworks.merchant.newscope;
 
 import java.util.regex.Matcher;
 
-import com.thoughtworks.merchant.lines.GenericLine;
+import com.thoughtworks.merchant.lines.QuestionLine;
 
 //Example Per Unit Question Line: "how many Credits is Silver per unit quantity ?"
-public class PerUnitQuestionLine extends GenericLine {
+public class PerUnitQuestionLine extends QuestionLine {
 	
 	protected double valuePerUnit;
 	

@@ -6,7 +6,7 @@ import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.CommodityCalculator;
 
 //Example Value Assignment Line: "glob glob Silver is 34 Credits"
-public class ValueAssignmentLine extends GenericLine {
+public class ValueAssignmentLine extends AssignmentLine {
 	
 	private int value;
 	private double valuePerUnit;

@@ -6,7 +6,7 @@ import com.thoughtworks.merchant.factory.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticMap;
 
 // Example Galactic Assignment Line: "glob is I"
-public class GalacticAssignmentLine extends GenericLine {
+public class GalacticAssignmentLine extends AssignmentLine {
 
 	private String galacticSymbol;
 	private Character romanSymbol;
