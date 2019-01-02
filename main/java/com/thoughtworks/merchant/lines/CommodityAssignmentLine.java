@@ -13,7 +13,7 @@ public class CommodityAssignmentLine extends AssignmentLine {
 	private double valuePerUnit;
 	
 	Factory factory = new FactoryImpl();
-	private CommodityCalculator commodityCalculator = (CommodityCalculator) factory.getObject("commodityCalculator");
+	private CommodityCalculator commodityCalculator = (CommodityCalculator) factory.getObject("CommodityCalculator");
 
 	public CommodityAssignmentLine() {
 		super();

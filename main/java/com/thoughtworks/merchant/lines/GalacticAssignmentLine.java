@@ -13,7 +13,7 @@ public class GalacticAssignmentLine extends AssignmentLine {
 	private Character romanSymbol;
 	
 	Factory factory = new FactoryImpl();
-	private GalacticMap galacticMap = (GalacticMap) factory.getObject("galacticMap");
+	private GalacticMap galacticMap = (GalacticMap) factory.getObject("GalacticMap");
 	
 	public GalacticAssignmentLine() {
 		super();

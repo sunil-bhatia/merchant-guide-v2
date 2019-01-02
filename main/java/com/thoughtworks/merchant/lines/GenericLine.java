@@ -19,9 +19,9 @@ public abstract class GenericLine implements Line {
 	protected String galacticNumber;
 
 	Factory factory = new FactoryImpl();
-	protected LogManager logManager = (LogManager) factory.getObject("logManager");
-	protected GalacticCalculator galacticCalculator = (GalacticCalculator) factory.getObject("galacticCalculator");
-	protected CommodityMap commodityMap = (CommodityMap) factory.getObject("commodityMap");
+	protected LogManager logManager = (LogManager) factory.getObject("LogManager");
+	protected GalacticCalculator galacticCalculator = (GalacticCalculator) factory.getObject("GalacticCalculator");
+	protected CommodityMap commodityMap = (CommodityMap) factory.getObject("CommodityMap");
 
 	public GenericLine() {
 	}
@@ -99,5 +99,11 @@ public abstract class GenericLine implements Line {
 	@Override
 	public void setRegex(String regex) {
 		this.regex = regex;
+	}
+
+	@Override
+	public String toString() {
+		return "GenericLine [line=" + line + ", regex=" + regex + ", commodity=" + commodity + ", galacticNumber="
+				+ galacticNumber + "]";
 	}
 }

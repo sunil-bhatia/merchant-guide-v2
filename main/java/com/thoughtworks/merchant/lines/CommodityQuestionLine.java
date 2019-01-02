@@ -12,7 +12,7 @@ public class CommodityQuestionLine extends QuestionLine {
 	private double totalValue;
 	
 	Factory factory = new FactoryImpl();
-	private CommodityCalculator commodityCalculator = (CommodityCalculator) factory.getObject("commodityCalculator");
+	private CommodityCalculator commodityCalculator = (CommodityCalculator) factory.getObject("CommodityCalculator");
 	
 	public CommodityQuestionLine() {
 		super();

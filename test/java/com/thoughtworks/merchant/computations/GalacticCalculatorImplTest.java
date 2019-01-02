@@ -26,13 +26,13 @@ public class GalacticCalculatorImplTest {
 		
 		// Set up galactic map
 		Factory factory = new FactoryImpl();
-		galacticMap = (GalacticMap) factory.getObject("galacticMap");
+		galacticMap = (GalacticMap) factory.getObject("GalacticMap");
 		galacticMap.addMapping("glob", 'I');
 		galacticMap.addMapping("prok", 'V');
 		galacticMap.addMapping("pish", 'X');
 		galacticMap.addMapping("tegj", 'L');
 		
-		galacticCalculator = (GalacticCalculator) factory.getObject("galacticCalculator");
+		galacticCalculator = (GalacticCalculator) factory.getObject("GalacticCalculator");
     }
      
 	@Test

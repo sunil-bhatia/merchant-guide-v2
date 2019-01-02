@@ -27,6 +27,12 @@ public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 	}
 
 	public String getPropertyValue(String propertyName) {
-		return rb.getString(propertyName);
+		String propertyValue = "";
+		
+		if (rb.containsKey(propertyName)){
+			propertyValue = rb.getString(propertyName);
+		}
+		
+		return propertyValue;
 	}
 }

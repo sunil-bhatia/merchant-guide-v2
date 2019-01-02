@@ -1,17 +1,14 @@
 package com.thoughtworks.merchant.computations;
 
-import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.GalacticMap;
-import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 import com.thoughtworks.merchant.interfaces.RomanCalculator;
 
 //This class is used to convert from galactic numbers to arabic numbers
 public class GalacticCalculatorImpl implements GalacticCalculator {
 	
-	Factory factory = new FactoryImpl();
-	private GalacticMap galacticMap = (GalacticMap) factory.getObject("galacticMap");
-	private RomanCalculator romanCalculator = (RomanCalculator) factory.getObject("romanCalculator");
+	private GalacticMap galacticMap;
+	private RomanCalculator romanCalculator;
 
 	@Override
 	public int galacticToArabic(String galacticNum) {
@@ -81,5 +78,13 @@ public class GalacticCalculatorImpl implements GalacticCalculator {
 		}
 			
 		return areGalacticSymbolsValid;
+	}
+	
+	public void setGalacticMap(Object galacticMap) {
+		this.galacticMap = (GalacticMap) galacticMap;
+	}
+
+	public void setRomanCalculator(Object romanCalculator) {
+		this.romanCalculator = (RomanCalculator) romanCalculator;
 	}
 }

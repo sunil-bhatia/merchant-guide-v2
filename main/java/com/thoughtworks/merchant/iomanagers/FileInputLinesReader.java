@@ -19,7 +19,7 @@ public class FileInputLinesReader implements ListReader {
 		List<String> inputLines = new ArrayList<>();
 		
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
-		String inputLinesFileName = configPropertiesManager.getPropertyValue("inputLinesFileName");
+		String inputLinesFileName = configPropertiesManager.getPropertyValue("InputLinesFileName");
 		      
         try {
             Path path = Paths.get(inputLinesFileName);

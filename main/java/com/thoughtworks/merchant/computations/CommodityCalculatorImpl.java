@@ -10,8 +10,8 @@ import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 public class CommodityCalculatorImpl implements CommodityCalculator {
 	
 	Factory factory = new FactoryImpl();
-	private CommodityMap commodityMap = (CommodityMap) factory.getObject("commodityMap");
-	private GalacticCalculator galacticCalculator = (GalacticCalculator) factory.getObject("galacticCalculator");
+	private CommodityMap commodityMap = (CommodityMap) factory.getObject("CommodityMap");
+	private GalacticCalculator galacticCalculator = (GalacticCalculator) factory.getObject("GalacticCalculator");
 
 	@Override
 	public double calculateValuePerUnit(int value, String galacticNumber) {

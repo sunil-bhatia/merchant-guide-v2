@@ -24,7 +24,7 @@ public class GalacticMapImplTest {
 		
 		// Set up galactic map
 		Factory factory = new FactoryImpl();
-		galacticMap = (GalacticMap) factory.getObject("galacticMap");
+		galacticMap = (GalacticMap) factory.getObject("GalacticMap");
 		galacticMap.addMapping("glob", 'I');
 		galacticMap.addMapping("prok", 'V');
 		galacticMap.addMapping("pish", 'X');

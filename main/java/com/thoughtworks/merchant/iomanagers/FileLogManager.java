@@ -14,7 +14,7 @@ public class FileLogManager extends GenericLogManager {
 	public void printLog() {
 		
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
-		String logFilePathAndName = configPropertiesManager.getPropertyValue("logFilePathAndName");
+		String logFilePathAndName = configPropertiesManager.getPropertyValue("LogFilePathAndName");
 		
         Path path = Paths.get(logFilePathAndName);
         try {

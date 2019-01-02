@@ -23,9 +23,9 @@ public class FactoryImpl implements Factory {
 	@Override
 	public MerchantsNotesProcessor createMerchantsNotesProcessor() {
 
-		ListReader inputLinesReader = (ListReader) getObject("inputLinesReader");
-		ListWriter listWriter = (ListWriter) getObject("listWriter");
-		LogManager logManager = (LogManager) getObject("logManager");
+		ListReader inputLinesReader = (ListReader) getObject("InputLinesReader");
+		ListWriter listWriter = (ListWriter) getObject("ListWriter");
+		LogManager logManager = (LogManager) getObject("LogManager");
 
 		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader, listWriter,
 				logManager);
@@ -39,9 +39,9 @@ public class FactoryImpl implements Factory {
 
 		// If line does not match with any of the regex, then by default it will
 		// be considered of invalid type
-		Line lineObject = (Line) getObject("invalidLineType");
+		Line lineObject = (Line) getObject("InvalidLineType");
 
-		int numberOfLineTypes = Integer.parseInt(configPropertiesManager.getPropertyValue("numberOfLineTypes"));
+		int numberOfLineTypes = Integer.parseInt(configPropertiesManager.getPropertyValue("NumberOfLineTypes"));
 
 		String objectName = "";
 		String regex = "";
@@ -50,8 +50,8 @@ public class FactoryImpl implements Factory {
 		// corresponding regex
 		// and if it matches, instantiate an object of the corresponding class
 		for (int i = 0; i < numberOfLineTypes; i++) {
-			objectName = "lineType" + (i + 1);
-			regex = configPropertiesManager.getPropertyValue("lineTypeRegex" + (i + 1));
+			objectName = "LineType" + (i + 1);
+			regex = configPropertiesManager.getPropertyValue("LineTypeRegex" + (i + 1));
 
 			Pattern ptn = Pattern.compile(regex);
 			Matcher mcher = ptn.matcher(line);
@@ -61,6 +61,9 @@ public class FactoryImpl implements Factory {
 				lineObject.setRegex(regex);
 			}
 		}
+		
+		//For testing
+		//System.out.println(lineObject);
 
 		return lineObject;
 	}
@@ -69,14 +72,16 @@ public class FactoryImpl implements Factory {
 	public Object getObject(String objectName) {
 
 		Object object = null;
-
-		if (objectMap.containsKey(objectName)) {
+		
+		String objectScope = configPropertiesManager.getPropertyValue(objectName + "Scope");
+		
+		if (!objectScope.equals("non-singleton") && objectMap.containsKey(objectName)) {
 			object = objectMap.get(objectName);
 		} else {
 
 			String className = configPropertiesManager.getPropertyValue(objectName);
 
-			Class<?> classObject;
+			Class<?> classObject = null;
 
 			try {
 				classObject = Class.forName(className);
@@ -86,9 +91,40 @@ public class FactoryImpl implements Factory {
 					| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
+			
+			//Check for dependencies
+			int numberOfDependencies = 0;
+			String numberOfDependenciesStr = configPropertiesManager.getPropertyValue(objectName + "NumOfDependencies");
+			if (!numberOfDependenciesStr.isEmpty()){
+				numberOfDependencies = Integer.parseInt(numberOfDependenciesStr);
+			}
+			
+			//For each dependency, set the dependency
+			Object depObject = null;
+			for (int i = 0; i < numberOfDependencies; i++) {
+				String depObjectName = configPropertiesManager.getPropertyValue(objectName + "Dependency" + (i + 1));
 
-			objectMap.put(objectName, object);
+				depObject = getObject(depObjectName);
+				//For testing
+				//System.out.println(depObject);
+				try {
+					classObject.getMethod("set" + depObjectName, Object.class).invoke(object, depObject);
+				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+						| NoSuchMethodException | SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+
+
+			if (!objectScope.equals("non-singleton")) {
+				objectMap.put(objectName, object);
+			}
 		}
+		
+		//For testing
+		//System.out.println(objectMap);
 
 		return object;
 	}

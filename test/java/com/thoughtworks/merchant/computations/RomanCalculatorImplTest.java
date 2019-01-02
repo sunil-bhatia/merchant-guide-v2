@@ -21,7 +21,7 @@ public class RomanCalculatorImplTest {
 		configPropertiesManager.configureProperties(args);
 		
 		Factory factory = new FactoryImpl();
-		romanCalculator = (RomanCalculator) factory.getObject("romanCalculator");
+		romanCalculator = (RomanCalculator) factory.getObject("RomanCalculator");
     }
 
 	@Test
