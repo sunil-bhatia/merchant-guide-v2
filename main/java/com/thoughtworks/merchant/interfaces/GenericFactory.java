@@ -1,10 +1,6 @@
 package com.thoughtworks.merchant.interfaces;
 
-import com.thoughtworks.merchant.interfaces.Line;
-
-public interface Factory {
-
-	public Line getLineObject(String line);
+public interface GenericFactory {
 
 	public Object getObject(String objectName);
 	

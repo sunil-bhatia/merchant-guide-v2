@@ -11,11 +11,11 @@ import org.junit.Test;
 import com.thoughtworks.merchant.MerchantsNotesProcessorImpl;
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.Factory;
+import com.thoughtworks.merchant.interfaces.GenericFactory;
 
 public class AppAcceptanceTest {
 	
-	private Factory factory;
+	private GenericFactory factory;
 	
     @Before
     public void setupConfig() {

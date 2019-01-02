@@ -2,8 +2,8 @@ package com.thoughtworks.merchant;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.Line;
+import com.thoughtworks.merchant.interfaces.LineFactory;
 import com.thoughtworks.merchant.interfaces.LogManager;
 import com.thoughtworks.merchant.interfaces.MerchantsNotesProcessor;
 import com.thoughtworks.merchant.interfaces.ListReader;
@@ -14,7 +14,7 @@ public class MerchantsNotesProcessorImpl implements MerchantsNotesProcessor {
 	private ListReader inputLinesReader;
 	private ListWriter listWriter;
 	private LogManager logManager; 
-	private Factory factory; 
+	private LineFactory lineFactory; 
 	
 	public MerchantsNotesProcessorImpl() {
 	}
@@ -39,7 +39,7 @@ public class MerchantsNotesProcessorImpl implements MerchantsNotesProcessor {
 		
 		// Process each line
 		for (String line : inputLines) {
-			Line lineObject = factory.getLineObject(line);
+			Line lineObject = lineFactory.getLineObject(line);
 			outputLine = lineObject.process();
 			
 			if (!outputLine.isEmpty()){
@@ -76,7 +76,7 @@ public class MerchantsNotesProcessorImpl implements MerchantsNotesProcessor {
 		this.logManager = (LogManager) logManager;
 	}
 	
-	public void setFactory(Object factory) {
-		this.factory = (Factory) factory;
+	public void setLineFactory(Object lineFactory) {
+		this.lineFactory = (LineFactory) lineFactory;
 	}
 }

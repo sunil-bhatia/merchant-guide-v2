@@ -6,7 +6,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.Factory;
+import com.thoughtworks.merchant.interfaces.GenericFactory;
 
 public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 
@@ -42,18 +42,18 @@ public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 	}
 	
 	@Override
-	public Factory getFactoryObject(){
+	public GenericFactory getFactoryObject(){
 		
-		Factory factoryObject = null;
+		GenericFactory factoryObject = null;
 		
-		String className = getPropertyValue("Factory");
+		String className = getPropertyValue("GenericFactory");
 		
 		Class<?> classObject = null;
 
 		try {
 			classObject = Class.forName(className);
 			Constructor<?> constructor = classObject.getConstructor();
-			factoryObject = (Factory) constructor.newInstance();
+			factoryObject = (GenericFactory) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();

@@ -6,5 +6,5 @@ public interface ConfigPropertiesManager {
 	
 	public String getPropertyValue(String propertyName);
 	
-	public Factory getFactoryObject();
+	public GenericFactory getFactoryObject();
 }
