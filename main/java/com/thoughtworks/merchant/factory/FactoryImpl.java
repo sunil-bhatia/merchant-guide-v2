@@ -6,31 +6,15 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.MerchantsNotesProcessor;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.Line;
-import com.thoughtworks.merchant.interfaces.LogManager;
-import com.thoughtworks.merchant.interfaces.ListReader;
-import com.thoughtworks.merchant.interfaces.ListWriter;
 
 public class FactoryImpl implements Factory {
 
 	private static HashMap<String, Object> objectMap = new HashMap<String, Object>();
 	
 	private static ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
-
-	@Override
-	public MerchantsNotesProcessor createMerchantsNotesProcessor() {
-
-		ListReader inputLinesReader = (ListReader) getObject("InputLinesReader");
-		ListWriter listWriter = (ListWriter) getObject("ListWriter");
-		LogManager logManager = (LogManager) getObject("LogManager");
-
-		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader, listWriter,
-				logManager);
-		return merchantsNotesProcessor;
-	}
 
 	// Based on the format of the line, return an appropriate object of type
 	// Line

@@ -13,7 +13,7 @@ public class MerchantsGuideToGalaxyApp {
 		configPropertiesManager.configureProperties(args);
 
 		Factory factory = new FactoryImpl();
-		MerchantsNotesProcessor merchantsNotesProcessor = factory.createMerchantsNotesProcessor();
+		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		merchantsNotesProcessor.processMerchantNotes();
 	}
 }

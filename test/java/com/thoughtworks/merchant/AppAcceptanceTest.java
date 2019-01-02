@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.MerchantsNotesProcessor;
+import com.thoughtworks.merchant.MerchantsNotesProcessorImpl;
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.Factory;
@@ -53,7 +53,7 @@ public class AppAcceptanceTest {
 		
 		// Process input lines
 		Factory factory = new FactoryImpl();
-		MerchantsNotesProcessor merchantsNotesProcessor = factory.createMerchantsNotesProcessor();
+		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 	
 		assertEquals(expectedOutputLines, generatedOutputLines);

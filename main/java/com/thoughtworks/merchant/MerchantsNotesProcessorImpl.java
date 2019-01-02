@@ -6,23 +6,20 @@ import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.Line;
 import com.thoughtworks.merchant.interfaces.LogManager;
+import com.thoughtworks.merchant.interfaces.MerchantsNotesProcessor;
 import com.thoughtworks.merchant.interfaces.ListReader;
 import com.thoughtworks.merchant.interfaces.ListWriter;
 
-public class MerchantsNotesProcessor {
+public class MerchantsNotesProcessorImpl implements MerchantsNotesProcessor {
 	
 	private ListReader inputLinesReader;
 	private ListWriter listWriter;
 	private LogManager logManager; 
 	
-	public MerchantsNotesProcessor(ListReader inputLinesReader, ListWriter listWriter,
-			LogManager logManager) {
-		super();
-		this.inputLinesReader = inputLinesReader;
-		this.listWriter = listWriter;
-		this.logManager = logManager;
+	public MerchantsNotesProcessorImpl() {
 	}
-
+	
+	@Override
 	public void processMerchantNotes() {
 		
 		final List<String> inputLines = inputLinesReader.read();
@@ -34,6 +31,7 @@ public class MerchantsNotesProcessor {
 		printLogs();
 	}
 	
+	@Override
 	public List<String> processInputLines(List<String> inputLines){
 		
 		List<String> outputLines = new ArrayList<String>();
@@ -65,5 +63,17 @@ public class MerchantsNotesProcessor {
 		// For testing
 		logManager.addLog("test where this is printed 4");
 		logManager.printLog();
+	}
+	
+	public void setInputLinesReader(Object inputLinesReader) {
+		this.inputLinesReader = (ListReader) inputLinesReader;
+	}
+
+	public void setListWriter(Object listWriter) {
+		this.listWriter = (ListWriter) listWriter;
+	}
+
+	public void setLogManager(Object logManager) {
+		this.logManager = (LogManager) logManager;
 	}
 }
