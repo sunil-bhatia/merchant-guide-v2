@@ -12,10 +12,10 @@ import com.thoughtworks.merchant.MerchantsNotesProcessorImpl;
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.Factory;
-import com.thoughtworks.merchant.factory.FactoryImpl;
-
 
 public class AppAcceptanceTest {
+	
+	private Factory factory;
 	
     @Before
     public void setupConfig() {
@@ -24,6 +24,7 @@ public class AppAcceptanceTest {
     	String[] args = {"config"};
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
 		configPropertiesManager.configureProperties(args);
+		factory = configPropertiesManager.getFactoryObject();
 		
     }
 
@@ -52,7 +53,6 @@ public class AppAcceptanceTest {
 		expectedOutputLines.add("I have no idea what you are talking about");
 		
 		// Process input lines
-		Factory factory = new FactoryImpl();
 		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 	

@@ -1,14 +1,18 @@
 package com.thoughtworks.merchant.factory;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
 
 public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 
 	private static ResourceBundle rb = null;
 	
+	@Override
 	public void configureProperties(String[] args) {
 
 		if (args == null || args.length == 0) {
@@ -26,6 +30,7 @@ public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 		}
 	}
 
+	@Override
 	public String getPropertyValue(String propertyName) {
 		String propertyValue = "";
 		
@@ -34,5 +39,28 @@ public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 		}
 		
 		return propertyValue;
+	}
+	
+	@Override
+	public Factory getFactoryObject(){
+		
+		Factory factoryObject = null;
+		
+		String className = getPropertyValue("Factory");
+		
+		Class<?> classObject = null;
+
+		try {
+			classObject = Class.forName(className);
+			Constructor<?> constructor = classObject.getConstructor();
+			factoryObject = (Factory) constructor.newInstance();
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		
+		factoryObject.setConfigPropertiesManager(this);
+				
+		return factoryObject;
 	}
 }

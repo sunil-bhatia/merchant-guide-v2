@@ -7,4 +7,6 @@ public interface Factory {
 	public Line getLineObject(String line);
 
 	public Object getObject(String objectName);
+	
+	public void setConfigPropertiesManager(Object configPropertiesManager);
 }

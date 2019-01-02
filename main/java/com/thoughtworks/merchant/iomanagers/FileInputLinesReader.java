@@ -7,18 +7,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ListReader;
 
 public class FileInputLinesReader implements ListReader {
+	
+	private ConfigPropertiesManager configPropertiesManager;
 	
 	@Override
 	public List<String> read(){
 		
 		List<String> inputLines = new ArrayList<>();
 		
-		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
 		String inputLinesFileName = configPropertiesManager.getPropertyValue("InputLinesFileName");
 		      
         try {
@@ -32,5 +32,9 @@ public class FileInputLinesReader implements ListReader {
         }
               
         return inputLines;
+	}
+	
+	public void setConfigPropertiesManager(Object configPropertiesManager) {
+		this.configPropertiesManager = (ConfigPropertiesManager) configPropertiesManager;
 	}
 }

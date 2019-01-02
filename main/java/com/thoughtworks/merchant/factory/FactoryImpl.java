@@ -14,7 +14,7 @@ public class FactoryImpl implements Factory {
 
 	private static HashMap<String, Object> objectMap = new HashMap<String, Object>();
 	
-	private static ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+	private ConfigPropertiesManager configPropertiesManager;
 
 	// Based on the format of the line, return an appropriate object of type
 	// Line
@@ -108,5 +108,10 @@ public class FactoryImpl implements Factory {
 		//System.out.println(objectMap);
 
 		return object;
+	}
+	
+	@Override
+	public void setConfigPropertiesManager(Object configPropertiesManager) {
+		this.configPropertiesManager = (ConfigPropertiesManager) configPropertiesManager;
 	}
 }

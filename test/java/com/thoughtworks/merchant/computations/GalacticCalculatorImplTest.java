@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.GalacticMap;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.Factory;
@@ -25,7 +24,7 @@ public class GalacticCalculatorImplTest {
 		configPropertiesManager.configureProperties(args);
 		
 		// Set up galactic map
-		Factory factory = new FactoryImpl();
+		Factory factory = configPropertiesManager.getFactoryObject();
 		galacticMap = (GalacticMap) factory.getObject("GalacticMap");
 		galacticMap.addMapping("glob", 'I');
 		galacticMap.addMapping("prok", 'V');

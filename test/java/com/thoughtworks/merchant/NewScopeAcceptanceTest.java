@@ -12,9 +12,10 @@ import com.thoughtworks.merchant.MerchantsNotesProcessorImpl;
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.Factory;
-import com.thoughtworks.merchant.factory.FactoryImpl;
 
 public class NewScopeAcceptanceTest {
+	
+	private Factory factory;
 	
     @Before
     public void setupConfig() {
@@ -23,6 +24,7 @@ public class NewScopeAcceptanceTest {
     	String[] args = {"confignewscope"};
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
 		configPropertiesManager.configureProperties(args);
+		factory = configPropertiesManager.getFactoryObject();
 		
     }
 
@@ -53,7 +55,6 @@ public class NewScopeAcceptanceTest {
 		expectedOutputLines.add("Per unit quantity Silver is 17 Credits");
 		
 		// Process input lines
-		Factory factory = new FactoryImpl();
 		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 

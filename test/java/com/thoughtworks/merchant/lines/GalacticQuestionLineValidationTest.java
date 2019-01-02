@@ -12,12 +12,10 @@ import com.thoughtworks.merchant.MerchantsNotesProcessorImpl;
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.Factory;
-import com.thoughtworks.merchant.factory.FactoryImpl;
-
 
 public class GalacticQuestionLineValidationTest {
 	
-	private Factory factory = new FactoryImpl();
+	private Factory factory;
 	
     @Before
     public void setupConfig() {
@@ -26,6 +24,7 @@ public class GalacticQuestionLineValidationTest {
     	String[] args = {"config"};
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
 		configPropertiesManager.configureProperties(args);
+		factory = configPropertiesManager.getFactoryObject();
 		
     }
 

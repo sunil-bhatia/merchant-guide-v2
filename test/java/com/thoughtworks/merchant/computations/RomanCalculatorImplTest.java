@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.RomanCalculator;
@@ -20,7 +19,7 @@ public class RomanCalculatorImplTest {
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
 		configPropertiesManager.configureProperties(args);
 		
-		Factory factory = new FactoryImpl();
+		Factory factory = configPropertiesManager.getFactoryObject();
 		romanCalculator = (RomanCalculator) factory.getObject("RomanCalculator");
     }
 
