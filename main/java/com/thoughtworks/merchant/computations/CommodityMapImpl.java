@@ -9,28 +9,22 @@ public class CommodityMapImpl implements CommodityMap {
 
 	private static HashMap<String, Double> commodityMap = new HashMap<String, Double>();
 
-	// Example:
-	// commodity = "Silver"
-	// valuePerUnit = 17
+	@Override
 	public void addValuePerUnit(String commodity, double valuePerUnit) {
 			commodityMap.put(commodity, valuePerUnit);
 	}
 	
+	@Override
 	public double getValuePerUnit(String commodity) {
 		double valuePerUnit = 0.0;
-		if (isValidCommodity(commodity)) {
+		if (isCommodityValid(commodity)) {
 			valuePerUnit = commodityMap.get(commodity);
 		}
 		return valuePerUnit;
 	}
 	
-	public boolean isValidCommodity(String commodity){
-		boolean isValid;
-		if (commodityMap.containsKey(commodity)){
-			isValid = true;
-		} else {
-			isValid = false;
-		}
-		return isValid;
+	@Override
+	public boolean isCommodityValid(String commodity){
+		return commodityMap.containsKey(commodity);
 	}
 }

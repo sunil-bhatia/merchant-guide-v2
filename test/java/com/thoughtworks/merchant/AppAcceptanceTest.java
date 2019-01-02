@@ -9,8 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
-import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
+import com.thoughtworks.merchant.factory.FactoryImpl;
 
 
 public class AppAcceptanceTest {
@@ -20,7 +22,8 @@ public class AppAcceptanceTest {
     	
     	// Configure properties
     	String[] args = {"config"};
-		ConfigPropertiesManager.configureProperties(args);
+		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+		configPropertiesManager.configureProperties(args);
 		
     }
 
@@ -49,8 +52,9 @@ public class AppAcceptanceTest {
 		expectedOutputLines.add("I have no idea what you are talking about");
 		
 		// Process input lines
-		MerchantsNotesProcessor merchantsNotesProcessor = Factory.createMerchantsNotesProcessor();
-		List<String> generatedOutputLines = merchantsNotesProcessor.processLines(inputLines);
+		Factory factory = new FactoryImpl();
+		MerchantsNotesProcessor merchantsNotesProcessor = factory.createMerchantsNotesProcessor();
+		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 	
 		assertEquals(expectedOutputLines, generatedOutputLines);
 	}

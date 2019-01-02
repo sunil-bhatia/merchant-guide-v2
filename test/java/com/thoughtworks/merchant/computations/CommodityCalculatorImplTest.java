@@ -4,10 +4,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
+import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.GalacticMap;
 import com.thoughtworks.merchant.interfaces.CommodityCalculator;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
 
 public class CommodityCalculatorImplTest {
 	
@@ -19,26 +21,28 @@ public class CommodityCalculatorImplTest {
     	
     	// Configure properties
     	String[] args = {"config"};
-		ConfigPropertiesManager.configureProperties(args);
+		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+		configPropertiesManager.configureProperties(args);
 		
 		// Set up galactic map
-		galacticMap = (GalacticMap) Factory.getObject("galacticMap");
+		Factory factory = new FactoryImpl();
+		galacticMap = (GalacticMap) factory.getObject("galacticMap");
 		galacticMap.addMapping("glob", 'I');
 		galacticMap.addMapping("prok", 'V');
 		galacticMap.addMapping("pish", 'X');
 		galacticMap.addMapping("tegj", 'L');
 		
-	    commodityCalculator = (CommodityCalculator) Factory.getObject("commodityCalculator");
+	    commodityCalculator = (CommodityCalculator) factory.getObject("commodityCalculator");
     }
     
 	@Test
 	public void testCalculatedValuePerUnit() {
 		
-		String qtyGalactic = "pish pish";
+		String galacticNumber = "pish pish";
 		int value = 3910;
 
 		double expectedValuePerUnit = 195.5;
-		double calculatedValuePerUnit = commodityCalculator.calculateValuePerUnit(value, qtyGalactic);
+		double calculatedValuePerUnit = commodityCalculator.calculateValuePerUnit(value, galacticNumber);
 		assertEquals(expectedValuePerUnit, calculatedValuePerUnit, 0.001);
 	}
 }

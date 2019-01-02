@@ -9,23 +9,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.MerchantsNotesProcessor;
-import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
+import com.thoughtworks.merchant.factory.FactoryImpl;
 
 
-public class ValueAssignmentLineValidationTest {
+public class CommodityAssignmentLineValidationTest {
+	
+	private Factory factory = new FactoryImpl();
 	
     @Before
     public void setupConfig() {
     	
     	// Configure properties
     	String[] args = {"config"};
-		ConfigPropertiesManager.configureProperties(args);
+		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+		configPropertiesManager.configureProperties(args);
 		
     }
 	
 	@Test
-	public void testIncorrectGalacticSymbolInValueAssignmentReturnsNoIdeaLine() {
+	public void testIncorrectGalacticSymbolInCommodityAssignmentReturnsNoIdeaLine() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob is I");
 		inputLines.add("prok is V");
@@ -36,14 +41,14 @@ public class ValueAssignmentLineValidationTest {
 		expectedOutputLines.add("I have no idea what you are talking about");
 
 		// Process input lines
-		MerchantsNotesProcessor merchantsNotesProcessor = Factory.createMerchantsNotesProcessor();
-		List<String> generatedOutputLines = merchantsNotesProcessor.processLines(inputLines);
+		MerchantsNotesProcessor merchantsNotesProcessor = factory.createMerchantsNotesProcessor();
+		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 
 		assertEquals(expectedOutputLines, generatedOutputLines);
 	}
 	
 	@Test
-	public void testIncorrectRomanNumInValueAssignmentReturnsNoIdeaLine() {
+	public void testIncorrectRomanNumInCommodityAssignmentReturnsNoIdeaLine() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob is I");
 		inputLines.add("glob glob glob glob Silver is 34 Credits");
@@ -53,14 +58,14 @@ public class ValueAssignmentLineValidationTest {
 		expectedOutputLines.add("I have no idea what you are talking about");
 
 		// Process input lines
-		MerchantsNotesProcessor merchantsNotesProcessor = Factory.createMerchantsNotesProcessor();
-		List<String> generatedOutputLines = merchantsNotesProcessor.processLines(inputLines);
+		MerchantsNotesProcessor merchantsNotesProcessor = factory.createMerchantsNotesProcessor();
+		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 
 		assertEquals(expectedOutputLines, generatedOutputLines);
 	}
 	
 	@Test
-	public void testDuplicateCommodityInValueAssignmentOverwrites() {
+	public void testDuplicateCommodityInCommodityAssignmentOverwrites() {
 		List<String> inputLines = new ArrayList<String>();
 		inputLines.add("glob is I");
 		inputLines.add("glob Silver is 10 Credits");
@@ -72,8 +77,8 @@ public class ValueAssignmentLineValidationTest {
 		expectedOutputLines.add("glob glob glob Silver is 3 Credits");
 
 		// Process input lines
-		MerchantsNotesProcessor merchantsNotesProcessor = Factory.createMerchantsNotesProcessor();
-		List<String> generatedOutputLines = merchantsNotesProcessor.processLines(inputLines);
+		MerchantsNotesProcessor merchantsNotesProcessor = factory.createMerchantsNotesProcessor();
+		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 
 		assertEquals(expectedOutputLines, generatedOutputLines);
 	}

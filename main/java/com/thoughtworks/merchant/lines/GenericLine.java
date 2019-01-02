@@ -3,8 +3,9 @@ package com.thoughtworks.merchant.lines;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
+import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 import com.thoughtworks.merchant.interfaces.Line;
 import com.thoughtworks.merchant.interfaces.LogManager;
@@ -15,15 +16,17 @@ public abstract class GenericLine implements Line {
 	protected String regex;
 
 	protected String commodity;
-	protected String qtyGalactic;
+	protected String galacticNumber;
 
-	protected LogManager logManager = Factory.getLogManager();
-	protected GalacticCalculator galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
-	protected CommodityMap commodityMap = (CommodityMap) Factory.getObject("commodityMap");
+	Factory factory = new FactoryImpl();
+	protected LogManager logManager = (LogManager) factory.getObject("logManager");
+	protected GalacticCalculator galacticCalculator = (GalacticCalculator) factory.getObject("galacticCalculator");
+	protected CommodityMap commodityMap = (CommodityMap) factory.getObject("commodityMap");
 
 	public GenericLine() {
 	}
 
+	@Override
 	public String process() {
 
 		String outputLine = "";
@@ -58,7 +61,7 @@ public abstract class GenericLine implements Line {
 	protected boolean isGalacticNumValid() {
 		boolean isGalacticNumValid;
 
-		if (galacticCalculator.isValidGalacticNum(qtyGalactic)) {
+		if (galacticCalculator.isGalacticNumValid(galacticNumber)) {
 			isGalacticNumValid = true;
 		} else {
 			isGalacticNumValid = false;
@@ -72,7 +75,7 @@ public abstract class GenericLine implements Line {
 
 		boolean isCommodityValid;
 
-		if (commodityMap.isValidCommodity(commodity)) {
+		if (commodityMap.isCommodityValid(commodity)) {
 			isCommodityValid = true;
 		} else {
 			isCommodityValid = false;
@@ -88,10 +91,12 @@ public abstract class GenericLine implements Line {
 		return "I have no idea what you are talking about";
 	}
 
+	@Override
 	public void setLine(String line) {
 		this.line = line;
 	}
 
+	@Override
 	public void setRegex(String regex) {
 		this.regex = regex;
 	}

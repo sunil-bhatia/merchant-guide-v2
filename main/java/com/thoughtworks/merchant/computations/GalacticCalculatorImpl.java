@@ -1,29 +1,29 @@
 package com.thoughtworks.merchant.computations;
 
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.GalacticMap;
+import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 import com.thoughtworks.merchant.interfaces.RomanCalculator;
 
+//This class is used to convert from galactic numbers to arabic numbers
 public class GalacticCalculatorImpl implements GalacticCalculator {
 	
-	private GalacticMap galacticMap = (GalacticMap) Factory.getObject("galacticMap");
-	private RomanCalculator romanCalculator = (RomanCalculator) Factory.getObject("romanCalculator");
+	Factory factory = new FactoryImpl();
+	private GalacticMap galacticMap = (GalacticMap) factory.getObject("galacticMap");
+	private RomanCalculator romanCalculator = (RomanCalculator) factory.getObject("romanCalculator");
 
-	// Example: parameter galacticNum = "glob glob"
-	// return arabicNum = 2
+	@Override
 	public int galacticToArabic(String galacticNum) {
 		int arabicNum = 0;
 				
-		if (isValidGalacticNum(galacticNum)) {
+		if (isGalacticNumValid(galacticNum)) {
 			String romanNum = galacticToRoman(galacticNum);
 			arabicNum = romanCalculator.romanToArabic(romanNum);
 		}
 		return arabicNum;
 	}
 
-	// Example: parameter galacticNum = "glob glob"
-	// return romanNum = "II"
 	private  String galacticToRoman(String galacticNum) {
 		String romanNum = "";
 
@@ -35,8 +35,9 @@ public class GalacticCalculatorImpl implements GalacticCalculator {
 		return romanNum;
 	}
 
-	public boolean isValidGalacticNum(String galacticNum) {
-		boolean isValidGalacticNum = false;
+	@Override
+	public boolean isGalacticNumValid(String galacticNum) {
+		boolean isGalacticNumValid = false;
 		
 		//Two conditions to be met for this to be true
 		//1. Galactic symbols in this galactic num should be valid
@@ -48,16 +49,16 @@ public class GalacticCalculatorImpl implements GalacticCalculator {
 		String romanNum = "";
 		if (areGalacticSymbolsValid){
 			romanNum = galacticToRoman(galacticNum);
-			if (romanCalculator.isValidRomanNum(romanNum)){
+			if (romanCalculator.isRomanNumValid(romanNum)){
 				isRomanNumValid = true;
 			}
 		}
 		
 		if (areGalacticSymbolsValid && isRomanNumValid){
-			isValidGalacticNum = true;
+			isGalacticNumValid = true;
 		}
 		
-		return isValidGalacticNum;
+		return isGalacticNumValid;
 	}
 	
 
@@ -68,8 +69,7 @@ public class GalacticCalculatorImpl implements GalacticCalculator {
 		String[] galacticSymbolArray = galacticNum.split(" ");
 
 		for (int i = 0; i < galacticSymbolArray.length; i++) {
-			// Check if galactic symbol is valid
-			if (!galacticMap.isValidGalacticSymbol(galacticSymbolArray[i])) {
+			if (!galacticMap.isGalacticSymbolValid(galacticSymbolArray[i])) {
 				invalidGalacticSymbolFound = true;
 			}
 		}

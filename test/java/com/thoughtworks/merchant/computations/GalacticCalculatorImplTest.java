@@ -4,9 +4,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
+import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.GalacticMap;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 
 public class GalacticCalculatorImplTest {
@@ -19,16 +21,18 @@ public class GalacticCalculatorImplTest {
     	
     	// Configure properties
     	String[] args = {"config"};
-		ConfigPropertiesManager.configureProperties(args);
+		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+		configPropertiesManager.configureProperties(args);
 		
 		// Set up galactic map
-		galacticMap = (GalacticMap) Factory.getObject("galacticMap");
+		Factory factory = new FactoryImpl();
+		galacticMap = (GalacticMap) factory.getObject("galacticMap");
 		galacticMap.addMapping("glob", 'I');
 		galacticMap.addMapping("prok", 'V');
 		galacticMap.addMapping("pish", 'X');
 		galacticMap.addMapping("tegj", 'L');
 		
-		galacticCalculator = (GalacticCalculator) Factory.getObject("galacticCalculator");
+		galacticCalculator = (GalacticCalculator) factory.getObject("galacticCalculator");
     }
      
 	@Test
@@ -37,7 +41,7 @@ public class GalacticCalculatorImplTest {
 		String galacticNum = "glob";
 		
 		boolean expectedResult = true;		
-		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);	
+		boolean calculatedResult = galacticCalculator.isGalacticNumValid(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -47,7 +51,7 @@ public class GalacticCalculatorImplTest {
 		String galacticNum = "glob glob";
 		
 		boolean expectedResult = true;	
-		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);		
+		boolean calculatedResult = galacticCalculator.isGalacticNumValid(galacticNum);		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -57,7 +61,7 @@ public class GalacticCalculatorImplTest {
 		String galacticNum = "pish pish";
 		
 		boolean expectedResult = true;		
-		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);		
+		boolean calculatedResult = galacticCalculator.isGalacticNumValid(galacticNum);		
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -67,7 +71,7 @@ public class GalacticCalculatorImplTest {
 		String galacticNum = "efgh";
 		
 		boolean expectedResult = false;	
-		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);	
+		boolean calculatedResult = galacticCalculator.isGalacticNumValid(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	
@@ -77,7 +81,7 @@ public class GalacticCalculatorImplTest {
 		String galacticNum = "prok efgh";
 		
 		boolean expectedResult = false;	
-		boolean calculatedResult = galacticCalculator.isValidGalacticNum(galacticNum);	
+		boolean calculatedResult = galacticCalculator.isGalacticNumValid(galacticNum);	
 		assertEquals(expectedResult, calculatedResult);
 	}
 	

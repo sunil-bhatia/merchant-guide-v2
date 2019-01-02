@@ -6,6 +6,7 @@ public abstract class AssignmentLine extends GenericLine {
 		super();
 	}
 
+	@Override
 	protected String processValidData() {
 		String outputLine = "";
 

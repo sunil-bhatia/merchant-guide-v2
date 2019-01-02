@@ -1,16 +1,19 @@
 package com.thoughtworks.merchant;
 
-import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
+import com.thoughtworks.merchant.factory.FactoryImpl;
 
 public class MerchantsGuideToGalaxyApp {
 	
 	public static void main(String[] args) {
 		
-		// Configure the properties like Dependency Injection classes etc
-		ConfigPropertiesManager.configureProperties(args);
+		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+		configPropertiesManager.configureProperties(args);
 
-		MerchantsNotesProcessor merchantsNotesProcessor = Factory.createMerchantsNotesProcessor();
+		Factory factory = new FactoryImpl();
+		MerchantsNotesProcessor merchantsNotesProcessor = factory.createMerchantsNotesProcessor();
 		merchantsNotesProcessor.processMerchantNotes();
 	}
 }

@@ -20,13 +20,14 @@ public class RomanCalculatorImpl implements RomanCalculator{
 		symbolVal.put('M', 1000);
 	}
 
+	@Override
 	public int romanToArabic(String romanNumInput) {
 
 		String romanNum = romanNumInput.toUpperCase();
 		
 		int totalArabicNumVal = 0;
 
-		if (isValidRomanNum(romanNum)){
+		if (isRomanNumValid(romanNum)){
 			
 			char currentSymbol;
 			int currentSymbolVal;
@@ -59,7 +60,8 @@ public class RomanCalculatorImpl implements RomanCalculator{
 		return (currentSymbolVal >= prevSymbolVal);
 	}
 	
-	public boolean isValidRomanNum(String romanNumInput){
+	@Override
+	public boolean isRomanNumValid(String romanNumInput){
 		boolean isValid = false;
 		
 		String romanNum = romanNumInput.toUpperCase();

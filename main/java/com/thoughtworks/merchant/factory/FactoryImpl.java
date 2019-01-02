@@ -1,0 +1,95 @@
+package com.thoughtworks.merchant.factory;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.thoughtworks.merchant.MerchantsNotesProcessor;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
+import com.thoughtworks.merchant.interfaces.Line;
+import com.thoughtworks.merchant.interfaces.LogManager;
+import com.thoughtworks.merchant.interfaces.ListReader;
+import com.thoughtworks.merchant.interfaces.ListWriter;
+
+public class FactoryImpl implements Factory {
+
+	private static HashMap<String, Object> objectMap = new HashMap<String, Object>();
+	
+	private static ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+
+	@Override
+	public MerchantsNotesProcessor createMerchantsNotesProcessor() {
+
+		ListReader inputLinesReader = (ListReader) getObject("inputLinesReader");
+		ListWriter listWriter = (ListWriter) getObject("listWriter");
+		LogManager logManager = (LogManager) getObject("logManager");
+
+		MerchantsNotesProcessor merchantsNotesProcessor = new MerchantsNotesProcessor(inputLinesReader, listWriter,
+				logManager);
+		return merchantsNotesProcessor;
+	}
+
+	// Based on the format of the line, return an appropriate object of type
+	// Line
+	@Override
+	public Line getLineObject(String line) {
+
+		// If line does not match with any of the regex, then by default it will
+		// be considered of invalid type
+		Line lineObject = (Line) getObject("invalidLineType");
+
+		int numberOfLineTypes = Integer.parseInt(configPropertiesManager.getPropertyValue("numberOfLineTypes"));
+
+		String objectName = "";
+		String regex = "";
+
+		// For each of the line type, try to match this line with its
+		// corresponding regex
+		// and if it matches, instantiate an object of the corresponding class
+		for (int i = 0; i < numberOfLineTypes; i++) {
+			objectName = "lineType" + (i + 1);
+			regex = configPropertiesManager.getPropertyValue("lineTypeRegex" + (i + 1));
+
+			Pattern ptn = Pattern.compile(regex);
+			Matcher mcher = ptn.matcher(line);
+			if (mcher.matches()) {
+				lineObject = (Line) getObject(objectName);
+				lineObject.setLine(line);
+				lineObject.setRegex(regex);
+			}
+		}
+
+		return lineObject;
+	}
+
+	@Override
+	public Object getObject(String objectName) {
+
+		Object object = null;
+
+		if (objectMap.containsKey(objectName)) {
+			object = objectMap.get(objectName);
+		} else {
+
+			String className = configPropertiesManager.getPropertyValue(objectName);
+
+			Class<?> classObject;
+
+			try {
+				classObject = Class.forName(className);
+				Constructor<?> constructor = classObject.getConstructor();
+				object = constructor.newInstance();
+			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+					| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+
+			objectMap.put(objectName, object);
+		}
+
+		return object;
+	}
+}

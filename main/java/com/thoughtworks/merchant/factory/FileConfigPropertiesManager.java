@@ -3,11 +3,13 @@ package com.thoughtworks.merchant.factory;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class ConfigPropertiesManager {
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+
+public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 
 	private static ResourceBundle rb = null;
 	
-	public static void configureProperties(String[] args) {
+	public void configureProperties(String[] args) {
 
 		if (args == null || args.length == 0) {
 			System.err.println("Please enter the name of the properties file as a program argument, e.g.");
@@ -24,7 +26,7 @@ public class ConfigPropertiesManager {
 		}
 	}
 
-	public static String getPropertyValue(String propertyName) {
+	public String getPropertyValue(String propertyName) {
 		return rb.getString(propertyName);
 	}
 }

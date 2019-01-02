@@ -4,6 +4,5 @@ public interface RomanCalculator {
 
 	public int romanToArabic(String romanNumInput);
 
-	public boolean isValidRomanNum(String romanNumInput);
-
+	public boolean isRomanNumValid(String romanNumInput);
 }

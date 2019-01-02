@@ -5,5 +5,4 @@ public interface LogManager {
 	public void addLog(String log);
 
 	public void printLog();
-
 }

@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
-import com.thoughtworks.merchant.factory.Factory;
+import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
+import com.thoughtworks.merchant.factory.FactoryImpl;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.RomanCalculator;
 
 public class RomanCalculatorImplTest {
@@ -15,9 +17,11 @@ public class RomanCalculatorImplTest {
     @Before
     public void setup() {
     	String[] args = {"config"};
-		ConfigPropertiesManager.configureProperties(args);
+		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+		configPropertiesManager.configureProperties(args);
 		
-		romanCalculator = (RomanCalculator) Factory.getObject("romanCalculator");
+		Factory factory = new FactoryImpl();
+		romanCalculator = (RomanCalculator) factory.getObject("romanCalculator");
     }
 
 	@Test

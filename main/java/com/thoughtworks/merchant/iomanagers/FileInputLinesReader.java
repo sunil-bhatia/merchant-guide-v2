@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thoughtworks.merchant.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.ListReader;
 
 public class FileInputLinesReader implements ListReader {
@@ -17,7 +18,8 @@ public class FileInputLinesReader implements ListReader {
 		
 		List<String> inputLines = new ArrayList<>();
 		
-		String inputLinesFileName = ConfigPropertiesManager.getPropertyValue("inputLinesFileName");
+		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
+		String inputLinesFileName = configPropertiesManager.getPropertyValue("inputLinesFileName");
 		      
         try {
             Path path = Paths.get(inputLinesFileName);

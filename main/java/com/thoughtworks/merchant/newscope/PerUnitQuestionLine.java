@@ -13,7 +13,6 @@ public class PerUnitQuestionLine extends QuestionLine {
 		super();
 	}
 
-    // Example: commodity = "Silver"
 	protected void extractData(Matcher mcher) {
 		commodity = mcher.group(1).trim();
 	}

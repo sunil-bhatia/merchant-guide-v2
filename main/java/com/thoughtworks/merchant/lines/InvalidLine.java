@@ -9,6 +9,7 @@ public class InvalidLine extends GenericLine {
 		super();
 	}
 
+	@Override
 	public String process() {
 		return processInvalidData();
 	}
