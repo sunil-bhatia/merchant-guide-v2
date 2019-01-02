@@ -1,17 +1,14 @@
 package com.thoughtworks.merchant.computations;
 
-import com.thoughtworks.merchant.factory.FactoryImpl;
 import com.thoughtworks.merchant.interfaces.CommodityCalculator;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
-import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 
 // This class calculates the value (in credits) for a commodity given some quantity of the commodity
 public class CommodityCalculatorImpl implements CommodityCalculator {
 	
-	Factory factory = new FactoryImpl();
-	private CommodityMap commodityMap = (CommodityMap) factory.getObject("CommodityMap");
-	private GalacticCalculator galacticCalculator = (GalacticCalculator) factory.getObject("GalacticCalculator");
+	private CommodityMap commodityMap;
+	private GalacticCalculator galacticCalculator;
 
 	@Override
 	public double calculateValuePerUnit(int value, String galacticNumber) {
@@ -35,5 +32,13 @@ public class CommodityCalculatorImpl implements CommodityCalculator {
 		double totalValue = arabicNumber * valuePerUnit;
 		
         return totalValue;
+	}
+	
+	public void setCommodityMap(Object commodityMap) {
+		this.commodityMap = (CommodityMap) commodityMap;
+	}
+
+	public void setGalacticCalculator(Object galacticCalculator) {
+		this.galacticCalculator = (GalacticCalculator) galacticCalculator;
 	}
 }

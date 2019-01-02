@@ -2,17 +2,10 @@ package com.thoughtworks.merchant.lines;
 
 import java.util.regex.Matcher;
 
-import com.thoughtworks.merchant.factory.FactoryImpl;
-import com.thoughtworks.merchant.interfaces.CommodityCalculator;
-import com.thoughtworks.merchant.interfaces.Factory;
-
 //Example Commodity Question Line: "how many Credits is glob prok Silver ?"
 public class CommodityQuestionLine extends QuestionLine {
 	
 	private double totalValue;
-	
-	Factory factory = new FactoryImpl();
-	private CommodityCalculator commodityCalculator = (CommodityCalculator) factory.getObject("CommodityCalculator");
 	
 	public CommodityQuestionLine() {
 		super();

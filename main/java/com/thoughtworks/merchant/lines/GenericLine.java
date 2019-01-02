@@ -3,9 +3,8 @@ package com.thoughtworks.merchant.lines;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.factory.FactoryImpl;
+import com.thoughtworks.merchant.interfaces.CommodityCalculator;
 import com.thoughtworks.merchant.interfaces.CommodityMap;
-import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 import com.thoughtworks.merchant.interfaces.Line;
 import com.thoughtworks.merchant.interfaces.LogManager;
@@ -17,11 +16,11 @@ public abstract class GenericLine implements Line {
 
 	protected String commodity;
 	protected String galacticNumber;
-
-	Factory factory = new FactoryImpl();
-	protected LogManager logManager = (LogManager) factory.getObject("LogManager");
-	protected GalacticCalculator galacticCalculator = (GalacticCalculator) factory.getObject("GalacticCalculator");
-	protected CommodityMap commodityMap = (CommodityMap) factory.getObject("CommodityMap");
+	
+	protected LogManager logManager;
+	protected GalacticCalculator galacticCalculator;
+	protected CommodityMap commodityMap;
+	protected CommodityCalculator commodityCalculator;
 
 	public GenericLine() {
 	}
@@ -105,5 +104,21 @@ public abstract class GenericLine implements Line {
 	public String toString() {
 		return "GenericLine [line=" + line + ", regex=" + regex + ", commodity=" + commodity + ", galacticNumber="
 				+ galacticNumber + "]";
+	}
+	
+	public void setLogManager(Object logManager) {
+		this.logManager = (LogManager) logManager;
+	}
+
+	public void setGalacticCalculator(Object galacticCalculator) {
+		this.galacticCalculator = (GalacticCalculator) galacticCalculator;
+	}
+
+	public void setCommodityMap(Object commodityMap) {
+		this.commodityMap = (CommodityMap) commodityMap;
+	}
+	
+	public void setCommodityCalculator(Object commodityCalculator) {
+		this.commodityCalculator = (CommodityCalculator) commodityCalculator;
 	}
 }

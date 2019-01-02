@@ -111,12 +111,9 @@ public class FactoryImpl implements Factory {
 					classObject.getMethod("set" + depObjectName, Object.class).invoke(object, depObject);
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 						| NoSuchMethodException | SecurityException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-
-
 
 			if (!objectScope.equals("non-singleton")) {
 				objectMap.put(objectName, object);

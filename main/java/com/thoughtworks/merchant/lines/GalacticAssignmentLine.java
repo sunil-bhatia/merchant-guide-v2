@@ -2,8 +2,6 @@ package com.thoughtworks.merchant.lines;
 
 import java.util.regex.Matcher;
 
-import com.thoughtworks.merchant.factory.FactoryImpl;
-import com.thoughtworks.merchant.interfaces.Factory;
 import com.thoughtworks.merchant.interfaces.GalacticMap;
 
 // Example Galactic Assignment Line: "glob is I"
@@ -12,8 +10,7 @@ public class GalacticAssignmentLine extends AssignmentLine {
 	private String galacticSymbol;
 	private Character romanSymbol;
 	
-	Factory factory = new FactoryImpl();
-	private GalacticMap galacticMap = (GalacticMap) factory.getObject("GalacticMap");
+	private GalacticMap galacticMap;
 	
 	public GalacticAssignmentLine() {
 		super();
@@ -38,5 +35,9 @@ public class GalacticAssignmentLine extends AssignmentLine {
 	@Override
 	protected void calculateAssignedData() {
 		// Empty method, as nothing to be calculated
+	}
+
+	public void setGalacticMap(Object galacticMap) {
+		this.galacticMap = (GalacticMap) galacticMap;
 	}
 }
