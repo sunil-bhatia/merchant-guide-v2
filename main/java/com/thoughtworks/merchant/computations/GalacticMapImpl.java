@@ -15,12 +15,12 @@ public class GalacticMapImpl implements GalacticMap {
 	}
 
 	@Override
-	public boolean isGalacticSymbolValid(String galacticSymbol){
-		return galacticMap.containsKey(galacticSymbol);
-	}
-	
-	@Override
 	public Character getRomanSymbol(String galacticSymbol){
 		return galacticMap.get(galacticSymbol);
+	}
+
+	@Override
+	public boolean isGalacticSymbolValid(String galacticSymbol){
+		return galacticMap.containsKey(galacticSymbol);
 	}
 }

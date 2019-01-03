@@ -8,10 +8,10 @@ import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
 import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
 
 public class GeneralFactoryImpl implements GeneralFactory {
-
-	private static HashMap<String, Object> objectMap = new HashMap<String, Object>();
 	
 	private ConfigPropertiesManager configPropertiesManager;
+
+	private static HashMap<String, Object> objectMap = new HashMap<String, Object>();
 
 	@Override
 	public Object getObject(String objectName) {
@@ -50,8 +50,6 @@ public class GeneralFactoryImpl implements GeneralFactory {
 				String depObjectName = configPropertiesManager.getPropertyValue(objectName + "Dependency" + (i + 1));
 
 				depObject = getObject(depObjectName);
-				//For testing
-				//System.out.println(depObject);
 				try {
 					classObject.getMethod("set" + depObjectName, Object.class).invoke(object, depObject);
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -64,9 +62,6 @@ public class GeneralFactoryImpl implements GeneralFactory {
 				objectMap.put(objectName, object);
 			}
 		}
-		
-		//For testing
-		//System.out.println(objectMap);
 
 		return object;
 	}

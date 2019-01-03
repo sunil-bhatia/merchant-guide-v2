@@ -43,9 +43,6 @@ public class LineFactoryImpl implements LineFactory {
 			}
 		}
 		
-		//For testing
-		//System.out.println(lineObject);
-
 		return lineObject;
 	}
 

@@ -59,8 +59,6 @@ public class MerchantsNotesProcessorImpl implements MerchantsNotesProcessor {
 	}
 	
 	private void printLogs() {
-		// For testing
-		logManager.addLog("test where this is printed 4");
 		logManager.printLog();
 	}
 	

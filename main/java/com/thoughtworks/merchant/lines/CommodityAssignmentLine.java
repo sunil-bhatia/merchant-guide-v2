@@ -31,6 +31,6 @@ public class CommodityAssignmentLine extends AssignmentLine {
 	
 	@Override
 	protected void addAssignedData(){
-		commodityMap.addValuePerUnit(commodity, valuePerUnit);
+		commodityMap.addMapping(commodity, valuePerUnit);
 	}
 }

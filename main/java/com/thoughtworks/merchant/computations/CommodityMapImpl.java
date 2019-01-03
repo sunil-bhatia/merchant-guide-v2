@@ -10,7 +10,7 @@ public class CommodityMapImpl implements CommodityMap {
 	private static HashMap<String, Double> commodityMap = new HashMap<String, Double>();
 
 	@Override
-	public void addValuePerUnit(String commodity, double valuePerUnit) {
+	public void addMapping(String commodity, double valuePerUnit) {
 			commodityMap.put(commodity, valuePerUnit);
 	}
 	
