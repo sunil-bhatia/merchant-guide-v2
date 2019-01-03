@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.interfaces;
+package com.thoughtworks.merchant.interfaces.iomanagers;
 
 import java.util.List;
 

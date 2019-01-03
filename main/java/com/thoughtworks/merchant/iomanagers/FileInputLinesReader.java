@@ -7,8 +7,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.ListReader;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.iomanagers.ListReader;
 
 public class FileInputLinesReader implements ListReader {
 	

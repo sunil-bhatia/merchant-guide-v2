@@ -1,8 +1,8 @@
 package com.thoughtworks.merchant.newscope;
 
-import com.thoughtworks.merchant.iomanagers.GenericLogManager;
+import com.thoughtworks.merchant.iomanagers.GeneralLogManager;
 
-public class ConsoleLogManager extends GenericLogManager {
+public class ConsoleLogManager extends GeneralLogManager {
 
 	@Override
 	public void printLog() {

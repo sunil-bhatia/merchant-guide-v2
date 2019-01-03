@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.interfaces;
+package com.thoughtworks.merchant.interfaces.computations;
 
 public interface GalacticMap {
 

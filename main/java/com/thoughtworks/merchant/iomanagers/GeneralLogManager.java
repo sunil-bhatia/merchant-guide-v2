@@ -3,10 +3,10 @@ package com.thoughtworks.merchant.iomanagers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.LogManager;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.iomanagers.LogManager;
 
-public abstract class GenericLogManager implements LogManager {
+public abstract class GeneralLogManager implements LogManager {
 	
 	protected ConfigPropertiesManager configPropertiesManager;
 

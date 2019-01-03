@@ -4,10 +4,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GenericFactory;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
 
-public class GenericFactoryImpl implements GenericFactory {
+public class GeneralFactoryImpl implements GeneralFactory {
 
 	private static HashMap<String, Object> objectMap = new HashMap<String, Object>();
 	

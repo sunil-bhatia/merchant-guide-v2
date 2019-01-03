@@ -1,6 +1,6 @@
-package com.thoughtworks.merchant.interfaces;
+package com.thoughtworks.merchant.interfaces.factory;
 
-public interface GenericFactory {
+public interface GeneralFactory {
 
 	public Object getObject(String objectName);
 	

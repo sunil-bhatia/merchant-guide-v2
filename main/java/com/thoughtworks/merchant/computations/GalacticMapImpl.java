@@ -2,7 +2,7 @@ package com.thoughtworks.merchant.computations;
 
 import java.util.HashMap;
 
-import com.thoughtworks.merchant.interfaces.GalacticMap;
+import com.thoughtworks.merchant.interfaces.computations.GalacticMap;
 
 //This class maintains the mapping between galactic symbols and roman symbols
 public class GalacticMapImpl implements GalacticMap {

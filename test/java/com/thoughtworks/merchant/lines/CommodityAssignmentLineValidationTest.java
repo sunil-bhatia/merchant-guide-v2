@@ -8,14 +8,15 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.MerchantsNotesProcessorImpl;
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GenericFactory;
+import com.thoughtworks.merchant.interfaces.MerchantsNotesProcessor;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
 
 public class CommodityAssignmentLineValidationTest {
 	
-	private GenericFactory factory;
+	private GeneralFactory factory;
+	private MerchantsNotesProcessor merchantsNotesProcessor;
 	
     @Before
     public void setupConfig() {
@@ -23,9 +24,9 @@ public class CommodityAssignmentLineValidationTest {
     	// Configure properties
     	String[] args = {"config"};
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
-		configPropertiesManager.configureProperties(args);
-		factory = configPropertiesManager.getFactoryObject();
-		
+		configPropertiesManager.readConfigProperties(args);
+		factory = configPropertiesManager.getGeneralFactoryObject();
+		merchantsNotesProcessor = (MerchantsNotesProcessor) factory.getObject("MerchantsNotesProcessor");
     }
 	
 	@Test
@@ -40,7 +41,6 @@ public class CommodityAssignmentLineValidationTest {
 		expectedOutputLines.add("I have no idea what you are talking about");
 
 		// Process input lines
-		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 
 		assertEquals(expectedOutputLines, generatedOutputLines);
@@ -57,7 +57,6 @@ public class CommodityAssignmentLineValidationTest {
 		expectedOutputLines.add("I have no idea what you are talking about");
 
 		// Process input lines
-		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 
 		assertEquals(expectedOutputLines, generatedOutputLines);
@@ -76,7 +75,6 @@ public class CommodityAssignmentLineValidationTest {
 		expectedOutputLines.add("glob glob glob Silver is 3 Credits");
 
 		// Process input lines
-		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 
 		assertEquals(expectedOutputLines, generatedOutputLines);

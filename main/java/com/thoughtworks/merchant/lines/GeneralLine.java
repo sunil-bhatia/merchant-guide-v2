@@ -3,13 +3,13 @@ package com.thoughtworks.merchant.lines;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.interfaces.CommodityCalculator;
-import com.thoughtworks.merchant.interfaces.CommodityMap;
-import com.thoughtworks.merchant.interfaces.GalacticCalculator;
 import com.thoughtworks.merchant.interfaces.Line;
-import com.thoughtworks.merchant.interfaces.LogManager;
+import com.thoughtworks.merchant.interfaces.computations.CommodityCalculator;
+import com.thoughtworks.merchant.interfaces.computations.CommodityMap;
+import com.thoughtworks.merchant.interfaces.computations.GalacticCalculator;
+import com.thoughtworks.merchant.interfaces.iomanagers.LogManager;
 
-public abstract class GenericLine implements Line {
+public abstract class GeneralLine implements Line {
 
 	protected String line;
 	protected String regex;
@@ -22,7 +22,7 @@ public abstract class GenericLine implements Line {
 	protected CommodityMap commodityMap;
 	protected CommodityCalculator commodityCalculator;
 
-	public GenericLine() {
+	public GeneralLine() {
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public abstract class GenericLine implements Line {
 
 	@Override
 	public String toString() {
-		return "GenericLine [line=" + line + ", regex=" + regex + ", commodity=" + commodity + ", galacticNumber="
+		return "GeneralLine [line=" + line + ", regex=" + regex + ", commodity=" + commodity + ", galacticNumber="
 				+ galacticNumber + "]";
 	}
 	

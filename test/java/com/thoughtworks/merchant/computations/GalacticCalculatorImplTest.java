@@ -5,10 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GalacticMap;
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GenericFactory;
-import com.thoughtworks.merchant.interfaces.GalacticCalculator;
+import com.thoughtworks.merchant.interfaces.computations.GalacticCalculator;
+import com.thoughtworks.merchant.interfaces.computations.GalacticMap;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
 
 public class GalacticCalculatorImplTest {
 	
@@ -21,10 +21,10 @@ public class GalacticCalculatorImplTest {
     	// Configure properties
     	String[] args = {"config"};
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
-		configPropertiesManager.configureProperties(args);
+		configPropertiesManager.readConfigProperties(args);
 		
 		// Set up galactic map
-		GenericFactory factory = configPropertiesManager.getFactoryObject();
+		GeneralFactory factory = configPropertiesManager.getGeneralFactoryObject();
 		galacticMap = (GalacticMap) factory.getObject("GalacticMap");
 		galacticMap.addMapping("glob", 'I');
 		galacticMap.addMapping("prok", 'V');

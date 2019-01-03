@@ -5,15 +5,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GenericFactory;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
 
 public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 
 	private static ResourceBundle rb = null;
 	
 	@Override
-	public void configureProperties(String[] args) {
+	public void readConfigProperties(String[] args) {
 
 		if (args == null || args.length == 0) {
 			System.err.println("Please enter the name of the properties file as a program argument, e.g.");
@@ -42,18 +42,18 @@ public class FileConfigPropertiesManager implements ConfigPropertiesManager {
 	}
 	
 	@Override
-	public GenericFactory getFactoryObject(){
+	public GeneralFactory getGeneralFactoryObject(){
 		
-		GenericFactory factoryObject = null;
+		GeneralFactory factoryObject = null;
 		
-		String className = getPropertyValue("GenericFactory");
+		String className = getPropertyValue("GeneralFactory");
 		
 		Class<?> classObject = null;
 
 		try {
 			classObject = Class.forName(className);
 			Constructor<?> constructor = classObject.getConstructor();
-			factoryObject = (GenericFactory) constructor.newInstance();
+			factoryObject = (GeneralFactory) constructor.newInstance();
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
 				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();

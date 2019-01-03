@@ -1,8 +1,8 @@
 package com.thoughtworks.merchant.computations;
 
-import com.thoughtworks.merchant.interfaces.GalacticMap;
-import com.thoughtworks.merchant.interfaces.GalacticCalculator;
-import com.thoughtworks.merchant.interfaces.RomanCalculator;
+import com.thoughtworks.merchant.interfaces.computations.GalacticCalculator;
+import com.thoughtworks.merchant.interfaces.computations.GalacticMap;
+import com.thoughtworks.merchant.interfaces.computations.RomanCalculator;
 
 //This class is used to convert from galactic numbers to arabic numbers
 public class GalacticCalculatorImpl implements GalacticCalculator {

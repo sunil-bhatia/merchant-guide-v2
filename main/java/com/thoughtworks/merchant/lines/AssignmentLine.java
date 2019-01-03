@@ -1,6 +1,6 @@
 package com.thoughtworks.merchant.lines;
 
-public abstract class AssignmentLine extends GenericLine {
+public abstract class AssignmentLine extends GeneralLine {
 
 	public AssignmentLine() {
 		super();

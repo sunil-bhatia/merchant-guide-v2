@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.merchant.interfaces.Line;
-import com.thoughtworks.merchant.interfaces.LineFactory;
-import com.thoughtworks.merchant.interfaces.LogManager;
 import com.thoughtworks.merchant.interfaces.MerchantsNotesProcessor;
-import com.thoughtworks.merchant.interfaces.ListReader;
-import com.thoughtworks.merchant.interfaces.ListWriter;
+import com.thoughtworks.merchant.interfaces.factory.LineFactory;
+import com.thoughtworks.merchant.interfaces.iomanagers.ListReader;
+import com.thoughtworks.merchant.interfaces.iomanagers.ListWriter;
+import com.thoughtworks.merchant.interfaces.iomanagers.LogManager;
 
 public class MerchantsNotesProcessorImpl implements MerchantsNotesProcessor {
 	

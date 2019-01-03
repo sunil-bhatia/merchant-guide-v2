@@ -1,19 +1,20 @@
 package com.thoughtworks.merchant;
 
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GenericFactory;
+import com.thoughtworks.merchant.interfaces.MerchantsNotesProcessor;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
 
 public class MerchantsGuideToGalaxyApp {
 	
 	public static void main(String[] args) {
 		
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
-		configPropertiesManager.configureProperties(args);
+		configPropertiesManager.readConfigProperties(args);
 
-		GenericFactory factory = configPropertiesManager.getFactoryObject();
+		GeneralFactory factory = configPropertiesManager.getGeneralFactoryObject();
 
-		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
+		MerchantsNotesProcessor merchantsNotesProcessor = (MerchantsNotesProcessor) factory.getObject("MerchantsNotesProcessor");
 		merchantsNotesProcessor.processMerchantNotes();
 	}
 }

@@ -2,7 +2,7 @@ package com.thoughtworks.merchant.computations;
 
 import java.util.HashMap;
 
-import com.thoughtworks.merchant.interfaces.CommodityMap;
+import com.thoughtworks.merchant.interfaces.computations.CommodityMap;
 
 // This class manages the map from Commodity to it's Value Per Unit Quantity (in credits)
 public class CommodityMapImpl implements CommodityMap {

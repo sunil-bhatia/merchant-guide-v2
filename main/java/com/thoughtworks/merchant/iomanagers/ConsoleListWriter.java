@@ -2,7 +2,7 @@ package com.thoughtworks.merchant.iomanagers;
 
 import java.util.List;
 
-import com.thoughtworks.merchant.interfaces.ListWriter;
+import com.thoughtworks.merchant.interfaces.iomanagers.ListWriter;
 
 public class ConsoleListWriter implements ListWriter {
 	

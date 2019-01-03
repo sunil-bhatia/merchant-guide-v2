@@ -1,8 +1,8 @@
 package com.thoughtworks.merchant.computations;
 
-import com.thoughtworks.merchant.interfaces.CommodityCalculator;
-import com.thoughtworks.merchant.interfaces.CommodityMap;
-import com.thoughtworks.merchant.interfaces.GalacticCalculator;
+import com.thoughtworks.merchant.interfaces.computations.CommodityCalculator;
+import com.thoughtworks.merchant.interfaces.computations.CommodityMap;
+import com.thoughtworks.merchant.interfaces.computations.GalacticCalculator;
 
 // This class calculates the value (in credits) for a commodity given some quantity of the commodity
 public class CommodityCalculatorImpl implements CommodityCalculator {

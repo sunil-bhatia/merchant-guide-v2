@@ -1,4 +1,4 @@
-package com.thoughtworks.merchant.interfaces;
+package com.thoughtworks.merchant.interfaces.factory;
 
 import com.thoughtworks.merchant.interfaces.Line;
 

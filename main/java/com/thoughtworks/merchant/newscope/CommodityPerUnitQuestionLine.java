@@ -5,11 +5,11 @@ import java.util.regex.Matcher;
 import com.thoughtworks.merchant.lines.QuestionLine;
 
 //Example Per Unit Question Line: "how many Credits is Silver per unit quantity ?"
-public class PerUnitQuestionLine extends QuestionLine {
+public class CommodityPerUnitQuestionLine extends QuestionLine {
 	
 	protected double valuePerUnit;
 	
-	public PerUnitQuestionLine() {
+	public CommodityPerUnitQuestionLine() {
 		super();
 	}
 

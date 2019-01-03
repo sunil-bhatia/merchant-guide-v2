@@ -2,7 +2,7 @@ package com.thoughtworks.merchant.computations;
 
 import java.util.HashMap;
 
-import com.thoughtworks.merchant.interfaces.RomanCalculator;
+import com.thoughtworks.merchant.interfaces.computations.RomanCalculator;
 
 //This class is used to convert from roman numbers to arabic numbers
 public class RomanCalculatorImpl implements RomanCalculator{

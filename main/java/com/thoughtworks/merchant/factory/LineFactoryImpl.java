@@ -3,14 +3,14 @@ package com.thoughtworks.merchant.factory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GenericFactory;
 import com.thoughtworks.merchant.interfaces.Line;
-import com.thoughtworks.merchant.interfaces.LineFactory;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
+import com.thoughtworks.merchant.interfaces.factory.LineFactory;
 
 public class LineFactoryImpl implements LineFactory {
 
-	private GenericFactory genericFactory; 
+	private GeneralFactory generalFactory; 
 	private ConfigPropertiesManager configPropertiesManager;
 
 	// Based on the format of the line, return an appropriate object of type
@@ -20,7 +20,7 @@ public class LineFactoryImpl implements LineFactory {
 
 		// If line does not match with any of the regex, then by default it will
 		// be considered of invalid type
-		Line lineObject = (Line) genericFactory.getObject("InvalidLineType");
+		Line lineObject = (Line) generalFactory.getObject("InvalidLineType");
 
 		int numberOfLineTypes = Integer.parseInt(configPropertiesManager.getPropertyValue("NumberOfLineTypes"));
 
@@ -37,7 +37,7 @@ public class LineFactoryImpl implements LineFactory {
 			Pattern ptn = Pattern.compile(regex);
 			Matcher mcher = ptn.matcher(line);
 			if (mcher.matches()) {
-				lineObject = (Line) genericFactory.getObject(objectName);
+				lineObject = (Line) generalFactory.getObject(objectName);
 				lineObject.setLine(line);
 				lineObject.setRegex(regex);
 			}
@@ -53,7 +53,7 @@ public class LineFactoryImpl implements LineFactory {
 		this.configPropertiesManager = (ConfigPropertiesManager) configPropertiesManager;
 	}
 	
-	public void setGenericFactory(Object genericFactory) {
-		this.genericFactory = (GenericFactory) genericFactory;
+	public void setGeneralFactory(Object generalFactory) {
+		this.generalFactory = (GeneralFactory) generalFactory;
 	}
 }

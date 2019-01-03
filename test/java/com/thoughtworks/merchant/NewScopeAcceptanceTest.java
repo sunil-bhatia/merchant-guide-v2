@@ -8,14 +8,15 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thoughtworks.merchant.MerchantsNotesProcessorImpl;
 import com.thoughtworks.merchant.factory.FileConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.ConfigPropertiesManager;
-import com.thoughtworks.merchant.interfaces.GenericFactory;
+import com.thoughtworks.merchant.interfaces.MerchantsNotesProcessor;
+import com.thoughtworks.merchant.interfaces.factory.ConfigPropertiesManager;
+import com.thoughtworks.merchant.interfaces.factory.GeneralFactory;
 
 public class NewScopeAcceptanceTest {
 	
-	private GenericFactory factory;
+	private GeneralFactory factory;
+	private MerchantsNotesProcessor merchantsNotesProcessor;
 	
     @Before
     public void setupConfig() {
@@ -23,8 +24,10 @@ public class NewScopeAcceptanceTest {
     	// Configure properties
     	String[] args = {"confignewscope"};
 		ConfigPropertiesManager configPropertiesManager = new FileConfigPropertiesManager();
-		configPropertiesManager.configureProperties(args);
-		factory = configPropertiesManager.getFactoryObject();
+		configPropertiesManager.readConfigProperties(args);
+		factory = configPropertiesManager.getGeneralFactoryObject();
+		merchantsNotesProcessor = (MerchantsNotesProcessor) factory.getObject("MerchantsNotesProcessor");
+
 		
     }
 
@@ -55,7 +58,6 @@ public class NewScopeAcceptanceTest {
 		expectedOutputLines.add("Per unit quantity Silver is 17 Credits");
 		
 		// Process input lines
-		MerchantsNotesProcessorImpl merchantsNotesProcessor = (MerchantsNotesProcessorImpl) factory.getObject("MerchantsNotesProcessor");
 		List<String> generatedOutputLines = merchantsNotesProcessor.processInputLines(inputLines);
 
 		assertEquals(expectedOutputLines, generatedOutputLines);

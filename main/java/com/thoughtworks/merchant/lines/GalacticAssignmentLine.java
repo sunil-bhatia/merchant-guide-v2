@@ -2,7 +2,7 @@ package com.thoughtworks.merchant.lines;
 
 import java.util.regex.Matcher;
 
-import com.thoughtworks.merchant.interfaces.GalacticMap;
+import com.thoughtworks.merchant.interfaces.computations.GalacticMap;
 
 // Example Galactic Assignment Line: "glob is I"
 public class GalacticAssignmentLine extends AssignmentLine {
